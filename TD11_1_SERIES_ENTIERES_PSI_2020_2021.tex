@@ -1,0 +1,344 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+%\everymath{\displaystyle}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD11-1}}
+\chead{\textsc{Séries entières 1: rayon de convergence}}
+\rhead{\textit{2021-2022}} 
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+	\theoremstyle{break}
+	\theoremprework{%
+		\rule{0.5\linewidth}{0.3pt}}
+	\theorempostwork{\hfill%
+		\rule{0.5\linewidth}{0.3pt}}
+	\theoremheaderfont{\scshape}
+	\theoremseparator{ ---}
+	\newtheorem{Prop}{%
+		\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+	\theoremstyle{break}
+	\theoremprework{%
+		\rule{0.6\linewidth}{0.5pt}}
+	\theorempostwork{\hfill%
+		\rule{0.6\linewidth}{0.5pt}}
+	\theoremheaderfont{\scshape}
+	\newtheorem{Theo}{%
+		\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+	\theoremheaderfont{\sffamily\bfseries}
+	\theorembodyfont{\sffamily}
+	\newtheorem{Def}{%
+		\textcolor{green}{Définition}}[section]
+}
+
+{%
+	\theorembodyfont{\small}
+	\theoremsymbol{$\square$}
+	\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+	\theorembodyfont{\small}
+	\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+	\theorembodyfont{\small}
+	\newtheorem{Exo}{Exercice}
+}
+
+{%
+	\theoremnumbering{Roman}
+	\theorembodyfont{\normalfont}
+	\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+%--------------------------------------------------------------------
+%-------------DOCUMENT-----------------------------------------------
+%--------------------------------------------------------------------
+
+
+\begin{document}
+
+\emph{\textbf{
+	Sans musique la vie serait une erreur. (Nietzsche)
+}}
+
+\begin{bclogo}[couleur = green!30, arrondi = 0.1, logo = \bccoeur, barre = zigzag]{Pour mémoire}
+
+Soit $\sum_n a_n z^n$ une série entière. On rappelle que:
+$$I=\left\{r\geqslant 0,(a_nr^n)_n\text{ est bornée}\right\}$$ est un intervalle de $\R$ dont la borne supérieure $R_a$ dans $\R\cup\{+\infty\}$ est appelé rayon de convergence de la série entière.
+
+On a ainsi $I=[0,R_a]$ ou $I=[0,R_a[$. Il importe de bien comprendre alors que:
+$$\forall r \geqslant 0,r<R_a\implies (a_nr^n)_n\text{ bornée et }(a_nr^n)_n\text{ bornée }\implies r\leqslant R_a$$
+
+On montre alors que:
+\begin{enumerate}
+	\item
+	$\abs{z}<R_a\implies \sum_n a_n z^n$ CVA.
+	\item
+	$\abs{z}>R_a\implies \sum_n a_n z^n$ DVG car $(a_nz^n)_n$ non bornée.
+\end{enumerate}
+On appelle cercle d'incertitude le cercle de centre $0$ et de rayon $R_a$. C'est le seul endroit ou on peut trouver $z$ tel que $\sum_a a_n z^n$ soit finement divergente ou convergente sans l'être absolument!
+\end{bclogo}
+\vspace*{1cm}
+
+
+\begin{Exo}
+	Soit $a,b$ des réels positifs, montrer que:
+	$\left(\forall r\in \R_+,r<a\implies r\leqslant b\right)\implies \left(a\leqslant b\right)$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $\lambda$ dans $\C^*$, montrer que $\sum_n a_nz^n$ et $\sum_n \lambda a_n z^n$ ont même rayon de convergence.
+\end{Exo}
+\newpage
+\begin{Exo}
+	Soit $\alpha$ un réel, montrer que $\sum_n a_n z^n$ et $\sum_n n^{\alpha}a_n z^n$ ont même rayon de convergence.
+\end{Exo}
+
+\begin{Exo}\ 
+	\begin{enumerate}
+		\item
+		Donner un exemple de série entière qui diverge grossièrement en tout point du cercle d'incertitude.
+		\item
+		Donner un exemple de série entière qui converge absolument en tout point du cercle d'incertitude.
+		\item
+		Donner un exemple de série entière qui diverge finement en au moins un point du cercle d'incertitude et qui est semi-convergente en au moins un point du cercle d'incertitude.
+		\item Donner un exemple de série entière de rayon de convergence $R>0$.
+	\end{enumerate}
+	
+\end{Exo}
+
+
+\begin{Exo}
+	Etudier la convergence des séries entieres $\sum a_{n}z^{n}$ dans
+	les cas suivants:
+	\begin{multicols}{3}
+		\begin{enumerate}
+			\item $a_{n}=\frac{1}{n^{\alpha }}$ ($\alpha >0$)
+			
+			\item $a_{n}=\ln n$
+			
+			\item $a_{n}=\frac{n^{n}}{n!}$
+			
+			\item $a_{n}=\sin n$
+			
+			\item $a_{n}$ semi-convergente
+			
+			\item $\lim_{n}a_{n}=\ell\neq 0;$
+			\item $a_n=\binom{2n}{n}$.
+			\item
+			$a_n=\E^{-n^2}$.
+			\item
+			$a_n=\frac{n^3+n^2\cos(n)-2n}{4n^4+n+1}$
+			\item $a_n=n^{(-1)^n}$
+			\item
+			$a_n=\frac{1}{1+2+3+...+n}$
+			\item $a_n=\frac{n+1}{n+2}$
+		\end{enumerate}
+	\end{multicols}
+\end{Exo}
+
+
+
+\begin{Exo}
+	Rayon de convergence des séries suivantes:
+	\begin{multicols}{4}
+		\begin{enumerate}
+			\item $\sum n!z^{n}$
+			
+			\item $\sum 2^{n}z^{n!}$
+			
+			\item $\sum (3+(-1)^{n})^n z^{n}$
+			
+			\item $\underset{p\text{ premier}}{\sum }z^{p}$
+		\end{enumerate}
+	\end{multicols}
+\end{Exo}
+
+
+
+\begin{Exo}
+	On suppose que $\sum_n a_n z^n$ a un rayon de convergence $R>0$. Quel est le rayon de convergence de $\sum_n a_n z^{2n}$? De $\sum_n \frac{a_n}{n!}z^n$?
+\end{Exo}
+
+
+
+\begin{Exo}
+	On rappelle que l'on note pour $n\in\N^*:H_n=\sum_{k=1}^{n}\frac{1}{k}$. 
+	\begin{enumerate}
+		\item
+		Montrer que $S(x)=\sum_{n=1}^{+\infty}H_n x^n$ est définie sur $]-1,1[$. 
+		\item
+		En simplifiant $(1-x)S(x)$ donner une expression de $S(x)$. 
+%		\item
+%		Retrouver ce résultat via un produit de Cauchy.
+	\end{enumerate}
+
+
+\end{Exo}
+% \begin{Exo}
+% 	On note $u_0=0$ et pour $n\geqslant 0,u_{n+1}=\frac{u_n}{2}+(-1)^n$.
+%\begin{enumerate}
+%	\item
+%	Montrer que $\lvert u_n\rvert\leqslant 2$, en déduire le RCV de $\sum_n u_n x^n$.
+%	\item
+%	On note $f(x)=\sum_{n=0}^{+\infty}u_n x^n$, simplifier $(1-x/2)f(x)$. En déduire $u_n$ pour tout $n$.
+%\end{enumerate}
+% \end{Exo}
+
+
+
+	
+
+
+	
+	
+	
+
+
+	
+\begin{Exo}
+		Soit $\sum_n a_n z^n$ avec $R_a>0$, on note $b_n=\frac{a_n}{1+\lvert a_n\rvert}$. Montrer que $R_b\geqslant \max(1,R_a)$ puis qu'il y a égalité.	
+\end{Exo}
+	
+	
+%		  \begin{Exo}
+%			On considère une série entiére $\sum a_{n}z^{n}$  et on pose $s_{n}=\sum_{p=0}^n a_{p}$. Vérifier que $R_s\leqslant R_a$ et que $R_s\geqslant \min(1,R_a)$. Que se passe t-il si $R_a\leqslant 1$ ?
+%		\end{Exo}
+%		
+	
+%	\item On considére une série entiére $\sum a_{n}z^{n}$ de rayon
+%	de convergence $R>0$ et on pose $s_{n}=\sum a_{p}$ et on note $R^{\prime }$
+%	le rayon de convergence de la série $\sum s_{n}z^{n}.$ On veut comparer $%
+%	R$ et $R^{\prime }.$
+%	
+%	\begin{enumerate}
+%		\item vérifier que $R^{\prime }\leqslant R$ et que $R^{\prime }\geqslant \inf
+%		(1,R).$
+%		
+%		\item que se passe t-il si $R\leqslant 1$ ?
+%		
+%		\item On suppose que $R>1$
+%		
+%		\begin{enumerate}
+%			\item vérifier que la suite $(s_{n})$ converge. On note $l$ sa limite.
+%			
+%			\item montrer que si $l\neq 0,$ $R^{\prime }=1.$
+%			
+%			\item montrer que si $l=0,$ pour tout $r\in \left] 1,R\right[ $ et pour $n$
+%			assez grand, on a $\left\vert s_{n}\right\vert \leq \overset{\infty }{%
+%				\underset{k=n+1}{\sum }}\frac{1}{r^{k}}.$ en déduire que $R^{\prime
+%			}\geq R$ et conclure.
+%			
+%			\item résumer les différents cas possibles.
+%		\end{enumerate}
+%	\end{enumerate}
+	
+%	\item soit $\left[ a_{n}x^{n}\right] $ une série entiére de rayon de
+%	convergence infini, de somme $S,$ vérifiant $\forall n\in \mathbb{N}%
+%	,a_{n}>0.$ Montrer que 
+%	\begin{equation*}
+%		\forall p,S(x)\underset{+\infty }{\sim }\overset{\infty }{\underset{n=p+1}{%
+%				\sum }}a_{n}x^{n}.
+%	\end{equation*}
+	
+%	\item soit $f$ une fonction $C^{\infty }$ sur $\R$; on suppose que $f
+%	$ ainsi que toutes ses dérivées sont positives. Soit $x>0.$
+%	
+%	\begin{enumerate}
+%		\item justifier les trois égalités suivantes:
+%		
+%		\begin{enumerate}
+%			\item $f(x)=f(0)+xf^{\prime }(0)+...+x^{n}\frac{f^{(n)}(0)}{n!}+x^{n+1}\frac{%
+%				f^{(n+1)}(c_{n})}{(n+1)!}$
+%			
+%			\item $f(2x)=f(x)+xf^{\prime }(x)+...+x^{n}\frac{f^{(n)}(x)}{n!}+x^{n+1}%
+%			\frac{f^{(n+1)}(d_{n})}{(n+1)!}$
+%			
+%			\item $f(-x)=f(0)-xf^{\prime }(0)+...+(-1)^{n}\frac{f^{(n)}(0)}{n!}%
+%			+(-1)^{n+1}x^{n+1}\frac{f^{(n+1)}(h_{n})}{(n+1)!}$\newline
+%			avec $c_{n}\in \left] 0,x\right[ ,$ $d_{n}\in \left] x,2x\right[ $ et $%
+%			h_{n}\in \left] -x,0\right[ .$
+%		\end{enumerate}
+%		
+%		\item montrer que la série $\Sigma \frac{f^{(n)}(x)}{n!}x^{n}$ est
+%		convergente.
+%		
+%		\item montrer que la série $\Sigma \frac{f^{(n)}(0)}{n!}x^{n}$ est
+%		convergente de somme $f(x),$ puis que la série $\Sigma \frac{f^{(n)}(0)}{%
+%			n!}(-x)^{n}$ est convergente de somme $f(-x),$ et enfin que $f$ est DSE sur $%
+%		\R.$
+%	\end{enumerate}
+	
+
+	
+
+
+\end{document}

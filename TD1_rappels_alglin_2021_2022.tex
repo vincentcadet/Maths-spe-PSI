@@ -1,0 +1,331 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD1}}
+\chead{\textsc{Polynôme de matrice, sev stables}}
+\rhead{\textit{ septembre 2021}} 
+
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+\emph{\textbf{“Je crois beaucoup en la chance ; et je constate que plus je travaille, plus la chance me sourit” (Thomas Jefferson)}}
+
+
+
+
+\begin{Exo}
+	Soit $A=\begin{pmatrix}
+	a & b\\
+	c & d
+	\end{pmatrix}$ dans $M_2(\R)$, calculer $A^2-\tr(A)A+\det(A)I_2$. Retrouver que si $\det(A)$ est non nul alors $A$ est inversible et expliciter $A^{-1}$ en fonction de $a,b,c,d$.
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $F$ sev d'un $K$-ev $E$ et $u,v$ deux endomorphismes de $E$. Montrer que si $F$ est stable par $u$ et par $v$ alors il est stable par $u+v$ et par $u\circ v$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $(A,B)\in GL_n(\K)\times M_n(\K)$. Montrer que si $A$ et $B$ commutent alors $A^{-1}$ et $B$ commutent.
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soit $n$ entier naturel non nul. Rappeler la dimension de $M_n(\K)$ (en donner la base canonique). En déduire que toute matrice admet un polynôme annulateur non nul.
+\end{Exo}
+
+\begin{Exo}[un peu d'initiative]
+	Montrer que l'inverse d'une matrice inversible $A$ est un polynôme en $A$.
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $A=\begin{pmatrix}
+		2 & 0 & -1 \\
+		1 & 1 & -1 \\
+		-1 & 0 & 2
+	\end{pmatrix}$
+	\begin{enumerate}
+		\item
+		Déterminer $\alpha,\beta$ réels tels que $A^2=\alpha A+\beta I_3$. En déduire un polynôme annulateur pour $A$.
+		\item Montrer que $A$ est inversible et préciser $A^{-1}$.
+		\item
+		Calculer pour $n\geqslant 2$ le reste de la division euclidienne de $X^n$ par $P=(X-1)(X-3)$.
+		En déduire $A^n$ pour $n\geqslant 2$. On donnera le résultat en fonction de $A$ et $I_3$.
+	\end{enumerate}	
+	
+\end{Exo}
+%\begin{Exo}
+%	Soit $a$ réel non nul et $A=\begin{pmatrix}
+%	0 & a & a^2 \\
+%	a^{-1} & 0 & a \\
+%	a^{-2} & a^{-1} & 0
+%	\end{pmatrix}$.
+%	\begin{enumerate}
+%		\item
+%		Calculer $A^2$ en fonction de $A$ et $I_3$.
+%		\item
+%		En déduire $A^n$ pour tout entier naturel $n$.
+%	\end{enumerate}
+%\end{Exo}
+
+\begin{Exo}
+	Soit $n\geqslant 2$ $U$ la matrice de $M_n(\K)$ dont tous les coefficients valent $1$, on note pour $a,b$ réels:
+	$$M_{a,b}=aI_n+bU$$
+	\begin{enumerate}
+		\item
+		Calculer $U^2$, en déduire $M_{a,b}^2$ en fonction de $M_{a,b}$ et $I_n$.
+		\item Montrer que $F=\left\{M_{a,b},(a,b)\in\K^2\right\}$ est un sev de $M_n(\K)$ stable par produit dont on précisera la dimension.
+		\item
+		Préciser les valeurs de $a,b$ pour lesquelles $M_{a,b}$ est inversible.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $D=\diag(x_1,x_2,...,x_n)$ avec les $x_i$ deux à deux distincts.
+	\begin{enumerate}
+		\item
+		Montrer que $(I_n,D,D^2,...,D^{n-1})$ est une base du sev $\mathcal{D}_n(\K)$ des matrices diagonales de $M_n(\K)$.
+		\item
+		Quel est le degré minimal d'un polynôme annulateur non nul de $D$?
+	\end{enumerate}	
+\end{Exo}
+
+\begin{Exo}[matrices en damier]
+	On dit que $M\in M_n(\K)$ est en damier si:
+	$$\forall (i,j)\in \{1,2,...,n\},i+j\text{ impair }\implies m_{i,j}=0$$
+	On note $\mathcal{A}$ l'ensemble de ces matrices.
+	
+	\vspace*{2mm}
+	NB: aucune honte à traiter d'abord l'exercice en petite dimension ($n=3,4$) pour mieux appréhender la notion.
+	\begin{enumerate}
+		\item Donner des exemples en petite taille.
+		\item
+		Montrer que $\mathcal{A}$ est un sev de $M_n(\K)$ dont on donnera une base et la dimension.
+		\item Montrer que $\mathcal{A}$ est stable par produit.
+		\item  \textbf{On rappelle (?) que si $A$ est inversible alors $A^{-1}$ est un polynôme en $A$}. Montrer que si $A$ est en damier et inversible alors $A^{-1}$ est encore en damier.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Trouver un polynôme annulateur non nul de degré minimal pour $A=\begin{pmatrix}
+	-2 & 2 & -1 \\
+	-1 & 1 & -1 \\
+	-1 & 2 & -2
+	\end{pmatrix}$
+\end{Exo}
+
+\begin{Exo}
+	Montrer que si un sev $F$ de $E$ est stable par $u\in GL(E)$ alors il est stable par $u^{-1}$. Rejustifier le fait que l'inverse d'une matrice en damier inversible est encore en damier.
+\end{Exo}
+
+
+
+
+
+
+\begin{Exo}
+	Soit $u$ l'application définie pour $P\in \R_2[X]$ par $u(P)=P-(X+1)P'$
+\begin{enumerate}
+
+	\item
+	Montrer que $u$ est un endomorphisme de $\R_2[X]$, écrire sa matrice $A$ dans la base canonique $B=(1,X,X^2)$ de $\R_2[X]$.
+	\item
+	Donner le rang de $u$, la dimension de $\ker(u)$, une base de $\ker(u)$ et de $\Ima(u)$.
+	\item $u$ est-il injectif? Surjectif?
+	\item
+	Justifier rapidement que $B'=(P_{1},P_{2},P_{3})$ avec $P_{1}=1,P_{2}=X+1,P_{3}=X^2+2X+1$ est une base de $\R_2[X]$ et écrire la matrice $D$ de $u$ dans $B'$.  \textbf{Soyez attentifs à la fa\c con d'écrire une matrice d'endomorphisme...}%Préciser une matrice $P$ telle que $A=PDP^{-1}$.
+	% \item Comment pourrait-on déterminer $A^n$ en fonction de $P,D$ et $P^{-1}$? (\textbf{On ne demande pas de calculer quoi que ce soit, juste d'expliquer une méthode!})
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $E$ un $\R$-ev de dimension $2$ et $f$ un endomorphisme de $E$ vérifiant $f^2+f+Id_E=0$.
+\begin{enumerate}
+	\item Montrer que $f\neq 0$, en déduire l'existence d'un vecteur $x_0\notin\ker(f)$.
+	\item Montrer que $B=(x_0,f(x_0))$ est une base de $E$.
+	\item
+	Préciser la matrice de $f$ dans $B$, la trace et le déterminant de $f$.
+\end{enumerate}
+\end{Exo}
+
+
+\begin{center}
+	\fbox{Problème}
+\end{center}
+
+On dit que $A\in M_{n}(\R) $ est une racine de $I_{n}$
+s'il existe un entier $p\in \N^*$ tel que $A^{p}=I_{n}.$ Si $A$
+est une racine de $I_{n}$, on appelle \textbf{indice} de $A$ le plus petit
+entier $p\in \N^*$ v\'{e}rifiant $A^{p}=I_{n}.$ Dans la suite
+on prendra $n=2$ pour simplifier les calculs...
+
+\begin{enumerate}
+	%\item $I_{2}$ a-t'elle une (des) racine(s) d'indice \'{e}gal \`{a} $1$?
+	
+	\item Soit $A\in M_{2}(\R)$ dont tous les coefficients
+	sont strictement positifs. Expliquer rapidement pourquoi les coefficients de
+	\ $A^{p}$ sont tous  strictement positifs pour tout entier $p\in \N^*$.
+	\item $\left(\begin{array}{cc}1 & 2 \\2 & 2\end{array}\right)$ peut-elle être racine de $I_{2}$?
+	
+	\item Dans toute cette question $A=
+	\begin{pmatrix}
+		2 & -7 \\ 
+		1 & -3
+	\end{pmatrix}
+	$ et $B= 
+	\begin{pmatrix}
+		1 & 0 \\ 
+		0 & -1
+	\end{pmatrix}
+	$.
+	
+	\begin{enumerate}
+		\item Vérifier que $A$ est racine de $I_{2}$ d'indice $3$. Montrer qu'e $B$ est  racine de $I_{2}$ et préciser son indice.
+		
+		\item Calculer ensuite $AB$. Est-elle racine de $I_{2}$? 		
+	\end{enumerate}
+	\item 		 A quelle condition suffisante simple le produit de deux racines de $I_{2}$ l'est-il encore?
+	
+	\item On note pour $\alpha $ réel $A_{\alpha }=
+	\begin{pmatrix}
+		\cos \alpha & -\sin \alpha \\ 
+		\sin \alpha & \cos \alpha
+	\end{pmatrix}$.
+	Montrer par récurrence que $$\forall n\in \N,\left(A_{\alpha }\right)^{n}=A_{n\alpha }$$
+	En déduire que pour tout
+	entier $p\in \N^*$ il existe une racine de $I_{2}$ d'indice $p$.
+	
+	%\textit{\small{On rappelle que $\cos \left( a+b\right) =\cos a\cos b-\sin a\sin b$ et $\sin\left( a+b\right) =\sin a\cos b+\sin b\cos a.$}}
+	
+	
+	\item Calculer pour $A= 
+	\begin{pmatrix}
+		a & b \\ 
+		c & d
+	\end{pmatrix}
+	$ la matrice $A^{2}-\mathrm{Tr}\left( A\right) A+\det \left( A\right) I_{2}.$
+	
+
+	
+	\item En déduire qu'une matrice $A= 
+	\begin{pmatrix}
+		a & b \\ 
+		c & d
+	\end{pmatrix}
+	$ de taille $2$ différente de $-I_{2}$ est racine de $I_{2}$
+	d'indice $2$ si et seulement si $\mathrm{Tr}\left( A\right) =0$ et $\det \left( A\right) =-1$.
+\end{enumerate}
+
+\end{document}

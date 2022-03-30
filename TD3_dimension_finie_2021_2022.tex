@@ -1,0 +1,341 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD3}}
+\chead{\textsc{Rappels algèbre linéaires}}
+\rhead{\textit{2020-2021}} 
+
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+%\emph{\textbf{“Je crois beaucoup en la chance ; et je constate que plus je travaille, plus la chance me sourit” (Thomas Jefferson)}}
+%
+%\begin{center}
+%\textsc{Les exercices ... sont à chercher pour vendredi}   
+%\end{center}
+
+\begin{Exo}[Nilpotent]
+Soit $E$ de dimension $n>0$, $f$ dans $L(E)$ nilpotent d'indice de nilpotence $p$ (ie $f^p=0$ et $f^{p-1}\neq 0$).
+
+\begin{enumerate}
+	\item Donner un exemple.
+	\item Adapter cette définition pour une matrice carrée.
+	\item
+	Soit $x_0\notin\ker(f^{p-1})$. Montrer que $B=\left(x_0,f(x_0),...,f^{p-1}(x_0)\right)$ est libre, en déduire une majoration de l'indice de nilpotence.
+	\item
+	Donner un exemple montrant que cette majoration est optimale.
+	\item Soit $A,B$ dans $M_n(\K)$ telles que $(AB)^n=0$, montrer que $(BA)^n=0$.
+	\item Existe-t-il $A\in M_2(\R)$ telle que $A^2=\begin{pmatrix}
+	0 & 1 \\
+	0 & 0
+	\end{pmatrix}$?
+	 
+\end{enumerate}
+
+\end{Exo}
+
+\begin{Exo}[Polynômes de Hilbert]
+	Notons $H_0=1,H_1=X$ et pour $n>1$:$$H_{n}=\frac {X \left( X-1\right) \left( X-2\right) \ldots \left( X-n+1\right) } {n!}$$
+	\begin{enumerate}
+		\item
+		Calculer $H_{10}(4),H_{10}(-4)$ et $H_{10}(13)$.
+		\item
+		Montrer que $(H_0,H_1,...,H_n)$ est une base de $\R_n[X]$ puis que $(H_n)_{n\in\N}$ est une base de $\R[X]$.
+		\item
+		Montrer que $\phi:P(X)\mapsto P(X+1)-P(X)$ est un endomorphisme de $\R_n[X]$.
+		\item
+		Former sa matrice  dans la base $(H_0,H_1,...,H_n)$. On pourra montrer que pour $k>0,\phi(H_k)=H_{k-1}$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[Nilpotent cyclique]
+	Soit $E$ de dimension $n>0$, $u$ dans $L(E)$ nilpotent d'indice $n$.
+	\begin{enumerate}
+		\item
+		Soit $x_0\notin\ker(f^{n-1})$. Montrer que $B=\left(x_0,f(x_0),...,f^{n-1}(x_0)\right)$ est une base de $E$ et donner la matrice de $u$ dans $B$.
+		\item
+		Soit $v\in L(E)$. Montrer que $u$ et $v$ commutent ssi $v\in \vect\left(Id_E,u,u^2,...,u^{n-1}\right)$.
+		\item
+		Exhiber un tel $x_0$ pour l'endomorphisme de $\R^3$ de matrice dans la base canonique: $A=\left( \begin{matrix} 2& 1& 0\\ -3& -1& 1\\ 1& 0& 1\end{matrix} \right)$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $E$ de dimension finie et $p$ un projecteur. Montrer que la trace de $p$ est égale à son rang.
+\end{Exo}
+
+\begin{Exo}
+	Existe-t-il deux matrices $A,B$ de $M_n(\K)$ avec $n>0$ telles que $AB-BA=I_n$?
+\end{Exo}
+
+
+\begin{Exo}[Suites récurrentes linéaires]
+	Soit $a,b$ deux scalaires et $$E=\left\{u\in \K^n,\forall n\in \N,u_{n+1}+au_{n+1}+bu_n=0\right\}$$
+	\begin{enumerate}
+		\item
+		Montrer que $E$ est un $\K$-ev et que $\phi:u\mapsto (u_0,u_1)$ est un isomorphisme.
+		\item
+		On suppose que l'équation caractéristique $r^2+ar+b=0$ a deux racines distinctes $r_1,r_2$. Donner la forme des éléments de $E$.
+		\item Recommencer avec une racine double pour l'équation caractéristique.
+		\item
+		Déterminer le terme général de la suite vérifiant $u_0=0,u_1=1$ et pour tout $n\geqslant 0,u_{n+1}=u_{n+1}+u_n$.
+		\item
+		Déterminer le terme général de la suite vérifiant $u_0=1,u_1=1$ et pour tout $n\geqslant 0,u_{n+1}+u_{n+1}+u_n=n$.
+	\end{enumerate}
+\end{Exo}
+
+\newpage
+\begin{Exo}
+	Montrer que les matrices suivantes ne sont pas semblables:
+		\begin{multicols}{2}
+	\begin{enumerate}
+		\item
+		$A=\left( \begin{matrix} 1& 1\\ 1& 4\end{matrix} \right),B= \left( \begin{matrix} 2& 1\\ 1& 2\end{matrix} \right)$
+		
+		\item
+		$A=\left( \begin{matrix} 0& 0& 0\\ 0& 2& 0\\ 0& 0& -1\end{matrix} \right) ,B=\left( \begin{matrix} 0& 0& 0\\ 0& 0& 0\\ 0& 0& 1\end{matrix} \right)$
+		\item
+		$A=\left( \begin{matrix} 0& 0& 0\\ 0& 2& 0\\ 0& 0& -1\end{matrix} \right) ,B=\left( \begin{matrix} 0& 1& 0\\ 0& 0& 1\\ 0& 0& 0\end{matrix} \right)$
+		\item
+		$A=\left( \begin{matrix} 3& 0\\ 0& 1\end{matrix} \right) ,B=\left( \begin{matrix} 2& 0\\ 0& 2\end{matrix} \right)$
+	\end{enumerate}
+		\end{multicols}
+\end{Exo}
+
+\begin{Exo}
+	Montrer que $A=\left( \begin{matrix} 0& -2\\ 1& 3\end{matrix} \right)$ et $B=\left( \begin{matrix} 2& 2\\ 0& 1\end{matrix} \right)$ sont semblables.
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_{3,2}\left( \mathbb{R} \right),B\in M_{2,3}\left( \mathbb{R} \right)$ telles que $AB=\left( \begin{matrix} 1& 1& 2\\ -2& x& 1\\ 1& -2& 1\end{matrix} \right)$. Déterminer $x$. Construire ensuite deux matrices convenant.
+\end{Exo}
+
+\begin{Exo}
+	 On travaille dans$E=\R^{\R}$ le $\R-$ev des fonctions de $\R$ dans $\R.$
+
+\begin{enumerate}
+	\item Montrer que l'application $s:f\mapsto \overset{\vee }{f}$ avec $\overset{\vee }{f}\left( x\right) =f\left( -x\right) $ est une symétrie de $E$.
+	
+	\item Déterminer $\ker f,\Ima  f,\ker \left( f-id\right) $ et $\ker \left( f+id\right) $
+	
+	\item Montrer que $\R^{\R}$ est somme directe des sevs des fonctions paires et des fonctions impaires. Préciser les projecteurs sur ces sevs et les exprimer à l'aide de $s.$
+\end{enumerate}
+\end{Exo}
+
+
+
+
+\begin{Exo}\ 
+	\begin{enumerate}
+	\item
+	Montrer que  $f \in \mathcal{L}(E,F)$ et  $g \in \mathcal{L}(F,G)$ vérifient $g \circ f=0$ ssi $\Ima f \subset \ker g$.
+	\item Soit $f\in L(E)$ vérifiant $f^2+f-2id_{E}=0$.
+	\begin{enumerate}
+		\item Calculer $(f-id_{E})\circ (f+2id_{E})$ et $(f+2id_{E})\circ (f-id_{E})$.
+		\item En déduire que $\Ima (f-id_{E})\subset \ker (f+2id_{E})$ et $\Ima (f+2id_{E})\subset \ker (f-id_{E})$.
+		\item Montrer que $E=\ker (f+2id_{E})\oplus \ker (f-id_{E})$
+	\end{enumerate}
+\end{enumerate}
+\end{Exo}
+
+
+ \begin{Exo}
+ 	 On note $\C_{\R}$ l'ensemble $\C$ considéré comme $\R-$ev. Soit $a=e^{i\alpha }$ et $f:z\in\C\mapsto z-a\overline{z}$.
+
+\begin{enumerate}
+	\item Assurez vous que vous avez bien compris ce qu'est $\C_{\R}$.
+	\item Montrez que $f$ est un endomorphisme de $\C_{\R}$.
+	\item Montrez que $\frac{1}{2}f$ est un projecteur puis que $\C_{\R}=\ker f\oplus \Ima f$.
+	\item Décrire $\ker f$ et $\Ima f.$
+\end{enumerate}
+ \end{Exo}
+
+
+\begin{Exo}
+	Soit $u,v\in L\left( E,F\right) $ montrer que $\Ima \left(u+v\right) \subset \Ima  u+\Ima  v$ et $\ker u\cap \ker v\subset \ker \left( u+v\right) ,$ montrer par des exemples que les inclusions peuvent être strictes.
+\end{Exo}
+
+
+
+
+\begin{Exo}
+	Démontrer que, pour tout $n\geq 0$, pour tout $P\in\mathbb R_n[X]$, il existe un unique $Q\in\mathbb R_n[X]$ tel que $P=\sum_{k=0}^n Q^{(k)}$
+\end{Exo}
+
+
+\begin{Exo}
+	En dim finie montrer que:
+	$\left\vert rg\left( u\right) -rg\left( v\right) \right\vert \leqslant rg\left(u+v\right) \leqslant rg\left( u\right) +rg\left( v\right)$.
+\end{Exo}
+\begin{Exo}
+	Soit $E$ de dimension $3$ et $f\in L\left( E\right) $ tel que $f\neq 0$
+	et $f^{2}=0.$ Rang de $f?$
+	
+\end{Exo}
+
+\begin{Exo}
+	Soit $E$ un espace vectoriel de dimension finie.
+	Montrer qu'il existe $f\in\mathcal L(E)$ tel que $\ker(f)=\textrm{Im}(f)$
+	si et seulement si $E$ est de dimension paire.
+\end{Exo}
+
+\newpage
+\begin{Exo}
+	Soit $f,g$ deux endomorphismes de $E$ (avec $\dim E$ quelconque) tels que $f\circ g=id_E$. Montrer que:
+	\begin{multicols}{3}
+		\begin{enumerate}
+			\item
+			$\ker(g\circ f)=\ker(f)$
+			\item
+			$\Ima (g\circ f)=\Ima (g)$
+			\item
+			$E=\ker(f)\oplus \Ima(g)$
+		\end{enumerate}
+	\end{multicols}
+\end{Exo}
+
+\begin{Exo}
+	Soit $E$ un ev de dimension finie $n,f,g\in L\left( E\right) $ tels que: $E=\ker f+\ker g=\Ima  f+\Ima g$. Montrez que les sommes sont directes.
+\end{Exo}
+\begin{Exo}
+	Soit $E=\mathbb R_3[X]$ l'espace vectoriel des polynômes à coefficients réels de degré inférieur ou égal à 3.
+	On définit $u$ l'application de $E$ dans lui-même par
+	$$u(P)=P+(1-X)P'.$$
+	\begin{enumerate}
+		\item Montrer que $u$ est un endomorphisme de $E$.
+		\item Déterminer une base de $\textrm{Im}(u)$ et de $\ker(u)$.
+		\item Montrer que $\ker(u)$ et $\textrm{Im}(u)$ sont deux sous-espaces
+		vectoriels supplémentaires de $E$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $E=\mathbb R^4$ et $F=\mathbb R^2$. On considère
+	$H=\{(x,y,z,t)\in\mathbb R^4;\ x=y=z=t\}$. Existe-t-il des applications linéaires de $E$ dans $F$ dont le noyau est $H$?
+\end{Exo}
+
+\begin{Exo}[Noyaux et images itérés]
+	Soit $u$ un endomorphisme d'un $\K$-ev $E$.
+	\begin{enumerate}
+		\item
+		Montrer que la suite des noyaux itérés $\left(\ker(u^k)\right)_{k\in\N}$ est croissante et que la suite des images itérées $\left(\Ima(u^k)\right)_{k\in\N}$ est décroissante.
+		\item
+		Les déterminer quand $E=\K[X]$ et $u:P\mapsto P'$.
+		\item
+		Montrer que s'il existe $p$ dans $\N$ tel que $\ker(u^p)=\ker(u^{p+1})$ alors pour tout $k$ supérieur à $p$ on a $\ker(u^k)=\ker(u^p)$.
+		\item
+		Montrer que si $E$ est de dimension finie alors il existe $p\in\N$ tel que $\ker(u^p)=\ker(u^{p+1})$. Comparer alors $\Ima(u^p)=\Ima(u^{p+1})$ et montrer que $E=\ker(u^p)\oplus \Ima(u^p)$.
+	\end{enumerate}
+\end{Exo}
+\end{document}

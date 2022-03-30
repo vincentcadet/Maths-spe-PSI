@@ -1,0 +1,628 @@
+  
+\documentclass[12pt,a4paper,landscape]{article}
+
+
+
+
+\usepackage{geometry}
+
+
+%\usepackage{fullpage}
+%\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{textcomp}
+%\usepackage{tikz}
+
+\usepackage{fancyhdr}
+\usepackage{stmaryrd}
+\addtolength{\hoffset}{-3cm}
+ \addtolength{\voffset}{-2cm}
+ \addtolength{\textwidth}{4cm}
+\addtolength{\textheight}{4cm}
+
+
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD 13}}
+\chead{\textsc{Variables aléatoires discrètes}}
+\rhead{\textit{2021-2022}} 
+
+
+
+
+
+
+
+
+
+%ensembles de nombres------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\K}{\mathbb{K}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\U}{\mathbb{U}}
+
+
+
+
+%applications relations----------------------------------------------
+
+
+
+
+\DeclareMathOperator{\Id}{\mathrm{Id}}
+\DeclareMathOperator{\Class}{\mathcal{C}}
+\DeclareMathOperator{\DL}{\mathrm{DL}}
+
+\newcommand{\lci}{l.c.i. }
+\newcommand{\set}[2]{
+\left\{
+\begin{array}{ccc}
+#1 & / & #2
+\end{array}
+\right\}
+}
+\newcommand{\appli}[5]
+{
+%E,F,f,x,y
+\left\{
+\begin{array}{ccc}
+#1 & \overset{#3}{\longrightarrow} & #2 \\
+#4 & \longmapsto & #5 
+\end{array}
+\right.
+}
+\newcommand{\applilight}[3]
+{
+%E,F,f
+#3 : #1  \longrightarrow  #2
+}
+\newcommand{\reciproque}[1]{
+#1^{*} 
+}
+
+
+
+
+
+%fonctions usuelles--------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\ch}{\mathrm{ch}}
+\DeclareMathOperator{\sh}{\mathrm{sh}}
+\DeclareMathOperator{\tah}{\mathrm{th}}
+\DeclareMathOperator{\sgn}{\mathrm{sgn}}
+\DeclareMathOperator{\cotan}{\mathrm{cotan}}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\equi}[3]
+{
+% f,g,a
+#1\underset{#3}{\sim}#2
+}
+\newcommand{\bigo}[3]
+{
+% f,g,a
+#1\underset{#3}{=}\mathcal{O}\left(#2\right)
+}
+\newcommand{\plusbigo}[4]
+{
+% f,g,h,a : f =_a g+O(h)
+#1\underset{#4}{=}#2 + \mathcal{O}\left(#3\right)
+}
+\newcommand{\smallo}[3]
+{
+% f,g,a
+#1\underset{#3}{=}\mathbf{o}\left(#2\right)
+}
+\newcommand{\plussmallo}[4]
+{
+% f,g,h,a : f =_a g+o(h)
+#1\underset{#4}{=}#2 + \mathbf{o}\left(#3\right)
+}
+
+
+
+	\newtheorem{Exo}{Exercice}
+
+
+
+
+%complexes--------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Real}{\mathcal{R}e}
+\DeclareMathOperator{\Imaginary}{\mathcal{I}m}
+\DeclareMathOperator{\I}{\mathbf{i}}
+
+
+
+
+
+%polynomes----------------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Xd}{\mathrm{X}}
+\DeclareMathOperator{\val}{\mathrm{val}}
+\DeclareMathOperator{\X}{\mathrm{X}}
+%\DeclareMathOperator{\deg}{\mathrm{deg}}
+
+
+
+
+
+%algebre lineaire---------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Diag}{\mathrm{Diag}}
+\DeclareMathOperator{\Vect}{\mathrm{Vect}}
+\DeclareMathOperator{\Ima}{\mathrm{Im}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\GL}{\mathrm{GL}}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
+\DeclareMathOperator{\Lcal}{\mathcal{L}}
+\DeclareMathOperator{\Mat}{\mathrm{Mat}}
+\DeclareMathOperator{\Com}{\mathrm{Com}}
+\DeclareMathOperator{\M}{\mathcal{M}}
+\DeclareMathOperator{\rg}{\mathrm{rg}}
+\newcommand{\tribu}{\mathcal{A}}
+\renewcommand{\Pr}{\mathbb{P}} 
+\newcommand{\ev}{espace vectoriel }
+\newcommand{\evs}{espaces vectoriels }
+\newcommand{\transpo}[1]{
+ \mathstrut^t\! #1
+}
+
+
+
+
+
+%arithmetique-------------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\pgcd}{pgcd}
+
+\newcommand{\modulobis}[3]{
+% x,y,alpha
+#1\equiv #2\; \left(\text{mod}\;#3\right)
+}
+\newcommand{\modulo}[3]{
+% x,y,alpha
+#1\equiv #2\; \left[#3\right]
+}
+
+
+
+
+
+%calcul differentiel et integral----------------------------
+
+
+
+
+\DeclareMathOperator{\der}{\mathrm{d}}
+
+
+
+
+%denombrement probas-----------------------------------------
+
+
+
+
+\DeclareMathOperator{\Card}{\mathrm{Card}}
+\DeclareMathOperator{\PR}{\mathbf{P}}
+\DeclareMathOperator{\E}{\mathbf{E}}
+\DeclareMathOperator{\V}{\mathbf{V}}
+\DeclareMathOperator{\COV}{\mathbf{Cov}}
+
+\newcommand{\VA}{v.a. }
+\newcommand{\VAR}{v.a.r. }
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+
+
+
+
+%geometrie---------------------------------------------------
+
+
+
+
+\newcommand{\fle}[1]{
+\overrightarrow{#1}
+}
+\newcommand{\ang}[2]{
+\widehat{
+\left(
+#1 , #2
+\right)
+}
+}
+\newcommand{\scal}[2]{
+\left( #1 |  #2 \right)
+}
+
+
+
+
+%recurrence--------------------------------------------------
+
+
+
+
+\newcommand{\recurr}[4]{
+% u, n_0, u(n_0), u(n+1)
+\left\{
+\begin{array}{cl}
+& #1_{#2}=#3 \\
+\forall n\geqslant #2 \quad &    #1_{n+1}=#4   
+\end{array}
+\right.
+}
+\newcommand{\recurrdouble}[6]{
+% u, n_0,n_1, u(n_0), u(n_1), u(n+2)
+\left\{
+\begin{array}{cl}
+& #1_{#2}=#4 \qquad #1_{#3}=#5\\
+\forall n\geqslant #2 \quad &    #1_{n+2}=#6   
+\end{array}
+\right.
+}
+
+
+
+
+%divers----------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\lcro}{\textnormal{\textlbrackdbl}}
+\DeclareMathOperator{\rcro}{\textnormal{\textrbrackdbl}}
+
+\newcommand{\ssi}{ssi }
+\newcommand{\dis}{\displaystyle}
+
+
+%--------------------------------------------------------
+
+
+
+
+
+
+
+%--------------------------------------------------------------------
+%-------------DOCUMENT-----------------------------------------------
+%--------------------------------------------------------------------
+
+
+\begin{document}
+
+\emph{\textbf{
+Les espoirs des hommes instruits valent mieux que la richesse des ignorants.
+(Démocrite)
+}}
+
+
+%\item
+%Une personne réalise une infinité de lancers indépendants d’une pièce truquée  dont la probabilité de faire pile vaut $p\in]0,1[$.
+%\begin{enumerate}
+%	\item
+%	Quelle est la probabilité que le premier pile apparaisse lors des deux premiers lancers?
+%	\item
+%	Quelle est la probabilité que le premier pile apparaissent lors d’un numéro de lancer pair?
+%\end{enumerate}
+
+
+\begin{Exo}[problème des rencontres]
+	$n$ individus déposent leur portefeuille dans une urne. Puis ils piochent chacun leur tour un portefeuille. On note $X$ la variable aléatoire égale au nombre d'individus ayant récupéré leur portefeuille. Déterminer $\mathbb{E}(X)$. 
+\end{Exo}
+
+\begin{Exo}
+	$n$ personnes montent dans un ascenseur desservant $p$ étages. Chaque personne choisit un étage, indépendamment des autres usagers, avec probabilité uniforme. Quel est l'espérance de $X$ le nombre d'arrêts? On pourra calculer la loi de la v.a $X_i$ valant $1$ si l'ascenseur s'arrête à l'étage $i$, $0$ sinon.
+\end{Exo}
+
+\begin{Exo}[collectionneur de vignettes]
+Chaque paquet de céréales contient une vignette à collectionner, que l'on ne découvre qu'à l'ouverture du paquet. On se demande combien il faut ouvrir de
+paquets pour posséder au moins un exemplaire de chacune des $n$ vignettes.
+On décompose ce nombre en $N=N_1+...+N_n$ où $N_k$ est le nombre de paquets supplémentaires nécessaires pour obtenir $k$ vignettes différentes quand on en a déjà $k-1$ différentes. Déterminer la loi de $N_k$ puis $\mathbb{E}(N)$.
+\end{Exo} 
+
+\begin{Exo}
+	On suppose que le nombre $N$ de clients allant en caisse dans une période de temps donnée suit une loi de Poisson de paramètre $\lambda>0$. Le magasin dispose de deux caisses, et chaque client se dirige au hasard et indépendamment des autres clients :
+\begin{itemize}
+	\item vers la caisse $1$ avec probabilité $p\in[0,1]$
+	\item vers la caisse $2$ avec probabilité $1-p$
+\end{itemize}
+
+On note $N_1$ et $N_2$ le nombre de clients se présentant respectivement à la caisse $1$ et à la caisse $2$. Soit $n\in\N$. Quelle est la loi conditionnelle de $N_1$ sachant l’événement $\{N=n\}$? En déduire la loi de $N_1$.
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soient $X_1,X_2$ deux variables aléatoires indépendantes suivant des  lois géométriques de paramètre respectif $p_1,p_2$ dans $]0,1[$. Quelle est la loi de la variable aléatoire $X=\min(X_1,X_2)$? On pourra calculer $\Pr(X\geqslant n)$ pour $n\in\N^*$.
+\end{Exo}
+
+
+\begin{Exo}
+	 Calculer l’espérance de $\frac{1}{1+X}$ quand 	$X\hookrightarrow \mathcal{B}(n,p)$ puis quand $X\hookrightarrow \mathcal{P}(\lambda)$
+\end{Exo}
+ 
+
+
+\begin{Exo}
+	 Soit $a\in\R$ et $X$ v.a.d à valeurs dans $N^*$ dont la loi
+est définie par:
+\[\forall n\in\N^*,\Pr(X=n)=\frac{a}{n(n+1)}\]
+Déterminer $a$ puis, si elle existe, l'espérance de $X$.
+\end{Exo}
+
+
+\begin{Exo}
+	 On lance une pièce équilibrée jusqu’à ce que celle-ci ait produit pour
+la première fois la séquence «pile - face». On note $T$ le nombre de lancer avant que le jeu s’arrête. Donner la loi de $T$, montrer que $T$ est presque surement fini et calculer son espérance.
+
+\end{Exo}
+
+\begin{Exo}
+	Le nombre $N$ de voitures passant devant une station essence suit une loi de Poisson de paramètre $\lambda>0$. Chaque voiture décide de s'arrêter avec une probabilité $0<p<1$, indépendamment les unes des autres. Quelle est l'espérance de la v.a.d $X$ donnant le nombre de voitures s'arrêtant à la station?
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $X$ une variable aléatoire discrète à valeurs dans $\N$ . On suppose que $X$ suit une loi sans mémoire, c’est à dire:
+$$\forall (n,m)\in \N^2,\Pr(X>m)>0,\Pr\left(X>m+n|X>m\right)=\Pr(X>n)$$
+\begin{enumerate}
+	\item Montrer qu’une loi géométrique est sans mémoire.
+	
+	Dans la suite on suppose $X$ sans mémoire et on note $p=\Pr(X=1)$.
+
+	\item Montrer que pour tout $n$ dans $\N$ on a $\Pr(X>n+1)=\Pr(X>1)\Pr(X>n)$
+	\item En déduire que $X$ suit une loi géométrique.
+\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+		Soit $X$ une v.a.d sur 	$\left(\Omega,\tribu,\Pr\right)$ telle que $X(\Omega)=\N$.
+Montrer que: $$\forall n\in\N^*,\sum_{k=0}^nk\Pr(X=k)=\sum_{k=0}^{n-1}\Pr(X>k)-n\Pr(X>n)$$
+ En déduire que  $X$ admet une espérance ssi $\sum_n\Pr(X>n)$ converge et qu'alors $$\mathbb{E}(X)=\sum_{k=1}^{+\infty}\Pr(X\geqslant k)=\sum_{k=0}^{+\infty}\Pr(X>k)$$
+\end{Exo}
+
+\begin{Exo}
+	Soient $X,Y$ v.a.d indépendantes suivant la loi géométrique de paramètre $0<p<1$ et $M=\max(X,Y)$.
+\begin{enumerate}
+	\item
+	Calculer pour $n\in\N^*:\Pr(X\leqslant n)$ puis $\Pr(M\leqslant n)$.
+	\item
+	Déterminer la loi de $M$ et l'espérance de $M$. On pourra utiliser l'exercice précédent.
+\end{enumerate}
+\end{Exo}
+
+%\item
+%Soient $X,Y,Z$ trois variables aléatoires indépendantes, suivant la même loi binomiale B$\mathcal{B}(n,p)$. Pour tout $\omega\in\Omega$ on pose $A(\omega)=\begin{pmatrix}
+%X(\omega)	& Y(\omega) & Z(\omega) \\
+%	X(\omega)& Y(\omega) & Z(\omega) \\
+%	X(\omega)& Y(\omega) & Z(\omega)
+%\end{pmatrix}$
+%\begin{enumerate}
+%	\item Quelle est la probabilité qu'elle soit diagonalisable ?
+%	\item Quelle est la probabilité qu'elle soit une matrice de projecteur ?	
+%\end{enumerate}
+
+%\item
+%Soient $X,Y$ indépendantes suivant la même loi $\mathcal{G}(p)$ avec $0<p<1$. quelle est la probabilité que $A=\begin{pmatrix}
+%X_1	& 1 \\
+%0	& X_2
+%\end{pmatrix}$ soit inversible? Diagonalisable?
+
+
+
+
+\begin{Exo}
+	Soient $X,Y$ v.a.d à valeurs dans $\N$ telles que:
+$$\forall(i,j)\in\N^2,\Pr(X=i,Y=j)=\frac{i+j}{i!j!\mathrm{e}}\left(\frac{1}{2^{i+j}}\right)$$
+\begin{enumerate}
+	\item
+	Déterminer la loi de $X$ et de $Y$. $X$ et $Y$ sont-elles indépendantes?
+	\item
+	Montrer que $2^{X+Y}$ admet une espérance et calculer celle-ci.
+\end{enumerate}
+\end{Exo}
+
+
+ \begin{Exo}
+ 	On suppose qu’une colonie d’insectes produit $N$ oeufs où $N\hookrightarrow\mathcal{P}(\lambda)$. Pour tout $n\in\N$, lorsque $N=n$, le nombre $X$ d’oeufs qui éclosent suit une loi binomiale $\mathcal{B}(n,p)$. Déterminer la loi de $X$.
+ \end{Exo}
+ 
+ 
+ 
+\begin{Exo}
+	On dispose d’une pièce ayant la probabilité $0<p<1$ de donner pile.
+On  réalise l’expérience suivante : on lance la pièce autant de fois que nécessaire pour obtenir pile. On note $N$ le nombre de lancers effectués. Puis on relance à nouveau la pièce $N$ fois et on compte le nombre $X$ de piles obtenus. Déterminer la loi de $N$ et de $X$, montrer que $X$ admet une espérance et calculer celle-ci.
+\end{Exo}
+
+
+\begin{Exo}
+	Soient $X,Y$ deux v.a.d indépendantes. À l’aide des fonctions génératrices, montrer que :
+\begin{enumerate}
+	\item
+	Si $X\hookrightarrow \mathcal{B}(n,p)$ et $Y\hookrightarrow \mathcal{B}(m,p)$ alors  $X+Y\hookrightarrow \mathcal{B}(m+n,p)$.
+	\item
+	Si $X\hookrightarrow \mathcal{P}(\lambda)$ et $Y\hookrightarrow \mathcal{P}(\mu)$ alors  $X+Y\hookrightarrow \mathcal{P}(\lambda+\mu)$.
+\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+	On joue à pile ou face avec une pièce équilibrée.  Déterminer un entier $p$ tel
+que pour tout $n\geqslant p$ la probabilité d'avoir entre la moitié et trois quart de piles soit au moins $0,95$. (Utiliser Bienaymé-Tchebytchev)
+\end{Exo}
+
+
+
+\begin{Exo}
+	Montrer que l'on ne peut pas truquer deux dés de sorte que la somme de leur résultat suive une loi uniforme.
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $X$ v.a à valeurs dans $\N$ de fonction génératrice $G:t\mapsto a\mathrm{e}^{1+t^2}$.
+\begin{enumerate}
+	\item
+	Déterminer $a$.
+	\item
+	Déterminer la loi de $X$.
+	\item Justifier que $X$ admet une espérance et une variance, les déterminer.
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[banque CCP MP]
+	On admet, dans cet exercice, que:
+	$\forall\:q\in \mathbb{N}$, $\displaystyle\sum\limits_{k\geqslant q}^{}\dbinom {k}{q}x^{k-q}$ converge et  $\forall \:x\in \left] -1,1\right[$,   $\displaystyle\sum\limits_{k=q}^{+\infty}\dbinom{k}{q}x^{k-q}=\dfrac{1}{(1-x)^{q+1}}$.
+	Soit $p\in \left] 0,1\right[ $, $(\Omega,\mathcal{A},P)$ un espace probabilisé et $X$ et $Y$ deux variables aléatoires définies sur  $(\Omega,\mathcal{A},P)$ et à valeurs dans $\mathbb{N}$.\\
+	On suppose que la loi de probabilité du  couple $(X,Y)$ est donnée par:\\
+	\medskip
+	$$\forall\:(k,n)\in\mathbb{N}^2:P((X=k)\cap (Y=n))=
+	\begin{cases}
+\dbinom{n}{k}\left( \dfrac{1}{2}\right)^np(1-p)^n\:\text{si}\:k\leqslant n\\
+	0\:\text{sinon} 
+	\end{cases}$$
+	\begin{enumerate}
+		\item
+		Vérifier qu'il s'agit bien d'une loi de probabilité.
+		\item
+		\begin{enumerate}
+			\item
+			Déterminer la loi de $Y$.
+			\item
+			Prouver que $1+Y$ suit une loi géométrique.
+			\item
+			Déterminer l'espérance de $Y$.
+		\end{enumerate}
+		\item
+		Déterminer la loi de $X$.
+		
+		
+	\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}[banque CCP MP]
+	Soit $(\Omega,\mathcal{A},P)$ un espace probabilisé.\\
+	
+	\begin{enumerate}
+		\item 
+		Soit $X$ une variable aléatoire définie sur  $(\Omega,\mathcal{A},P)$ et à valeurs dans $\mathbb{N}$.\\
+		On considère la série entière  $\displaystyle\sum t^nP(X=n)$ de variable réelle $t$.\\
+		On note $R_X$ son rayon de convergence.\\
+		\begin{enumerate}
+			\item 
+			Prouver que $R_X\geqslant 1$.\:\:\:\:\\
+			On pose  $G_X(t)=\displaystyle\sum\limits_ {n=0}^{+\infty}t^nP(X=n)$ et on  note $D_{G_X}$ l'ensemble de définition de $G_X$.\\
+			Justifier que   $\left[-1,1 \right] \subset D_{G_X}$.\:\:\:\:\\
+			
+			Pour tout réel $t$ fixé de $\left[-1,1 \right]$, exprimer $G_X(t)$ sous forme d'une espérance.\:\:\:\:
+			\item
+			Soit $k\in\mathbb{N}$.
+			Exprimer, en justifiant la réponse, $P(X=k)$ en fonction de  $G_X^{(k)}(0)$.\:\:\:\:
+			
+		\end{enumerate}
+		\item 
+		\begin{enumerate}
+			\item
+			On suppose que $X$ suit une loi de Poisson de paramètre $\lambda$.\\
+			Déterminer $D_{G_X}$ et, pour tout $\:t\in D_{G_X}$, calculer $G_X(t)$.\:\:\:\:
+			
+			
+			\item
+			Soit $X$ et $Y$ deux variables aléatoires définies sur un même espace probabilisé, indépendantes  et suivant des lois de Poisson de paramètres respectifs $\lambda_1$ et $\lambda_2$.\\
+			Déterminer, en utilisant les questions précédentes, la loi de $X+Y$.
+		\end{enumerate}
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[banque CCP MP]
+	Une secrétaire effectue, une première fois, un appel téléphonique vers $n$ correspondants distincts.\\
+On admet que les $n$ appels constituent $n$ expériences indépendantes et que, pour chaque appel, la probabilité d'obtenir le correspondant demandé est $p$ ($p\in{\left]  0,1\right[ }$).\\
+Soit $X$ la variable aléatoire représentant le nombre de correspondants obtenus.
+\begin{enumerate}
+	\item Donner la loi de $X$. Justifier.
+	\item
+	La secrétaire rappelle une seconde fois, dans les mêmes conditions, chacun des $n-X$ correspondants qu'elle n'a pas pu joindre au cours de la première série d'appels.
+	On note $Y$ la variable aléatoire représentant le nombre de personnes jointes au cours de la seconde série d'appels.
+	\begin{enumerate}
+		\item
+		Soit $i\in \llbracket 0,n \rrbracket $.
+		Déterminer, pour  $k\in \mathbb{N}, $ $P(Y=k|X=i)$.
+		\item
+		Prouver que $Z=X+Y$ suit une loi binomiale dont on déterminera le paramètre.\\
+		\textbf{Indication} : on pourra utiliser, sans la prouver, l'égalité suivante: $\dbinom{n-i}{k-i}\dbinom{n}{i}=\dbinom{k}{i}\dbinom{n}{k}$.\\
+		\item
+		Déterminer l'espérance et la variance de $Z$.
+	\end{enumerate}
+\end{enumerate}
+
+\end{Exo}
+
+
+\begin{Exo}[banque CCP MP]\ 
+	\begin{enumerate}
+	\item
+	Rappeler l'inégalité de Bienaymé-Tchebychev.
+	\item
+	Soit $(Y_n)$ une suite de variables aléatoires mutuellement indépendantes, de même loi et admettant un moment d'ordre 2. On pose $S_n=\displaystyle\sum\limits_{k=1}^{n}Y_k$.\\
+	
+	Prouver que: $\forall\:a\in \left] 0,+\infty\right[ $, $P\left( \left|\dfrac{S_n}{n}-E(Y_1)\right|\geqslant a\right) \leqslant\dfrac{V(Y_1)}{na^2}$.
+	\item \textbf{Application}\\
+	On effectue des tirages successifs, avec remise, d'une boule dans une urne contenant 2 boules rouges et 3 boules noires.\\
+	\`A partir de quel nombre de tirages peut-on garantir à plus de 95\% que la proportion de boules rouges obtenues restera comprise entre $0,35$ et $0,45$?\\
+	\textbf{Indication} : considérer la suite $(Y_i)$ de variables aléatoires de Bernoulli où $Y_i$ mesure l'issue du $i^{\text{ème}}$  tirage.
+	
+\end{enumerate}
+\end{Exo}
+
+
+
+
+\begin{Exo}[banque CCP MP]
+	Soit $\lambda \in{\left] 0,+\infty\right[ }$ et $X$ une variable aléatoire discrète à valeurs dans $\mathbb{N}^\ast$. On suppose que $\forall n\in\mathbb{N}^\ast$, $P(X=n)=\dfrac{\lambda}{n(n+1)(n+2)} $.
+\begin{enumerate}
+	\item Décomposer en éléments simples la fraction rationnelle $R$ définie par $R(x)=\dfrac{1}{x(x+1)(x+2)}$.
+	\item
+	Calculer $\lambda$.
+	\item
+	Prouver que $X$ admet une espérance, puis la calculer.
+	\item
+	$X$ admet-elle une variance? Justifier.
+	
+\end{enumerate}
+\end{Exo}
+
+\end{document}

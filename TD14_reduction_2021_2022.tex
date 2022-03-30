@@ -1,0 +1,712 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD13}}
+\chead{\textsc{Réduction}}
+\rhead{\textit{2020-2021}} 
+
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+\emph{\textbf{“La peur de l'effort est plus épuisante que l'effort même. ” (Albert Brie)}}
+
+
+
+\begin{Exo}
+Soit $u$ un endomorphisme d'un espace vectoriel $E$. Montrer que si $0$ est valeur propre de $u$ alors $u$ n'est pas inversible. La réciproque est-elle toujours vraie?
+\end{Exo}
+
+
+\begin{Exo}
+	La somme de deux vecteurs propres est-elle encore un vecteur propre?
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soit $D=\diag(x_1,x_2,...,x_n)$ avec les $x_i$ deux à deux distincts.
+	\begin{enumerate}
+		\item
+		Montrer que $(I_n,D,D^2,...,D^{n-1})$ est une base du sev $\mathcal{D}_n(\K)$ des matrices diagonales de $M_n(\K)$.
+		\item
+		Quel est le degré minimal d'un polynôme annulateur non nul de $D$?
+	\end{enumerate}	
+\end{Exo}
+
+%\begin{Exo}[matrices en damier]
+%	On dit que $M\in M_n(\K)$ est en damier si:
+%	$$\forall (i,j)\in \{1,2,...,n\},i+j\text{ impair }\implies m_{i,j}=0$$
+%	On note $Dam$ leur ensemble.
+%	
+%	\vspace*{2mm}
+%	NB: aucune honte à traiter d'abord l'exercice en petite dimension ($n=3,4$) pour mieux appréhender la notion.
+%	\begin{enumerate}
+%		\item
+%		Montrer que $Dam$ est un sev de $M_n(\K)$ dont on donnera une base.
+%		\item Montrer que $Dam$ est stable par produit.
+%		\item  \textbf{On admet à ce stade du cours que $A^{-1}$ est un polynôme en $A$}. Montrer que si $A$ est en damier et inversible alors $A^{-1}$ est encore en damier.
+%	\end{enumerate}
+%\end{Exo}
+
+\begin{Exo}
+	Trouver un polynôme annulateur non nul de degré minimal pour $A=\begin{pmatrix}
+	-2 & 2 & -1 \\
+	-1 & 1 & -1 \\
+	-1 & 2 & -2
+	\end{pmatrix}$
+\end{Exo}
+
+%\begin{Exo}
+%	Montrer que si un sev $F$ de $E$ est stable par $u\in L(E)$ alors il est stable par $u^{-1}$. Rejustifier le fait que l'inverse d'une matrice en damier est encore en damier.
+%\end{Exo}
+
+
+\begin{Exo}
+	Soit $E=\mathbb C^\mathbb N$ l'espace des suites à coefficients complexes, et $\phi$ l'endomorphisme de $E$ qui à une suite $(u_n)$ associe la suite $(v_n)$ définie par $v_0=u_0$ et pour tout $n\geq 1$, 
+	$v_n=\frac{u_n+u_{n-1}}2$.	Déterminer les valeurs propres et les vecteurs propres de $\phi$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $(P,u,x,\lambda)\in \K[X]\times L(E)\times E^*\times \K$. On suppose que $u(x)=\lambda x$, montrer que $P(\lambda)$ est valeur propre de $P(u)$.
+\end{Exo}
+
+\begin{Exo}
+	Montrer qu'un vecteur propre de $u$ associé à une valeur propre non nulle est dans $\Ima(u)$
+\end{Exo}
+
+\begin{Exo}
+	Déterminer les valeurs propres et les sevs propres de l'endomorphisme de dérivation $D$ sur $\K_n[X]$ avec $n\geqslant 0$. Idem sur $E=C^{\infty}(\R,\R)$ ev des fonctions indéfiniment dérivables sur $\R$.
+\end{Exo}
+
+\begin{Exo}
+	Quels sont les sevs de $\mathbb{K}\left[ X\right] $ stables par la dérivation?
+\end{Exo}
+
+
+\begin{Exo}[En dimension finie]
+	Monter que si $u$ admet un hyperplan stable	alors il admet une valeur propre (raisonner matriciellement). Montrer aussi qu'un hyperplan est stable par $u$ ssi il existe une valeur propre $\lambda$ de $u$ telle que $\Ima (u-\lambda id_E)\subset H$.
+\end{Exo}
+
+
+\begin{Exo}
+		
+	 D\'{e}terminer les sevs de $\R^3$ stables par $\left( 
+	\begin{array}{lll}
+		1 & 1 & 1 \\ 
+		0 & 0 & 1 \\ 
+		0 & 0 & 1%
+	\end{array}%
+	\right)$ et par $\begin{pmatrix}
+		0 & 1 & 1 \\
+		1 & 0 & 0 \\
+		0 & 0 & 1
+	\end{pmatrix}$.
+	
+On pourra raisonner sur la dimension d'un tel sev stable.
+\end{Exo}
+
+\begin{Exo}
+	Diagonaliser :
+	$A=\left(\begin{array}{ccc}
+		0&2&-1\\
+		3&-2&0\\
+		-2&2&1
+	\end{array}\right),\textrm{ } B=\left(\begin{array}{ccc}
+		0&3&2\\
+		-2&5&2\\
+		2&-3&0
+	\end{array}\right), C=\left(\begin{array}{ccc}
+		1&0&0\\
+		0&1&0\\
+		1&-1&2
+	\end{array}\right).$
+\end{Exo}
+
+\begin{Exo}
+	Les matrices 
+	$A=\left(\begin{array}{ccc}
+		0&0&4\\
+		1&0&-8\\
+		0&1&5
+	\end{array}\right)\textrm{ et }
+	B=\left(\begin{array}{ccc}
+		2&1&1\\
+		0&0&-2\\
+		0&1&3
+	\end{array}\right)$
+	sont-elles semblables?
+\end{Exo}
+
+\begin{Exo}
+	Montrer que les applications suivantes sont des endomorphismes de $
+\R_{n}\left[ X\right] $, pr\'{e}ciser leurs \'{e}l\'{e}ments propres et
+dire s'ils sont diagonalisables:
+\begin{multicols}{2}
+\begin{enumerate}
+\item  $\phi \left( P\right) =P\left( X-1\right) .$
+
+\item  $\phi \left( P\right) =\left( X^{2}-1\right) P^{\prime }\left(
+X\right) -2nXP$
+
+\item  $\phi \left( P\right) =\left( nX+1\right) P+\left( 1-X^{2}\right)
+P^{\prime }$
+
+\item  $\phi \left( P\right) =X\left( X+1\right) P^{\prime }-2nXP.$
+\end{enumerate}
+\end{multicols}
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_n(\R)$ diagonalisable telle que $A^{2022}=I_n$, montrer que $A^2=I_n$.
+\end{Exo}
+
+\begin{Exo}
+	Montrer que $A\in M_n(\K)$ est diagonalisable ssi $A+I_n$ l'est.
+\end{Exo}
+
+\begin{Exo}
+	pour quelles valeurs des param\'{e}%
+	tres r\'{e}els les matrices suivantes sont elles diagonalisables ?
+	
+	$a)\left( 
+	\begin{array}{ccc}
+		1-a & a & 0 \\ 
+		-a & 1 & a \\ 
+		-a & 1-b & a+b%
+	\end{array}%
+	\right) ,b)\left( 
+	\begin{array}{ccc}
+		1 & a & 1 \\ 
+		0 & 1 & b \\ 
+		0 & 0 & c%
+	\end{array}%
+	\right) ,c)\left( 
+	\begin{array}{llll}
+		1 & a & b & c \\ 
+		0 & 1 & d & e \\ 
+		0 & 0 & -1 & f \\ 
+		0 & 0 & 0 & -1%
+	\end{array}%
+	\right) ,d)\left( 
+	\begin{array}{llll}
+		1 & a & b & c \\ 
+		0 & 1 & d & e \\ 
+		0 & 0 & 2 & f \\ 
+		0 & 0 & 0 & 2%
+	\end{array}%
+	\right)$
+\end{Exo}
+
+\begin{Exo}
+	Expliquer sans calcul pourquoi $A=\begin{pmatrix}
+		2 & 1 & 7 \\
+		0 & 2 & 13 \\
+		0 & 0 & 2
+	\end{pmatrix}$ n'est pas diagonalisable.
+	
+\end{Exo}
+
+\begin{Exo}
+	Montrer de deux manières différentes que si $A$ est diagonalisable alors sa transposée aussi.
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_3(\R)$ telle que $A^4=A^2$. Trouver un polynôme annulateur pour $A$. On suppose de plus que $\{-1,1\}\subset sp(A)$. Montrer alors que $A$ est diagonalisable.
+\end{Exo}
+
+\begin{Exo}[Mines-Ponts]
+	À quelle condition sur $z, M(z)=\left(\begin{array}{lll}0 & 0 & z \\ 1 & 1 & 0 \\ 0 & 1 & 0\end{array}\right)$ est-elle diagonalisable dans $\mathbb{C} ?$
+\end{Exo}
+
+\begin{Exo}
+	Soit $A=\left( 
+\begin{array}{ll}
+	5 & 3 \\ 
+	1 & 3%
+\end{array}%
+\right)$.On veut r\'{e}soudre dans $M_{2}\left( \mathbb{R}\right) $ l'%
+\'{e}quation $M^{2}+M=A$
+
+\begin{enumerate}
+	\item Diagonaliser $A$ avec matrice de passage.
+	
+	
+	
+	\item Trouver un polyn\^{o}me annulateur de $M,$ en d\'{e}duire les valeurs
+	propres possibles pour $M.$
+	
+	\item Montrer que $M$ est diagonalisable et pr\'{e}ciser les formes
+	diagonales possibles. Conclure.
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	
+ Niaiserie: une matrice \'{e}gale \`{a} son inverse est-elle
+diagonalisable?
+\end{Exo}
+
+\begin{Exo}
+	Donner une condition nécessaire et suffisante pour qu'une matrice de rang 1 soit diagonalisable.
+\end{Exo}
+
+ \begin{Exo}
+	Soit $A\in M_{n}\left( \mathbb{R}\right) $ telle que $A^{3}=A+I,$
+montrer que $\det A>0.$
+\end{Exo}
+
+ \begin{Exo}
+ 	Soit $A\in M_{n}\left( \mathbb{C}\right) $ telle que $%
+A^{3}-5A^{2}+4A=0.$ Montre que $tr\left( A\right) \in \mathbb{N}.$
+
+ \end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_{2n+1}(\R)$ non nulle telle que $A^3+4A=0$. Montrer que $A$ n'est pas diagonalisable sur $\R$. L'est-elle sur $\C$? Montrer aussi que $A$ n'est pas inversible.
+\end{Exo}
+
+\begin{Exo}
+	D\'{e}terminer la limite de la suite $\left( A^{n}\right) _{n\in 
+		\mathbb{N}}$ avec $A=\frac{1}{2}\left( 
+	\begin{array}{ccc}
+		-1 & -3 & 0 \\ 
+		0 & 2 & 0 \\ 
+		-3 & -3 & 2%
+	\end{array}%
+	\right) .$
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_{n}\left(\K\right) $ telle que $Tr\left(
+	A\right) \neq 0.$ On d\'{e}finit $\phi :\begin{cases}
+M_{n}\left( \mathbb{K}\right) \rightarrow M_{n}\left( \mathbb{K}\right) \\ 
+M\mapsto Tr\left( A\right) M-Tr\left( M\right) A
+	\end{cases}$.	
+	V\'{e}rifier (rapidement) que $\phi $ est lin\'{e}aire, d\'{e}terminez $\ker
+	\phi $ et $\Ima \phi ,$ montrer que $\phi $ est diagonalisable.
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_n(\R)$ diagonalisable telle que $\forall(\lambda,\mu)\in sp(A),\lambda+\mu\neq 0$. Soit $M\in M_n(\R)$ telle que $AM+MA=0$, montrer que $M=0$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $u\in L(E)$ vérifiant $u^3=u$.
+	\begin{enumerate}
+		\item
+		Calculer $u^2(x)$ pour $x\in \Ima(u)$.
+		\item
+		Montrer que l'endomorphisme induit par $u$ sur $F$ est inversible.
+		\item En déduire que $u$ est de rang pair.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $A$ la matrice 
+	$A=\left(\begin{array}{ccc}
+		1&0&-1\\
+		1&2&1\\
+		2&2&3
+	\end{array}\right).$
+	 Diagonaliser $A$.
+		 En déduire toutes les matrices $M$ qui commutent avec $A$.
+
+\end{Exo}
+
+\begin{Exo}
+	Soit $A$ une matrice nilpotente, montrer qu'elle admet une seule valeur propre à préciser. Que dire d'une matrice nilpotente ET diagonalisable?
+\end{Exo}
+
+
+\begin{Exo}
+	Montrer qu'en dimension $n>0$ un endomorphisme admet une droite ou un plan stable. On pourra raisonner matriciellement et ce n'est pas facile!!!
+\end{Exo}
+
+\begin{Exo}
+	Donner un plan d'\'{e}tude pour trigonaliser les matrices de taille $2$
+	et $3.$ Trigonaliser : 
+	\[
+	A=\left( 
+	\begin{array}{cc}
+		1 & 2 \\ 
+		-2 & 5%
+	\end{array}%
+	\right) ,B=\left( 
+	\begin{array}{ccc}
+		0 & -1 & -1 \\ 
+		3 & 4 & 2 \\ 
+		1 & 1 & 1%
+	\end{array}%
+	\right) ,C=\left( 
+	\begin{array}{ccc}
+		1 & -1 & -1 \\ 
+		2 & 4 & 2 \\ 
+		-1 & -1 & 1%
+	\end{array}%
+	\right) ,D=\left( 
+	\begin{array}{ccc}
+		4 & -2 & 5 \\ 
+		1 & 4 & -1 \\ 
+		0 & 1 & 1%
+	\end{array}%
+	\right) 
+	\]
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_n(\C)$ telle que $Tr(A^k)=0$ pour $1\leqslant k\leqslant n$. Montrer que $A$ est nilpotente.
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_{n}\left(\R\right) $ et $P\in \R\left[ X%
+	\right] $ tels que $P\left( A\right) $ triangulaire sup\'{e}rieure \`{a}
+	termes diagonaux tous distincts. Montrer que $A$ est diagonalisable puis
+	triangulaire sup\'{e}rieure.
+\end{Exo}
+
+
+
+\begin{Exo}[Un exemple de chaîne de Markov, paresseusement copié sur un TD de Mr Zwolska!]
+
+	Soit $a \in] 0 ; 1$ [. Une puce se déplace entre trois points $A, B$ et $C$ selon la règle suivante:
+	\begin{enumerate}
+		\item
+		Si elle est en $A$, la probabilité qu'elle se déplace en $B$ est égale à $a$, et celle qu'elle se déplace en $C$ est $1-a$;
+		\item
+		Si elle est en $B$, la probabilité qu'elle se déplace en $A$ est égale à $a$, et celle qu'elle se déplace en $C$ est $1-a$;
+		\item
+		Si elle est en $C$, la probabilité qu'elle se déplace en $A$ est égale à $a$, et celle qu'elle se déplace en $B$ est $1-a$; On suppose qu'au départ la puce est en $A$.
+	\end{enumerate}
+
+	Pour tout $n$ de $\mathrm{N}$, on note $A_{n}$ (resp. $B_{n}$ et $C_{n}$ ) l'événement : "la puce est en $A$ (resp. $B$ et $C$ ) après le $n^e$ déplacement" et $X_{n}$ la matrice colonne $X_{n}=\left(\begin{array}{l}P\left(A_{n}\right) \\ P\left(B_{n}\right) \\ P\left(C_{n}\right)\end{array}\right)$
+	
+	\begin{enumerate}
+		\item
+		Montrer que $\forall n \in \mathrm{N}, \quad X_{n+1}=M X_{n}$, où $M=\left(\begin{array}{ccc}0 & a & a \\ a & 0 & 1-a \\ 1-a & 1-a & 0\end{array}\right)$
+		\begin{enumerate}
+			\item
+			Montrer que 1 est valeur propre de ${ }^{t} M$ et préciser le vecteur propre associée.
+			\item
+			Donner les autres valeurs propres de ${ }^{t} M$ et sous-espaces propres associés.
+			\item
+			${ }^{t} M$ est elle diagonalisable?
+		\end{enumerate}
+	\end{enumerate}
+
+	Dans toute la suite de l'exercice, on fixe $a=\frac{1}{4}$.
+	\begin{enumerate}
+		\item
+		Diagonaliser alors la matrice ${ }^{t} M$ et en déduire, pour tout $n$ de $\mathrm{N},\left({ }^{t} M\right)^{n}$ puis $M^{n}$.
+		\item
+		Préciser la matrice $X_{0}$ et déterminer, pour tout $n$ de $\mathrm{N}, X_{n}$ en fonction de $n$.
+		\item
+		En déduire, pour tout $n$ de $\mathbb{N}$, les probabilités $P\left(A_{n}\right), P\left(B_{n}\right)$ et $P\left(C_{n}\right)$.
+		\item
+		Déterminer les limites de ces suites lorsque $n$ tend vers $+\infty$.
+	\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+	Soient $X,Y,Z$ trois variables aléatoires indépendantes, suivant la même loi binomiale B$\mathcal{B}(n,p)$. Pour tout $\omega\in\Omega$ on pose $A(\omega)=\begin{pmatrix}
+		X(\omega)	& Y(\omega) & Z(\omega) \\
+		X(\omega)& Y(\omega) & Z(\omega) \\
+		X(\omega)& Y(\omega) & Z(\omega)
+	\end{pmatrix}$
+	\begin{enumerate}
+		\item Quelle est la probabilité qu'elle soit diagonalisable ?
+		\item Quelle est la probabilité qu'elle soit une matrice de projecteur ?	
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soient $X,Y$ indépendantes suivant la même loi $\mathcal{G}(p)$ avec $0<p<1$. quelle est la probabilité que $A=\begin{pmatrix}
+		X_1	& 1 \\
+		0	& X_2
+	\end{pmatrix}$ soit inversible? Diagonalisable?
+\end{Exo}
+
+
+\section*{Banque CCP}
+
+
+
+\begin{Exo}
+	On considère la matrice $A=\begin{pmatrix}
+	0&a&1\\
+	a&0&1\\
+	a&1&0
+\end{pmatrix}$ où $a$ est un réel.
+\begin{enumerate}
+	\item
+	Déterminer le rang de $A$.
+	\item
+	Pour quelles valeurs de $a$, la matrice $A$ est-elle diagonalisable? 
+\end{enumerate}
+\end{Exo}
+
+
+
+
+\begin{Exo}
+	Soit $A=\begin{pmatrix}
+	0 & 0 & 1 \\ 
+	1 & 0 & 0 \\ 
+	0 & 1 & 0
+\end{pmatrix} \in \mathcal{M}_{3}\left( \mathbb{C}\right)$~.
+
+\begin{enumerate}
+	\item D\'{e}terminer les valeurs propres et les vecteurs propres de $A$. $A$ est-elle diagonalisable?
+	\item Soit $\left( a,b,c\right) \in \mathbb{C}^{3}$ et $B=a\mathrm{I}_{3}+bA+cA^{2}$, où $\mathrm{I}_3$ désigne la matrice identité d'ordre 3.\\ D\'{e}duire de la question \textbf{1.} les \'{e}l\'{e}ments propres de $B$.
+\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $u$ et $v$ deux endomorphismes d'un $\mathbb{R}$-espace vectoriel $E$.
+	
+	\begin{enumerate}
+		\item Soit $\lambda$ un réel non nul. Prouver que si $\lambda$ est valeur propre de $u\circ v$, alors $\lambda$ est valeur propre de $v\circ u$.\\
+		\:\:\:\:
+		\item On considère, sur $E=\mathbb{R}\left[ X\right] $ les endomorphismes $u$ et $v$ définis par 
+		$u$:\:$P\longmapsto \displaystyle\int_{1}^{X}P $ et $v$:\:$P\longmapsto P'$ .\\
+		Déterminer $ \mathrm{Ker} (u\circ v)$ et $\mathrm{Ker} (v\circ u)$.
+		Le résultat de la question 1. reste-t-il vrai pour $\lambda=0$?\:\:\:\:
+		\item 
+		Si $E$ est de dimension finie, démontrer que le résultat de la première question reste vrai pour $\lambda=0$.\\
+		\textbf{Indication }: penser à utiliser le déterminant.\:\:\:\:
+		
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit la matrice $M=\begin{pmatrix}
+	0 & a & c \\ 
+	b & 0 & c \\ 
+	b & -a & 0
+\end{pmatrix}$ o\`{u} $a,b,c$ sont des r\'{e}els.
+
+
+$M$ est-elle diagonalisable dans $\mathcal{M}_{3}\left(\mathbb{R}\right)$?
+$M$ est-elle diagonalisable dans $\mathcal{M}_{3}\left( \mathbb{C}\right)$?
+\end{Exo}
+
+\begin{Exo}
+	On considère la matrice $A=\begin{pmatrix}
+		-1 & -4 \\ 
+		1 & 3
+	\end{pmatrix}$~.
+	
+	\begin{enumerate}
+		\item Démontrer que $A$ n'est pas diagonalisable.
+		
+		\item On note $f$ l'endomorphisme de $\mathbb{R}^{2}$ canoniquement associ\'{e} \`{a} $A$. \\Trouver une base $\left( v_{1},v_{2}\right)$ de $\mathbb{R}^{2}$ dans laquelle la matrice de $f$ est de la forme $\begin{pmatrix}
+			a & b \\ 
+			0 & c
+		\end{pmatrix}$.\\
+		On donnera explicitement les valeurs de $a$, $b$ et $c$.
+		
+		\item En déduire la résolution du syst\`{e}me différentiel $\left\{
+		\begin{array}{l}
+			x^{\prime }=-x-4y \\ 
+			y^{\prime }=x+3y
+		\end{array}
+		\right.$~.
+	\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soit la matrice $A=\begin{pmatrix}
+	1 & -1 & 1 \\ 
+	-1 & 1 & -1 \\ 
+	1 & -1 & 1
+\end{pmatrix}$~.
+ Démontrer que $A$ est diagonalisable de trois manières:
+	\begin{enumerate}
+		\item En calculant directement le déterminant $\text{det}(\lambda \mathrm{I}_3-A)$, où $\mathrm{I}_3$ est la matrice identité d'ordre 3, et en déterminant les sous-espaces propres,
+		\item En utilisant le rang de la matrice,
+		\item En calculant $A^2$.
+	\end{enumerate}
+\end{Exo}
+
+\section*{Bonus}
+
+\begin{Exo}
+	Soit
+	$$
+	A=\left(\begin{array}{cccc}
+		0 & \cdots & 0 & 1 \\
+		\vdots & & \vdots & \vdots \\
+		0 & \cdots & 0 & 1 \\
+		1 & \cdots & 1 & 2
+	\end{array}\right)
+	$$
+\begin{enumerate}
+	\item
+	Quelle est la dimension de Ker $A$ ?
+	\item
+	Trouver les valeurs propres non nulles de $A$. (Indication: résoudre directement l'équation $A X=\lambda X$. On peut aussi calculer le polynôme caractéristique mais les calculs sont plus fastidieux.)
+	\item
+	La matrice $A$ est-elle diagonalisable?
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}\ 
+	
+	\begin{enumerate}
+		\item
+		Donner un exemple de matrice de ${M}_{2}(\mathbb{R})$ dont le spectre est vide.
+		\item
+		Donner un exemple de matrice diagonalisable de ${M}_{2}(\mathbb{R})$ dont le spectre est réduit à $\{1\} .$ Que peut-on dire d'une telle matrice?
+		\item
+		Donner un exemple de matrice non diagonalisable de ${M}_{2}(\mathbb{R})$ dont le spectre est réduit à $\{1\}$.
+		\item
+		Donner un exemple de matrice non diagonale de ${M}_{2}(\mathbb{R})$ dont le spectre est $\{-1,1\} .$ Une telle matrice est-elle toujours diagonalisable?
+		\item
+		Donner un exemple de matrice non nulle de ${M}_{2}(\mathbb{R})$ dont le spectre est réduit à $\{0\}$. Une telle matrice peut-elle être diagonalisable?
+		\item
+		Donner un exemple de couple $(A, B) \in {M}_{2}(\mathbb{R})^{2}$ telle que $\operatorname{Spec}_{\mathbb{R}}(A)=\operatorname{Spec}_{\mathbb{R}}(B)=$ $\{1\}$ et telle que $A$ et $B$ ne soient pas semblables.
+		\item
+		Peut-on trouver une paire $(A, B) \in {M}_{2}(\mathbb{R})^{2}$ telle que $\operatorname{Spec}_{\mathbb{R}}(A)=\operatorname{Spec}_{\mathbb{R}}(B)=$ $\{-1,1\}$ et telle que $A$ et $B$ ne soient pas semblables?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+Soit $n \in \mathbb{N}$. On définit l'endomorphisme $\varphi: \mathbb{C}_{n}[X] \rightarrow \mathbb{C}_{n}[X]$ par
+	$$
+	\forall P \in \mathbb{C}_{n}[X], \quad \varphi(P)=\left(X^{2}-1\right) P^{\prime \prime}+(2 X+1) P^{\prime} .
+	$$
+	\begin{enumerate}
+		\item
+		Déterminer les valeurs propres de l'endomorphisme $\varphi$.
+		\item
+		L'endomorphisme $\varphi$ est-il diagonalisable?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+Soit $n \in \mathbb{N} .$ On définit l'endomorphisme $\varphi: \mathbb{C}_{n}[X] \rightarrow \mathbb{C}_{n}[X]$ par
+	$$
+	\forall P \in \mathbb{C}_{n}[X], \quad \varphi(P)=\left(X^{2}-1\right) P^{\prime}-n X P .
+	$$
+	\begin{enumerate}
+		\item
+			Déterminer les valeurs propres et les vecteurs propres de l'endomorphisme $\varphi$.
+			\item
+			 L'endomorphisme $\varphi$ est-il diagonalisable?
+	\end{enumerate}
+\end{Exo}
+
+\end{document}

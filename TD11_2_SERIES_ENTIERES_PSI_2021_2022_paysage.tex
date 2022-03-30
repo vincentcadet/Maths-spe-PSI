@@ -1,0 +1,468 @@
+  
+\documentclass[17pt,a4paper,landscape]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+%\everymath{\displaystyle}
+\usepackage[T1]{fontenc}
+\usepackage{extsizes}[14pt]
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD11-2}}
+\chead{\textsc{Séries entières 2: DSE}}
+\rhead{\textit{2021-2022}} 
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathrm{i}}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+	\theoremstyle{break}
+	\theoremprework{%
+		\rule{0.5\linewidth}{0.3pt}}
+	\theorempostwork{\hfill%
+		\rule{0.5\linewidth}{0.3pt}}
+	\theoremheaderfont{\scshape}
+	\theoremseparator{ ---}
+	\newtheorem{Prop}{%
+		\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+	\theoremstyle{break}
+	\theoremprework{%
+		\rule{0.6\linewidth}{0.5pt}}
+	\theorempostwork{\hfill%
+		\rule{0.6\linewidth}{0.5pt}}
+	\theoremheaderfont{\scshape}
+	\newtheorem{Theo}{%
+		\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+	\theoremheaderfont{\sffamily\bfseries}
+	\theorembodyfont{\sffamily}
+	\newtheorem{Def}{%
+		\textcolor{green}{Définition}}[section]
+}
+
+{%
+	\theorembodyfont{\small}
+	\theoremsymbol{$\square$}
+	\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+	\theorembodyfont{\small}
+	\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+	\theorembodyfont{\small}
+	\newtheorem{Exo}{Exercice}
+}
+
+{%
+	\theoremnumbering{Roman}
+	\theorembodyfont{\normalfont}
+	\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+%--------------------------------------------------------------------
+%-------------DOCUMENT-----------------------------------------------
+%--------------------------------------------------------------------
+
+
+\begin{document}
+
+\emph{\textbf{
+	Sans musique la vie serait une erreur. (Nietzsche)
+}}
+
+\begin{bclogo}[couleur = green!30, arrondi = 0.1, logo = \bccoeur, barre = zigzag]{Pour mémoire}
+
+Soit $\sum_n a_n x^n$ une série entière de rayon de convergence $R_a\in\R\cup\{+\infty\}$. La fonction somme $S:x\mapsto \sum_{n=0}^{+\infty}a_n x^n$ est définie et de classe $C^{\infty}$ sur $]-R_a,R_a[$, on peut dériver terme à terme à tout ordre et pour tout entier $n$ on a: $a_n=\frac{S^{n}(0)}{n!}$.
+
+Soit $f$ de classe $C^{\infty}$ au voisinage de $0$. $f$ est développable en série entière (au voisinage de $0$) s'il existe $r>0$ tel que: $\forall x\in]-r,r[:f(x)=\sum_{n=0}^{+\infty}x^n$. Les coefficients $a_n$ sont  uniques, donnés par $a_n=\frac{f^{(n)}(0)}{n!}$ pour tout $n$ dans $\N$.
+
+La somme, le produit, la dérivée et les primitives de fonctions développables en série entière le sont encore. On obtient les DSE en les ajoutant/multipliant/ dérivant ou primitivant terme à terme.
+
+
+Une fonction paire/impaire n'a que des puissances paires/impaires dans son développement en série entière (DSE). 
+\end{bclogo}
+\vspace*{1cm}
+
+
+% \begin{Exo}
+% 	On note $u_0=0$ et pour $n\geqslant 0,u_{n+1}=\frac{u_n}{2}+(-1)^n$.
+%\begin{enumerate}
+%	\item
+%	Montrer que $\lvert u_n\rvert\leqslant 2$, en déduire le RCV de $\sum_n u_n x^n$.
+%	\item
+%	On note $f(x)=\sum_{n=0}^{+\infty}u_n x^n$, simplifier $(1-x/2)f(x)$. En déduire $u_n$ pour tout $n$.
+%\end{enumerate}
+% \end{Exo}
+
+
+
+	
+\begin{Exo}
+	On note pour $x$ réel  
+	$u_n(x)=\frac{\E^{2^n \I x}}{n!}$.
+		\begin{enumerate}
+			\item
+			Préciser pour $k$ dans $\N$ et $x$ réel $u_n^{(k)}(x)$.
+			\item
+			Montrer que pour tout $k$ dans $\N$ la série de fonctions $\sum_n u_n^{(k)}$ converge normalement sur $\R$.
+			\item
+			Montrer que $S=\sum_{n=0}^{+\infty}u_n$ est définie et de classe $C^{\infty}$ sur $\R$.
+			\item
+			Préciser la série de Taylor de $S$ en $0$ et son rayon de convergence.
+			\item
+			$S$ est-elle développable en série entière?
+		\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	
+	
+	On note $f$ la fonction définie sur $\R$ par:
+	$$f(0)=0\text{ et }\forall x\neq 0,f(x)=\E^{-\frac{1}{x^2}}$$
+	\begin{enumerate}
+		\item Soit $P\in \R[X]$, préciser la limite quand $u\to +\infty$ de $P(u)\E^{-u^2}$.
+		\item
+		Montrer que $f$ est continue en $0$.
+		\item
+		Calculer $f'(x)$ pour  $x$ non nul, et vérifier qu'il existe un polynôme $P_1$ tel que $f'(x)=P_1\left(\frac{1}{x}\right)\E^{-\frac{1}{x^2}}$.
+		\item
+		Montrer que $f$ est dérivable en $0$ (on précisera $f'(0)$) et que $f$ est de classe $C^1$ sur $\R$.
+		\item
+		Recommencer avec $f''$, préciser $P_2$.
+		\item
+		Montrer alors par récurrence que pour tout $n$ dans $\N$ il existe un polynôme $P_n$ tel que pour tout $x\neq 0$ on ait $f^{(n)}(x)=P_n\left(\frac{1}{x}\right)\E^{-\frac{1}{x^2}}$.
+		\item
+		Montrer alors que $f$ est de classe $C^{\infty}$ en $0$ et préciser la série de Taylor de $f$ en $0$.
+		\item
+		Quel est son rayon de convergence? $f$ est-elle développable en série entière?
+	\end{enumerate}
+\end{Exo}
+	
+	
+	
+	
+%		  \begin{Exo}
+%			On considère une série entiére $\sum a_{n}z^{n}$  et on pose $s_{n}=\sum_{p=0}^n a_{p}$. Vérifier que $R_s\leqslant R_a$ et que $R_s\geqslant \min(1,R_a)$. Que se passe t-il si $R_a\leqslant 1$ ?
+%		\end{Exo}
+%		
+	
+%	\item On considére une série entiére $\sum a_{n}z^{n}$ de rayon
+%	de convergence $R>0$ et on pose $s_{n}=\sum a_{p}$ et on note $R^{\prime }$
+%	le rayon de convergence de la série $\sum s_{n}z^{n}.$ On veut comparer $%
+%	R$ et $R^{\prime }.$
+%	
+%	\begin{enumerate}
+%		\item vérifier que $R^{\prime }\leqslant R$ et que $R^{\prime }\geqslant \inf
+%		(1,R).$
+%		
+%		\item que se passe t-il si $R\leqslant 1$ ?
+%		
+%		\item On suppose que $R>1$
+%		
+%		\begin{enumerate}
+%			\item vérifier que la suite $(s_{n})$ converge. On note $l$ sa limite.
+%			
+%			\item montrer que si $l\neq 0,$ $R^{\prime }=1.$
+%			
+%			\item montrer que si $l=0,$ pour tout $r\in \left] 1,R\right[ $ et pour $n$
+%			assez grand, on a $\left\vert s_{n}\right\vert \leq \overset{\infty }{%
+%				\underset{k=n+1}{\sum }}\frac{1}{r^{k}}.$ en déduire que $R^{\prime
+%			}\geq R$ et conclure.
+%			
+%			\item résumer les différents cas possibles.
+%		\end{enumerate}
+%	\end{enumerate}
+	
+%	\item soit $\left[ a_{n}x^{n}\right] $ une série entiére de rayon de
+%	convergence infini, de somme $S,$ vérifiant $\forall n\in \mathbb{N}%
+%	,a_{n}>0.$ Montrer que 
+%	\begin{equation*}
+%		\forall p,S(x)\underset{+\infty }{\sim }\overset{\infty }{\underset{n=p+1}{%
+%				\sum }}a_{n}x^{n}.
+%	\end{equation*}
+	
+%	\item soit $f$ une fonction $C^{\infty }$ sur $\R$; on suppose que $f
+%	$ ainsi que toutes ses dérivées sont positives. Soit $x>0.$
+%	
+%	\begin{enumerate}
+%		\item justifier les trois égalités suivantes:
+%		
+%		\begin{enumerate}
+%			\item $f(x)=f(0)+xf^{\prime }(0)+...+x^{n}\frac{f^{(n)}(0)}{n!}+x^{n+1}\frac{%
+%				f^{(n+1)}(c_{n})}{(n+1)!}$
+%			
+%			\item $f(2x)=f(x)+xf^{\prime }(x)+...+x^{n}\frac{f^{(n)}(x)}{n!}+x^{n+1}%
+%			\frac{f^{(n+1)}(d_{n})}{(n+1)!}$
+%			
+%			\item $f(-x)=f(0)-xf^{\prime }(0)+...+(-1)^{n}\frac{f^{(n)}(0)}{n!}%
+%			+(-1)^{n+1}x^{n+1}\frac{f^{(n+1)}(h_{n})}{(n+1)!}$\newline
+%			avec $c_{n}\in \left] 0,x\right[ ,$ $d_{n}\in \left] x,2x\right[ $ et $%
+%			h_{n}\in \left] -x,0\right[ .$
+%		\end{enumerate}
+%		
+%		\item montrer que la série $\Sigma \frac{f^{(n)}(x)}{n!}x^{n}$ est
+%		convergente.
+%		
+%		\item montrer que la série $\Sigma \frac{f^{(n)}(0)}{n!}x^{n}$ est
+%		convergente de somme $f(x),$ puis que la série $\Sigma \frac{f^{(n)}(0)}{%
+%			n!}(-x)^{n}$ est convergente de somme $f(-x),$ et enfin que $f$ est DSE sur $%
+%		\R.$
+%	\end{enumerate}
+	
+\begin{Exo}
+		 Montrer que $f:t\mapsto \frac{\sin t }{t}$ se prolonge en $0$ en une fonction $C^{\infty}$ sur $\R$. Idem avec $t\mapsto \frac{\E^t-1}{t}$.
+\end{Exo}
+
+\begin{Exo}
+	 Déterminer pour tout entier naturel $n$ la valeur de $\arctan^{(n)}(0)$.
+\end{Exo}
+
+\begin{Exo}
+	 Prouver que, pour tout $x\in\mathbb R$, on a $\textrm{ch}(x)\leqslant e^{x^2/2}$.
+\end{Exo}
+
+
+\begin{Exo}
+	 Calculer \`{a} $10^{-2}$ prés: $\int_0^1\frac{dt}{t^t},\int_{0}^{1}\frac{e^{t}-1}{t}	dt,\int_{0}^{\pi }\frac{\sin t}{t}dt,\int_{0}^{1}\frac{dt}{1+t^{16}}$.
+\end{Exo}
+
+
+\begin{Exo}
+	Pour les séries entières suivantes, donner le rayon de convergence et exprimer leur somme en termes de fonctions
+usuelles :
+$$\begin{array}{llllll}
+	\mathbf{1.}\quad \sum_{n\geq 0}\frac{x^{2n}}{2n+1}&\quad\quad&\mathbf{2.}\quad \sum_{n\geq 0}\frac{n^3}{n!}x^n&\quad\quad&\mathbf{3.}\quad \sum_{n\geq 0}(-1)^{n+1} nx^{2n+1}&
+	\mathbf{4.}\quad \sum_{n\geq 0}\frac{x^{2n}}{4n^2-1}
+\end{array}$$
+
+\end{Exo}
+
+
+
+
+
+\begin{Exo}
+	 Calculer $\overset{\infty }{\underset{n=1}{\sum }}\frac{1}{%
+	1^{2}+2^{2}+...+n^{2}}$ (décomposer en éléments simples $\frac{%
+	x^{2n+2}}{n(n+1)(2n+1)}$)
+\end{Exo}
+
+ \begin{Exo}
+	Développer en série entiére les fonctions: 
+\begin{equation*}
+	\frac{\ln (1-x)}{x-1},\arctan \frac{1-x^{2}}{1+x^{2}},\frac{\cos x}{\E^x},\frac{%
+		\E^{-x}}{1+x},\frac{1}{1+x+x^{2}+x^{3}},\left( \frac{\sin x}{x}\right)
+	^{2},\sin^3 
+\end{equation*}%
+\begin{equation*}
+	\left( \arctan x\right) ^{2},\arctan (1+x),\frac{1}{x^2+5x+6},\ln(x^2-3x+2),\sqrt{\frac{1-x}{1+x}}
+\end{equation*}
+\end{Exo}
+
+
+
+\begin{Exo}
+	 Soit $u_n$ telle que $u_{0}=1$ et $\forall n\in \N$, $u_{n+1}=\overset{n}{\underset{k=0}{\sum }}u_{k}u_{n-k}.$ On suppose que  $\Sigma u_{n}t^{n}$ a un rayon de convergence $>0$.
+Trouver la somme de cette série et calculer $u_{n}$. Déterminer son
+rayon de convergence.
+\end{Exo}
+
+ \begin{Exo}
+	Soit $f$ définie sur $]-1,1[$ par $f(x)=\frac{\arcsin(x)}{\sqrt{1-x^2}}$.
+\begin{enumerate}
+	\item
+	Montrer que $f$ est impaire. En déduire la forme de son éventuel DSE.
+	\item
+	Déterminer une équation différentielle d'ordre $1$ vérifiée par $f$.
+	\item
+	Déterminer les solutions impaires développables en série entière sur $]-1,1[$  de cette équation différentielle.
+	\item En déduire que $f$ est DSE et donner son DSE.
+\end{enumerate}
+\end{Exo}
+
+%	\item Déterminer une solution $f$ développable en série entié%
+%	re de l'équation différentielle $(E):$%
+%	\begin{equation*}
+	%		x(x+2)y^{\prime }+(x+1)y=1
+	%	\end{equation*}%
+%	Résoudre ensuite complétement cette équation, étudier le
+%	comportement des solutions quand $x\rightarrow 0$ puis exprimer la solution $%
+%	f$ \`{a} l'aide des fonctions élémentaires. En déduire $\underset%
+%	{n=0}{\overset{\infty }{\sum }}\frac{(n!)^{2}}{(2n+1)!}$ et $\underset{n=0}{%
+	%		\overset{\infty }{\sum }}\frac{(-1)^{n}(n!)^{2}}{(2n+1)!}.$
+%	
+%	\item On note $I_{n}$ le nombre d'involutions de $\left\{ 1,2,...,n\right\} $
+%	
+%	\begin{enumerate}
+	%		\item montrer que $I_{n+1}=I_{n}+nI_{n-1}.$ On pose $I_{0}=1$ et on consid%
+	%		ére la série entiére $\Sigma \frac{I_{n}}{n!}x^{n}$ dont on note 
+	%		$R$ le rayon de convergence et $S$ la somme.
+	%		
+	%		\item Vérifier que $R\geq 1.$
+	%		
+	%		\item Montrer que $S$ est solution d'une équation différentielle lin%
+	%		éaire du premier ordre et résoudre cette équation.
+	%		
+	%		\item En déduire que pour $x\in \left] -R,R\right[ $ on a $S(x)=\exp (x+%
+	%		\frac{x^{2}}{2}).$
+	%		
+	%		\item en exprimant cette derniére quantité comme produit de deux s%
+	%		éries entiéres montrez que $R=+\infty $ et que $I_{n}=n!%
+	%		\sum_{k=0}^{E(n/2)}\frac{1}{2^{k}k!(n-2k)!}.$
+	%	\end{enumerate}
+
+%	\item Pour tout $n\in \mathbb{N}$ on note:%
+%	\begin{equation*}
+	%		b_{n}=card\left\{ \left( p,q\right) \in \mathbb{N}^{2};p^{2}+q^{2}=n\right\} 
+	%		\text{ et }B_{n}=\sum_{k=0}^{n}b_{k}
+	%	\end{equation*}%
+%	et%
+%	\begin{equation*}
+	%		B\left( x\right) =\sum_{n=0}^{+\infty }b_{n}x^{n}\text{ et }B^{\ast }\left(
+	%		x\right) =\sum_{n=0}^{+\infty }B_{n}x^{n}
+	%	\end{equation*}
+%	
+%	\begin{enumerate}
+	%		\item Montrer que le rayon de convergence de $\sum b_{n}x^{n}$ est $\geq 1.$
+	%		
+	%		\item Montrer que%
+	%		\begin{equation*}
+		%			B_{n}=\sum_{k=0}^{n}\left( E\left( \sqrt{n^{2}-k^{2}}\right) +1\right)
+		%		\end{equation*}%
+	%		et qu'il existe $K$ tel que%
+	%		\begin{equation*}
+		%			B_{n}\sim Kn^{2}
+		%		\end{equation*}%
+	%		et en déduire le rayon de convergence $\sum B_{n}x^{n}.$
+	%		
+	%		\item Donner une relation entre $B$ et $B^{\ast }$ et déterminer un é%
+	%		quivalent en $1^{-}$ de $B$ et $B^{\ast }.$
+	%		
+	%		\item En s'inspirant de ce qui a été fait dans la question préc%
+	%		édente montrer que%
+	%		\begin{equation*}
+		%			f_{\alpha }\left( x\right) =\sum_{n=1}^{+\infty }n^{\alpha -1}x^{n}\underset{%
+			%				1^{-1}}{\sim }\frac{\Gamma \left( \alpha \right) }{\left( 1-x\right)
+			%				^{\alpha }}.
+		%		\end{equation*}
+	%	\end{enumerate}
+
+%	\item On se propose de calculer la somme de la série de terme gén%
+%	éral $\frac{1}{C_{2n}^{n}}.$ Pour cela on considére la série enti%
+%	ére $\Sigma _{n\geq 1}\frac{1}{C_{2n}^{n}}x^{n}.$
+%	
+%	\begin{enumerate}
+	%		\item déterminer son rayon de convergence.
+	%		
+	%		\item montrez que sa somme est solution de $(-4x+x^{2})y^{\prime }-(x+2)y=x.$
+	%		
+	%		\item résoudre cette équation, en déduire $S$ puis $S(1).$
+	%	\end{enumerate}
+
+ \begin{Exo}
+ 	On désigne par $N_{n}^{p}$ le nombre de permutations de $\left\{
+1,2,...,n\right\} $ ayant exactement $p$ points fixes avec la convention $%
+N_{0}^{0}=1.$
+
+\begin{enumerate}
+	\item vérifier que $N_{n}^{p}=\binom{n}{p}N_{n-p}^{0}$ et que $%
+	N_{n}^{0}+...+N_{n}^{p}+...+N_{n}^{n}=n!.$
+	
+	On considére la série entiére $\Sigma \frac{N_{n}^{0}}{n!}x^{n}$
+	
+	\item Montrez que son rayon de convergence est supérieur \`{a} $1$ et
+	que sa somme vérifie sur $\left] -1,1\right[ $ l'égalité $%
+	e^{x}f(x)=\frac{1}{1-x}.$
+	
+	\item En déduire des expressions de $N_{n}^{0}$ et $N_{n}^{p}.$
+	
+	\item la série étudiée est elle convergente pour $x=1?$ que dire
+	du rayon de convergence de $f?$
+\end{enumerate}
+ \end{Exo}
+
+\begin{Exo}
+	 On note $\Gamma _{n}^{p}$ le nombre de solutions $\left(
+k_{1},...,k_{n}\right) \in \mathbb{N}^{n}$ de l'équation $%
+k_{1}+...+k_{n}=p$ pour $p\in \mathbb{N}$ et $n\in \mathbb{N}^{*}.$
+
+\begin{enumerate}
+	\item Montrer que $\Gamma _{n}^{p}=\sum_{k=0}^{p}\Gamma _{n-1}^{k},$ en d%
+	éduire que $\Gamma _{n}^{p}=\Gamma _{n-1}^{p}+\Gamma _{n}^{p-1}$ et que $%
+	\Gamma _{n}^{p}\leq \left( p+1\right) ^{n}.$
+	
+	\item On note $S_{n}\left( x\right) =\sum_{p=0}^{\infty }\Gamma
+	_{n}^{p}x^{p},$ montrer que le RCV est non nul, trouver une relation entre $%
+	S_{n}$ et $S_{n-1}$ et en déduire $\Gamma _{n}^{p}.$
+\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+	 On pose $a_0=1,b_0=0$ et $\forall n\geqslant 0:a_{n+1}=-a_n-2b_n,b_{n+1}=3a_n+4b_n$. Déterminer RCV et somme de $\sum_n\frac{a_n}{n!}z^n$ et $\sum_n \frac{b_n}{n!}z^n$.	
+
+\end{Exo}	
+
+
+\end{document}

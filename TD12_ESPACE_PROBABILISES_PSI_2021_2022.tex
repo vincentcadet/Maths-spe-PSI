@@ -1,0 +1,583 @@
+  
+\documentclass[12pt,a4paper]{article}
+
+
+
+
+
+
+
+%\usepackage{fullpage}
+%\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{textcomp}
+%\usepackage{tikz}
+\usepackage{fancyhdr}
+
+\addtolength{\hoffset}{-3cm}
+ \addtolength{\voffset}{-2cm}
+ \addtolength{\textwidth}{4cm}
+\addtolength{\textheight}{4cm}
+
+
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD}}
+\chead{\textsc{Espaces probabilisés}}
+\rhead{\textit{2021-2022}} 
+
+
+
+
+
+
+
+
+
+%ensembles de nombres------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\K}{\mathbb{K}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\U}{\mathbb{U}}
+
+
+
+
+%applications relations----------------------------------------------
+
+
+
+
+\DeclareMathOperator{\Id}{\mathrm{Id}}
+\DeclareMathOperator{\Class}{\mathcal{C}}
+\DeclareMathOperator{\DL}{\mathrm{DL}}
+
+\newcommand{\lci}{l.c.i. }
+\newcommand{\set}[2]{
+\left\{
+\begin{array}{ccc}
+#1 & / & #2
+\end{array}
+\right\}
+}
+\newcommand{\appli}[5]
+{
+%E,F,f,x,y
+\left\{
+\begin{array}{ccc}
+#1 & \overset{#3}{\longrightarrow} & #2 \\
+#4 & \longmapsto & #5 
+\end{array}
+\right.
+}
+\newcommand{\applilight}[3]
+{
+%E,F,f
+#3 : #1  \longrightarrow  #2
+}
+\newcommand{\reciproque}[1]{
+#1^{*} 
+}
+
+
+
+
+
+%fonctions usuelles--------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\ch}{\mathrm{ch}}
+\DeclareMathOperator{\sh}{\mathrm{sh}}
+\DeclareMathOperator{\tah}{\mathrm{th}}
+\DeclareMathOperator{\sgn}{\mathrm{sgn}}
+\DeclareMathOperator{\cotan}{\mathrm{cotan}}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\equi}[3]
+{
+% f,g,a
+#1\underset{#3}{\sim}#2
+}
+\newcommand{\bigo}[3]
+{
+% f,g,a
+#1\underset{#3}{=}\mathcal{O}\left(#2\right)
+}
+\newcommand{\plusbigo}[4]
+{
+% f,g,h,a : f =_a g+O(h)
+#1\underset{#4}{=}#2 + \mathcal{O}\left(#3\right)
+}
+\newcommand{\smallo}[3]
+{
+% f,g,a
+#1\underset{#3}{=}\mathbf{o}\left(#2\right)
+}
+\newcommand{\plussmallo}[4]
+{
+% f,g,h,a : f =_a g+o(h)
+#1\underset{#4}{=}#2 + \mathbf{o}\left(#3\right)
+}
+
+
+
+
+
+%complexes--------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Real}{\mathcal{R}e}
+\DeclareMathOperator{\Imaginary}{\mathcal{I}m}
+\DeclareMathOperator{\I}{\mathbf{i}}
+
+
+
+
+
+%polynomes----------------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Xd}{\mathrm{X}}
+\DeclareMathOperator{\val}{\mathrm{val}}
+\DeclareMathOperator{\X}{\mathrm{X}}
+%\DeclareMathOperator{\deg}{\mathrm{deg}}
+
+
+
+
+
+%algebre lineaire---------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Diag}{\mathrm{Diag}}
+\DeclareMathOperator{\Vect}{\mathrm{Vect}}
+\DeclareMathOperator{\Ima}{\mathrm{Im}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\GL}{\mathrm{GL}}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
+\DeclareMathOperator{\Lcal}{\mathcal{L}}
+\DeclareMathOperator{\Mat}{\mathrm{Mat}}
+\DeclareMathOperator{\Com}{\mathrm{Com}}
+\DeclareMathOperator{\M}{\mathcal{M}}
+\DeclareMathOperator{\rg}{\mathrm{rg}}
+\newcommand{\tribu}{\mathcal{A}}
+\renewcommand{\Pr}{\mathbb{P}} 
+\newcommand{\ev}{espace vectoriel }
+\newcommand{\evs}{espaces vectoriels }
+\newcommand{\transpo}[1]{
+ \mathstrut^t\! #1
+}
+
+
+
+
+
+%arithmetique-------------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\pgcd}{pgcd}
+
+\newcommand{\modulobis}[3]{
+% x,y,alpha
+#1\equiv #2\; \left(\text{mod}\;#3\right)
+}
+\newcommand{\modulo}[3]{
+% x,y,alpha
+#1\equiv #2\; \left[#3\right]
+}
+
+
+
+
+
+%calcul differentiel et integral----------------------------
+
+
+
+
+\DeclareMathOperator{\der}{\mathrm{d}}
+
+
+
+
+%denombrement probas-----------------------------------------
+
+
+
+
+\DeclareMathOperator{\Card}{\mathrm{Card}}
+\DeclareMathOperator{\PR}{\mathbf{P}}
+\DeclareMathOperator{\E}{\mathbf{E}}
+\DeclareMathOperator{\V}{\mathbf{V}}
+\DeclareMathOperator{\COV}{\mathbf{Cov}}
+
+\newcommand{\VA}{v.a. }
+\newcommand{\VAR}{v.a.r. }
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+
+
+
+
+%geometrie---------------------------------------------------
+
+
+
+
+\newcommand{\fle}[1]{
+\overrightarrow{#1}
+}
+\newcommand{\ang}[2]{
+\widehat{
+\left(
+#1 , #2
+\right)
+}
+}
+\newcommand{\scal}[2]{
+\left( #1 |  #2 \right)
+}
+
+
+
+
+%recurrence--------------------------------------------------
+
+
+
+
+\newcommand{\recurr}[4]{
+% u, n_0, u(n_0), u(n+1)
+\left\{
+\begin{array}{cl}
+& #1_{#2}=#3 \\
+\forall n\geqslant #2 \quad &    #1_{n+1}=#4   
+\end{array}
+\right.
+}
+\newcommand{\recurrdouble}[6]{
+% u, n_0,n_1, u(n_0), u(n_1), u(n+2)
+\left\{
+\begin{array}{cl}
+& #1_{#2}=#4 \qquad #1_{#3}=#5\\
+\forall n\geqslant #2 \quad &    #1_{n+2}=#6   
+\end{array}
+\right.
+}
+
+
+
+
+%divers----------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\lcro}{\textnormal{\textlbrackdbl}}
+\DeclareMathOperator{\rcro}{\textnormal{\textrbrackdbl}}
+
+\newcommand{\ssi}{ssi }
+\newcommand{\dis}{\displaystyle}
+
+
+%--------------------------------------------------------
+
+
+
+
+
+
+
+%--------------------------------------------------------------------
+%-------------DOCUMENT-----------------------------------------------
+%--------------------------------------------------------------------
+
+
+\begin{document}
+
+\emph{\textbf{
+Des malheurs évités le bonheur se compose.
+(Alphonse Karr)
+}}
+
+\begin{enumerate}
+\item
+Que dire de $\mathbb{P}(A)$ si $A$ est indépendant de lui même?
+\item On lance deux d\'es simultan\'ement. 
+\begin{enumerate}
+\item D\'ecrire 
+de fa\c{c}on ensembliste les év\'enements suivants A:\og 
+On obtient deux fois le m\^eme r\'esultat\fg et B:\og La 
+somme des deux chiffres est \'egale \`a $4$ \fg
+\item Calculer $P(A)$, $P(B)$, $P(A\cup B)$, $P(A\cap B)$. 
+$A$ et $B$ sont-ils ind\'ependants?
+\end{enumerate}
+
+\item
+Soit $\Omega$ un univers et soient $A,B,C$ trois événements de $\Omega$. Traduire en termes ensemblistes
+(en utilisant uniquement les symboles d'union, d'intersection et de passage au complémentaire, ainsi que $A$, $B$ 
+et $C$) les événements suivants :
+\begin{enumerate}
+	\item
+	Seul $A$ se réalise;
+	\item $A$ et $B$ se réalisent, mais pas $C$.
+	\item  les trois événements se réalisent;
+	\item au moins l'un des trois événements se réalise;
+	\item au moins deux des trois événements se réalisent;
+	\item aucun ne se réalise;
+	\item au plus l'un des trois se réalise;
+	\item exactement deux des trois se réalisent;
+
+\end{enumerate}
+
+\item
+
+Soit $(\Omega,\tribu)$ espace probabilisé et $(A_n)_{n\in\N}$  une suite d'événements deux à deux incompatibles. Montrer que $\Pr(A_n)\underset{+\infty}{\to}0$.
+
+\item On suppose avoir un espace probabilisable $(\Omega,\tribu)$ modélisant le jeu de pile ou face équilibré infini (ie $\Omega=\{P,F\}^{\N^*}$) tel que $\tribu$ contienne les événements $P_n$:\og le lancer numéro $n$ donne pile\fg \ et $F_n$:\og le lancer numéro $n$ donne face\fg.
+\begin{enumerate}
+	\item 
+	Montrer que $A:$\og on obtient au moins un pile\fg, $B$:\og on obtient que des faces\fg\ sont des événements.
+	\item On note pour $k\in \N^*,C_k:$\og on n'obtient que des piles à partie du lancer $n$\fg. Montrer que  $C_k$ est un événement, puis que \og on n'obtient que des piles à partir d'un certain rang\fg \  est aussi un événement.
+\end{enumerate}
+
+\item On suppose avoir un espace probabilisable $(\Omega,\tribu)$ modélisant le jeu de lancer de dé équilibré infini  tel que $\tribu$ contienne les événements $N_n$:\og le lancer numéro $n$ donne $1$\fg .
+\begin{enumerate}
+	\item Expliciter $\Omega$.
+	\item 
+	Définir $\displaystyle\bigcap_{i=4}^{+\infty}N_i,(\displaystyle\bigcap_{i=1}^{3}\overline{N_i})\cap(\displaystyle\bigcap_{i=4}^{+\infty}N_i),\displaystyle \bigcup_{i=4}^{+\infty}N_i$.
+	\item
+	Décrire avec les $N_i$ l'événement \og parmi les lancers suivant le $n^e$ lancer on obtient au moins une fois $1$\fg.
+	\item Montrer que $\left(\displaystyle\bigcup_{i=n+1}^{+\infty}N_i\right)_{n\in\N}$ est décroissante et décrire l'événement $\displaystyle\bigcap_{n=0}^{+\infty}\left(\displaystyle\bigcup_{i=n+1}^{+\infty}N_i\right)$.
+\end{enumerate}
+
+
+\item
+Soit $(\Omega,\tribu)$ probabilisable et $(A_n)_n$ une famille d'événements. Soit $B$ défini par \og parmi les $(A_n)_n$ seul un nombre fini se réalisent\fg. Décrire $B$ en compréhension, montrer que $B$ est un événement.
+
+\item
+Supposons qu'il existe une bijection $f$ de $\N$ sur $\mathcal{P}(\N)$. Que dire de l'antécédent par $f$ de l'ensemble $E=\left\{n\in\N,n\notin f(n)\right\}$? Qu'en conclure?
+
+\item
+	Montrer que si deux événements sont incompatibles et indépendants alors l'un au moins des deux est de probabilité nulle.
+\item Soit $n\geq 1$. Déterminer une probabilité sur $\{1,\dots,n\}$ telle que la probabilité de $\{1,\dots,k\}$ soit proportionnelle à $k^2$.
+
+
+\item On lance deux dés à 6 faces, un rouge et un bleu. Calculer les probabilités que la somme vaille $i$ pour $2\leqslant i \leqslant 12$.
+\item Montrer qu'il est impossible de truquer un dé à $6$ faces pour que les probabilités de l'exercice précédent soient toutes égales. On pourra noter $p_i=\Pr(\{i\})$ et introduire le polynôme $p_1+p_2X+...+p_6X^5$.
+
+\item
+Soit $n\geq 1$. On lance $n$ fois un dé parfaitement équilibré. Quelle est la probabilité d'obtenir au moins une fois le chiffre 6? Au moins deux fois le chiffre 6? Au moins $k$ fois le chiffre 6?
+
+%\item Un coffre contient 10 diamants, 
+%15 \'emeraudes et 20 rubis. On tire 
+%quatre pierres au hasard dans le coffre. Calculer les 
+%probabilit\'es suivantes :
+%\begin{enumerate}
+%\item Les quatre pierres sont du m\^eme type
+%\item On tire deux diamants et deux rubis
+%\item On tire autant de diamants que de rubis
+%\end{enumerate}
+
+\item \textbf{Tirages successifs avec remise}
+\begin{itemize}
+	\item Une urne contient $r$ boules rouges et $b$ boules bleues. On note $N=r+b$ et  les boules sont discernables.
+	
+	\item On tire une boule, on note sa couleur et on la remet dans l'urne.
+	
+	\item On répète cette opération $n$ fois.
+	
+	\item Soit $k \in \lcro 0,n\rcro$, quelle est la probabilité d'obtenir $k$ boules rouges?
+	
+\end{itemize}
+
+\item \textbf{Tirages successifs sans remise}
+\begin{itemize}
+	\item Une urne contient $r$ boules rouges et $b$ boules bleues. On note $N=r+b$ et  les boules sont discernables.
+	\item On tire une boule, on note sa couleur et \textbf{on ne la remet pas} dans l'urne.
+	\item On répète cette opération $n$ fois (avec $n \leq N$...)
+	\item Soit $k \in \lcro 0,n\rcro$, quelle est la probabilité d'obtenir $k$ boules rouges?
+	\item Cette exp\'erience est appelée tirage successif sans remise.
+	
+\end{itemize}
+
+\item On lance un dé équilibré jusqu'à obtenir $6$. Déterminer la probabilité que tous les nombres obtenus soient pairs.
+
+\item On lance une pièce ayant pour laquelle la probabilité de faire pile vaut $p\in]0,1[$. Soit $A_n$ l'événement \og on obtient pour la première fois deux piles consécutifs au lancer numéro $n$\fg. \ On note $a_n$ sa probabilité.
+\begin{enumerate}
+	\item Déterminer $a_1,a_2,a_3$.
+	\item Exprimer pour $n>0,a_{n+2}$ en fonction de $a_{n+1}$ et $a_n$.
+	\item En déduire que l'évènement \og on obtient deux piles consécutifs\fg \  est presque-sûr.
+	
+\end{enumerate}
+
+\item
+On pose pour $n\in\N,\Pr({n})=\frac{1}{2^{n+1}}$. Montrer que l'on définit ainsi une probabilité sur $(\N,\mathcal{P}(\N))$ et calculer $\Pr(\{n\in\N,n\geqslant 10\})$.
+
+\item Pierre et Paul jouent au jeu suivant: ils lancent (chacun leur tour par exemple) une pièce équilibrée, Pierre gagne si la suite pile-pile-face sort avant la suite face-pile-pile, dans le cas contraire c'est Paul qui gagne.
+
+Notons $P_n$ l'événement \og Pierre gagne au lancer numéro $n$\fg et $p_n$ la probabilité de cet événement.
+\begin{enumerate}
+	\item
+	Calculer $g_3,g_4,g_n$ pour $n\geqslant 4$. En déduire la probabilité que Pierre gagne. Peut-on en déduire la probabilité que Paul gagne?
+	\item Notons $d_n$ la probabilité qu'au cours des $n$ premiers lancers il n'y ait jamais deux piles consécutifs. Préciser $d_1,d_2$ et montrer que pour $n>0$ on a $d_{n+2}=\frac{1}{2}d_{n+1}+\frac{1}{4}d_n$. En déduire que $d_n$ tend vers $0$.
+	\item Montrer alors que pour $n\geqslant 2$ la probabilité qu'aucun des deux joueurs n'ait gagné au lancer numéro $n$ est $d_n+\frac{1}{2^n}$
+	\item Quelle est la probabilité que Paul gagne?
+	
+\end{enumerate}
+
+%\item Dans une urne se trouvent 15 boules vertes 
+%et 10 boules blanches. On tire successivement 
+%sans remise 5 boules dans l'urne. Calculer les probabilit\'es
+%suivantes :
+%\begin{enumerate}
+%\item On obtient 5 boules vertes
+%\item On obtient une premi\`ere boule verte, les deux suivantes blanches, les deux derni\`eres vertes
+%\item On obtient au plus une boule blanche
+%\item On obtient trois boules vertes et deux blanches.
+%\end{enumerate}
+%Reprendre l'exercice avec des tirages avec remise.
+
+%\item Un tournoi de tennis international accueille 64 joueurs 
+%dont 8 fran\c{c}ais. 
+%Le tirage au sort remplit le tableau de fa\c{c}on 
+%al\'eatoire.
+%\begin{enumerate}
+%\item Quelle est la probabilit\'e 
+%qu'au moins deux fran\c{c}ais se rencontrent 
+%d\`es le premier tour?
+%\item Quelle est la probabilit\'e que les fran\c{c}ais 
+%ne se rencontrent pas avant les quarts de finale?
+%\end{enumerate}
+%
+
+
+%\item Une maladie rare touche un individu sur 1000. On dispose 
+%d'un test de d\'epistage qui est positif 
+%pour 95\% des personnes malades et 
+%pour 0,5\% des individus sains. Un individu est test\'e positif. Quelle est la probabilit\'e qu'il soit effectivement 
+%malade?
+
+\item On tire 5 cartes dans un jeu de 32 cartes.
+\begin{enumerate}
+\item Quelle est la probabilit\'e d'obtenir les quatre as?
+\item Un  joueur d\'evoile deux cartes de son jeu qui sont des as. Quelle est maintenant la probabilit\'e qu'il 
+d\'etienne quatre as?
+\end{enumerate}
+
+\item On dispose de $n$ urnes num\'erot\'ees de 1 \`a $n$.
+Dans l'urne nom\'ero $k$ se trouvent $k$ boules blanches 
+et $n-k$ boules rouges. On choisit au hasard une urne 
+puis on tire 2 boules dans cette urne.
+\begin{enumerate}
+\item Quelle est la probabilit\'e d'avoir 2 boules rouges?
+\item M\^eme question si on tire les 2 boules avec remise.
+\item Quelles sont les limites de ces probabilit\'es quand 
+$n\rightarrow +\infty$?
+\end{enumerate}
+
+
+\item
+	Vous êtes ministre de la santé et on veut vous vendre un test de dépistage d'une maladie touchant une personne sur $10000$ en vantant son efficacité: si une personne est malade, le test est positif à 99\%. Si une personne n'est pas malade, le test est positif à 0,1\%.
+
+Quelle est la probabilité qu'une personne dépistée positive soit effectivement malade? 
+
+Quelle est la probabilité qu'une personne dépistée négative soit effectivement malade?
+\item
+Dans un certain pays, le temps est soit sec (S) soit humide (H). Son évolution obéit à la règle immuable suivante : si le temps est sec aujourd'hui, il sera sec demain avec la probabilité 4/5 (et donc humide avec la probabilité 1/5). Si le temps est humide aujourd'hui, il sera humide demain avec la probabilité 3/5. Appelons $S_n$ (resp. $H_n$ ) l'événement « le temps est sec (resp. humide) le n eme jour ». On note $s_n$ et $h_n$ les probabilités de ces événements. On note également $X_n$ le vecteur colonne $\left(\begin{array}{c}s_n\\h_n \end{array}\right)$
+\begin{enumerate}
+	\item
+	En utilisant la règle d'évolution, exprimer $s_{n+1},h_{n+1}$ en fonction de $s_n$ et $h_n$. 
+	\item
+	En déduire que l'on a $X_{n+1}=AX_n$, où $A$ est une matrice à déterminer. 
+	\item
+	Nous sommes dimanche et il fait sec. Quelle est la probabilité que le temps soit sec mardi ? soit humide mercredi ? 
+\end{enumerate}
+
+\item Une compagnie a\'erienne \'etudie l'\'evolution des r\'eservations 
+sur l'un de ses vols. Elle constate que 
+l'\'etat d'une place donn\'ee \'evolue ainsi : elle est libre au jour 0 (jour d'ouverture des r\'eservations).
+ Si elle est libre au jour $n$, il y a une probabilit\'e 
+ $\frac{4}{10}$ que quelqu'un la r\'eserve au jour $n+1$.
+ Par contre si elle est r\'eserv\'ee au jour $n$, 
+ elle reste r\'eserv\'ee au jour $n+1$ avec une probabilit\'e 
+ $\frac{9}{10}$. Soit $p_n$ la probabilit\'e 
+ que la place soit r\'eserv\'ee au jour $n$.
+ \begin{enumerate}
+ \item Exprimer $p_{n+1}$ en fonction de $p_n$
+ \item En d\'eduire $p_n$ et $\lim p_n$.
+ \end{enumerate}
+ 
+\item Une gu\^epe entre au temps $n=0$ dans un appartement compos\'e de deux 
+pi\`eces A et B. Elle \'evolue ainsi :
+\begin{itemize}
+\item Si elle est en A \`a l'instant $n$, elle reste en A avec 
+probabilit\'e $\frac{1}{3}$ ou passe en B avec une probabilit\'e $\frac{2}{3}$ \`a l'instant $n+1$
+\item Si elle est en B \`a l'instant $n$, elle retourne en A avec 
+probabilit\'e $\frac{1}{4}$, reste en B avec 
+une probabilit\'e $\frac{1}{2}$, et sort de l'appartement
+avec une probabilit\'e $\frac{1}{4}$ \`a l'instant $n+1$
+\item Si elle est dehors, elle y reste.
+\end{itemize}
+On note $A_n$ l'\'ev\'enement \og la gu\^epe est en A 
+\`a l'instant $n$ \fg. On d\'efinit de m\^eme $B_n$ et $C_n$.
+Soit $X_n=\begin{pmatrix}
+P(A_n)\\P(B_n)\\P(C_n)
+\end{pmatrix}\in\M_{3,1}(\R)$
+\begin{enumerate}
+\item Calculer $X_0$, $X_1$, $X_2$.
+\item Montrer qu'il existe une matrice 
+$M\in\M_3(\R)$ telle que $\forall n\in\N\; X_{n+1}=MX_n$
+\item Montrer que $(M-\lambda I_3)$ est inversible sauf pour  $3$ valeurs à préciser $\lambda_1<\lambda_2<\lambda_3$.
+\item Pour $i\in\{1,2,3\}$ d\'eterminer $Y_i\in\M_{3,1}(\R)$ non nul tel que $MY_i=\lambda_i Y_i$
+\item Soit $P=\begin{pmatrix}
+Y_1 & Y_2 & Y_3
+\end{pmatrix}\in\M_3(\R)$. Montrer que $P$ est inversible. Calculer $P^{-1}$ 
+et $P^{-1}MP$
+\item En d\'eduire $M^n$ pour tout $n\in\N^*$, puis l'expression de $X_n$ 
+en fonction de $n$.
+\item Que vaut $\lim X_n$? Interpr\'eter. 
+\end{enumerate}
+
+\item
+Une marque vend des montres de bonne qualité avec une probabilité de tomber en panne de $0,01$. Des contrefaçons sont aussi vendues, représentant $20\%$ du marché, avec une probabilité de panne de $0,1$.
+\begin{enumerate}
+	\item
+	Si on achète une montre quelle est la probabilité qu'elle tombe en panne?
+	\item
+	Si on achète une montre et qu'elle tombe en panne, quelle est la probabilité que ce soit une contrefaçon?
+\end{enumerate}
+
+\item
+Un avion quadri-réacteur a besoin de deux moteurs pour pouvoir voler. Un avion bi-réacteur a besoin d'un moteur pour voler. La probabilité de panne d'un réacteur lors d'un vol  transatlantique est p. On suppose que les pannes des réacteurs sont indépendantes les unes des autres. Quel avion vous semble le plus sûr ? 
+
+
+
+
+\end{enumerate}
+
+\end{document}

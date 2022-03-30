@@ -1,0 +1,312 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD10}}
+\chead{\textsc{Intégrales généralisées}}
+\rhead{\textit{2021-2022}} 
+
+\everymath{\displaystyle}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathbf{i}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+ \begin{Exo}
+	Primitiver les fonctions $f$ telles que $f(x)=...$ (préciser l'intervalle où évolue $x$)
+	\begin{multicols}{4}
+		\begin{enumerate}
+			\item 
+			$\ln x$
+			\item 
+			$\frac{1}{x^2+a^2}$ avec $a\neq 0$
+			\item
+			$\left( \frac{x}{e}\right) ^{x}\ln x$
+			\item
+			$\frac{xe^{x}}{\sqrt{1+e^{x}}}$
+			\item 
+			$\frac{x}{\sin ^{2}x}$
+			\item 
+			$\frac{1}{\left( 1+x+x^{2}\right) ^{2}}$
+			\item 
+			$\frac{\arctan x}{\sqrt{x}}$
+			\item 
+			$\frac{\arctan x}{x^{2}+1}$
+			\item 
+			$\frac{1}{\sin x+\cos x}$
+			\item 
+			$\frac{\cos x}{4+\sin ^{3}x}$
+			\item 
+			$\sin \left( \ln x\right) $
+			\item 
+			$\ln \left(
+			1+x^{2}\right) $
+		\end{enumerate}
+	\end{multicols}
+	%$$\left( \frac{x}{e}\right) ^{x}\ln x,\frac{xe^{x}}{\sqrt{1+e^{x}}},\frac{x}{\sin ^{2}x},\frac{1}{\left( 1+x+x^{2}\right) ^{2}},\frac{\arctan x}{\sqrt{x}},\frac{\arctan x}{x^{2}+1},\sin \left( \ln x\right) ,\ln \left(
+	%1+x^{2}\right) ,\frac{1}{\sin x+\cos x},\frac{\cos x}{4+\sin ^{3}x}$$
+\end{Exo}
+
+
+\begin{Exo}(merci L.Garcin...)
+	CV et calcul éventuel de:
+	\begin{multicols}{4}
+		\begin{enumerate}
+			\item
+			$\int_{0}^{+\infty} \frac{1}{4+t^{2}} \mathrm{~d} t$	
+			\item
+			$\int_{0}^{2} \frac{1}{4-t^{2}} \mathrm{~d} t$
+			\item
+			$\int_{0}^{\frac{1}{3}} \frac{1}{\sqrt{1-9 t^{2}}} \mathrm{~d} t$
+			\item
+			$\int_{0}^{+\infty} \sin (t) \mathrm{d} t$
+			\item
+			$\int_{3}^{+\infty} \frac{\mathrm{d} t}{t^{2}-3 t+2}$
+			\item
+			$\int_{0}^{1} \ln (t) \mathrm{d} t$
+			\item
+			$\int_{2}^{+\infty} \frac{\mathrm{d} t}{t \ln t}$
+			\item
+			$\int_{0}^{+\infty} e^{-a t} \mathrm{~d} t$
+		\end{enumerate}
+	\end{multicols}
+\end{Exo}
+
+\begin{Exo}
+	Redémontrer rapidement $\cosh^2-\sinh^2=1$ et $\tanh'=\frac{1}{\cosh^2}$. Etablir l'existence et calculer $$I=\int_2^{+\infty}\frac{\diff x}{x^2\sqrt{x^2-4}}$$
+\end{Exo}
+
+\begin{Exo}
+	Calculer $\displaystyle\int_{0}^{1}\frac{\diff x}{\sqrt{1-x^2}}$ après avoir établi son existence. En déduire pour $a<b:\displaystyle\int_{a}^{b}\frac{\diff x}{\sqrt{(x-a)(b-x)}}$.
+\end{Exo}
+
+%\begin{Exo}
+%	Montrer que $\displaystyle\int_{0}^{\infty}\frac{\sin^2t}{t^2}\diff t$ converge, en déduire via une IPP que $\displaystyle\int_{0}^{\infty}\frac{\sin t}{t}\diff t$ converge et que les intégrales généralisées ont même valeur.
+%\end{Exo}
+
+\begin{Exo}
+	Existence et calcul de $\displaystyle\int_0^1\sqrt{\frac{t}{1-t}}\diff t$, $\displaystyle\int_0^1\frac{\diff x}{(1+x)\sqrt{1-x^2}}$ (poser $x=\cos (2\theta)$).
+\end{Exo}
+
+\begin{Exo}
+	Notons pour $n\in \N:I_n=\displaystyle\int_0^{+\infty}t^n\E^{-t}\diff t$. Justifier l'existence de $I_n$ et trouver une relation de récurrence entre $I_n$ et $I_{n-1}$. En déduire $I_n$.
+\end{Exo}
+
+%\begin{Exo}
+%	Calculer pour $0<a<b<1:\displaystyle\int_a^b\frac{\ln(1-t^2)}{t^2}\diff t$, en déduire l'existence et la valeur de $\displaystyle\int_0^1\frac{\ln(1-t^2)}{t^2}\diff t$.
+%\end{Exo}
+
+\begin{Exo}\ 
+	\begin{enumerate}
+		\item Montrer que $\int_{ 0}^{\frac{\pi }{2}}\ln (\sin t)\diff t$ et $\int_{ 0}^{\frac{\pi }{2}}\ln \left( \cos t\right) \diff t$
+		convergent et ont même valeur. 
+		\item Calculer leur somme, en déduire leur valeur. En déduire la valeur de $\int_{0}^{\pi }t\ln (\sin t)\diff t$
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $I=\displaystyle\int_0^{+\infty}\frac{t}{1+t^3}\diff t$ et $J=\displaystyle\int_0^{+\infty}\frac{\diff t}{1+t^3}$. Montrer que $I,J$ existent et sont égales, en déduire leur valeur.
+\end{Exo}
+
+\begin{Exo}
+	Montrer à l'aide d'une IPP que $\int_x^{+\infty}e^{-t^2}\diff t\underset{+\infty}{\sim}\frac{e^{-x^2}}{2x}$.
+\end{Exo}
+
+\begin{Exo}
+	Existence et calcul de $\displaystyle\int_0^{+\infty}\left(\int_x^{+\infty}e^{-t^2}\diff t\right)\diff x$.
+\end{Exo}
+
+\begin{Exo}
+	Nature de $\int_0^{\infty}\cos\left(t\right)\diff t$ et de $\int_0^{1}\cos\left(\ln t\right)\diff t$.
+\end{Exo}
+
+% \begin{Exo}
+% 	Etudier la CV de $\int_{\R_{+}^{\ast }}\frac{\sin ^{2}t}{t^{\alpha }}\diff t,\int_{\R_{+}^{\ast }}\frac{t^{\alpha }}{e^{t}-1}\diff t,\int_{\R_{+}^{\ast }}\cos \left( e^{t}\right) \diff t$
+% \end{Exo}
+
+%\begin{Exo}
+%	 Préciser les valeurs de $n\in \N$ telles que : 
+%$\displaystyle
+%\int_{\R_{+}}\frac{dt}{\left( t+\sqrt{t^{2}+1}\right) ^{n}}
+%$
+%converge. 
+%\end{Exo}
+
+ \begin{Exo}
+	Calculer (après avoir prouvé leur existence) 
+\begin{equation*}
+I=\int_{0}^{\frac{\pi }{2}}\frac{\cos x^{\sin x}}{\cos x^{\sin x}+\sin x^{\cos	x}}\diff x,J=\int_{0}^{+\infty }\frac{\ln t}{1+t^{2}}\diff t,K=\int_{0}^{+\infty}\ln\left(1+\frac{1}{t^2}\right)\diff t
+\end{equation*}
+
+\end{Exo}
+
+
+\newpage
+
+ \begin{Exo}
+	Calculer $\displaystyle\int_{0}^{1}\frac{\ln x}{\sqrt{x}\left( 1-x\right) ^{3/2}}dx$
+en posant $x=\sin ^{2}\phi .$
+\end{Exo}
+
+\begin{Exo}
+	 Etudier l'existence des int\'{e}grales suivantes (discuter suivant $%
+\alpha $ et $\beta $)\thinspace : 
+\begin{equation*}
+\int_{0}^{1}\left\vert 1-x^{\alpha }\right\vert ^{\beta }dx,\int_{0}^{1}%
+\frac{\left( \ln \left( 1-x\right) \right) ^{\alpha }}{x^{2}}dx
+\end{equation*}
+\end{Exo}
+
+\begin{Exo}
+	Convergence absolue, convergence de $\displaystyle\int_{\R_+}\frac{e^{\I t}}{1+\I t}\diff t$. Convergence et calcul de $\int_{0}^{+\infty}xe^{-x}\sin x\diff x$.
+\end{Exo}
+ 
+ \begin{Exo}
+ 	Soit $f:\R_+\to \R$ continue et positive. On suppose que $\frac{f(x+1)}{f(x)}\underset{x\to+\infty}{\to}\ell<1$. Montrer que $\int_{ 0}^{+\infty}f$ converge.
+ \end{Exo}
+ 
+
+\begin{Exo}
+	 Soit $f\in C\left( \R,\R\right) $ admettant des
+limites finies en $\pm \infty .$ Montrer que $\displaystyle\int_{-\infty}^{+\infty}\left(
+f\left( x+1\right) -f\left( x\right) \right) dx$ converge et donner sa
+valeur.
+\end{Exo}
+
+ \begin{Exo}
+ 	Pour quels polyn\^{o}mes $P$ la fonction $\sqrt{P\left( t\right) }%
+-t^{2}-t-1$ admet-elle une int\'{e}grale g\'{e}n\'{e}ralis\'{e}e $\R
+_{+}$.
+ \end{Exo}
+
+\begin{Exo}
+	Soit $f$ la fonction nulle en $0$ vérifiant pour $n>0: 
+	\begin{cases}
+			f\left( n\right) =n \\ 
+			f\left( n-\frac{1}{2n^{3}}\right) =0 \\ 
+			f\left( n+\frac{1}{2n^{3}}\right) =0
+	\end{cases}$
+	et affine entre les points $n-\frac{1}{2n^{3}},n,n+\frac{1}{2n^{3}}$ etc.
+	Tracer $f$ et calculer $\int_{\mathbb{R}_{+}}f$.
+\end{Exo}
+
+\begin{Exo}[Intégrale de Dirichlet]
+On souhaite établir la convergence et calculer $\displaystyle\int_0^{+\infty}\frac{\sin t}{t}\diff t$.
+\begin{enumerate}
+	\item
+		Montrer que $\displaystyle\int_{0}^{\infty}\frac{\sin^2t}{t^2}\diff t$ converge, en déduire via une IPP que $\displaystyle\int_{0}^{\infty}\frac{\sin t}{t}\diff t$ converge et que les intégrales généralisées ont même valeur.
+	\item
+	Lemme (de Riemann-Lebesgue light): montrer que si $f$ est de classe $C^1$ sur $[a,b]$ alors:
+	$$\int_a^b f(t)\sin(nt)\diff t\underset{n\to +\infty}{\to}0$$
+
+	\item
+	Montrer que $\phi$ définie sur $[0,\pi/2]$ par $\phi(0)=0$ et $\phi(t)=\frac{1}{\sin t}-\frac{1}{t}$ si $t\in]0,\pi/2]$ est $C^1$ sur $[0,\pi/2]$.
+	\item
+	On note pour $n\in\N:I_n=\int_{0}^{\pi/2}\frac{\sin(2n+1)t}{\sin t}\diff t$. Montrer que la suite $(I_n)_n$ est bien définie et est constante.
+	\item
+	On note pour $n\in\N:J_n=\int_{0}^{\pi/2}\frac{\sin(2n+1)t}{ t}\diff t$. Montrer à l'aide du lemme de Riemann-Lebesgue que la suite $(J_n)_n$ est bien définie et a même limite que $(I_n)_n$.
+	\item En déduire la valeur de $\displaystyle\int_0^{+\infty}\frac{\sin t}{t}\diff t$ puis celle de $\displaystyle\int_0^{+\infty}\frac{\sin^2 t}{t^2}\diff t$.
+\end{enumerate}
+\end{Exo}
+
+\end{document}

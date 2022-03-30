@@ -1,0 +1,274 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD7}}
+\chead{\textsc{Espaces vectoriels normés 2}}
+\rhead{\textit{2021-2022}} 
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+%\emph{\textbf{“Je crois beaucoup en la chance ; et je constate que plus je travaille, plus la chance me sourit” (Thomas Jefferson)}}
+%
+%\begin{center}
+%\textsc{Les exercices ... sont à chercher pour vendredi}   
+%\end{center}
+
+\begin{Exo}
+		 Soit $I$ intervalle de $\R$ et $f:I\to \R$. Montrer que $f$ est lipschitzienne sur $I$ ssi $f'$  bornée sur $I$.
+\end{Exo}
+%\begin{Exo}
+%	 Montrer que toute matrice de $M_n(\K)$ est limite d'une suite de matrices inversibles. L'ensemble $GL_n(\K)$ est-il ouvert? Fermé? Convexe? Borné?
+%\end{Exo}
+% \begin{Exo}
+% 	Soit $F=\left\{M\in M_n(\K),M^2=M\right\}$. Montrer que $F$ est fermé. Est-il ouvert? Borné? Est-ce un sev? Est-il convexe?
+% \end{Exo}
+
+%\begin{Exo}
+%	Soit $F$ l'ensemble des matrices triangulaires supérieures inversibles de $M_3(\C)$.
+%
+%	\begin{enumerate}
+%	\item
+%	Préciser $A^{-1}$ pour $A=\begin{pmatrix}
+%		a & b & c \\
+%		0 & d & e \\
+%		0 & 0 & f
+%	\end{pmatrix}$ dans $F$.
+%	\item En déduire que $f:M\in F\mapsto M^{-1}$ est continue.
+%	\item Justifier que plus généralement l'application qui à une matrice inversible associe son inverse est continue sur $GL_n(\K)$.
+%\end{enumerate}
+%\end{Exo}
+
+\begin{Exo}
+	Justifier que l'application qui à une matrice inversible associe son inverse est continue sur $GL_n(\K)$.
+\end{Exo}
+
+%	\begin{Exo}
+%		 Soit $f:\R^{2}\rightarrow \R$ définie par $f\left(x,y\right) =\frac{xy^{2}}{x^{2}+y^{4}}$ et $f\left( 0,0\right) =0.$ Etudier
+%	la continuité de $f$ en $\left( 0,0\right)$.
+%	\end{Exo}
+	
+%\begin{Exo}
+%	
+%	 Soit $f:\R^{2}\rightarrow \R$ définie par $f\left(x,y\right) =\frac{3x^{2}+xy}{\sqrt{x^{2}+y^{2}}}$ et $f\left( 0,0\right) =0.$ Etudier
+%l'existence d'une limite en $\left( 0,0\right)$.
+%\end{Exo}
+
+% \begin{Exo}
+%	Etudier la continuité sur $\R^2$ de $f:(x,y)\mapsto \begin{cases}
+%2x^2+y^2-1\text{ si }x^2+y^2>1\\x^2 \text{ sinon}
+%\end{cases}$.
+%\end{Exo}
+
+\begin{Exo}
+	Continuité sur $\R^2$ de $f:(x,y)\mapsto\begin{cases}
+		\left(\frac{\sin(xy)}{x^2+y^2},\sqrt{|x|+|y|}\right)\text{ si }(x,y)\neq (0,0)\\ (0,0)\text{ si }(x,y)=(0,0)
+	\end{cases}.$
+\end{Exo}
+%\begin{Exo}
+%	 Soit $\left( E,\left\| \,\right\| \right) $ un evn et $A$ une partie
+%de $E$ ouverte et fermée. (exemple ?)
+%
+%	\begin{enumerate}
+%	\item On note $\chi _{A}$ la fonction caractéristique de $A,$ définie par: $\chi _{A}\left( x\right) =\left\{ 
+%	\begin{array}{l}
+%		1\text{ si }x\in A \\ 
+%		0\text{ sinon}
+%	\end{array}
+%	\right.$. Montrer que $\chi _{A}$ est continue.
+%	
+%	\item Soit $a\in A$ et $b\notin A$. Montrez que $\phi :t\in \left[ 0,1\right]
+%	\mapsto \chi _{A}\left( ta+\left( 1-t\right) b\right) $ est continue.
+%	Conclure sur $A$.
+%	\end{enumerate}
+%\end{Exo}
+
+
+%\begin{Exo}
+%	 Parmi les parties suivantes de $\R$ usuel quelles sont celles qui sont ouvertes? Fermées? $$]1,2[,]1,2],[1,2],[1,2]\cup [3,4],[1,2]\cup\{3\},\Z,\R\setminus \Z,\Q,\left\{\frac{1}{n},n>0\right\},\left\{\frac{1}{n},n>0\right\}\cup\{0\}$$
+%\end{Exo}
+\begin{Exo}
+	 Soit $(E,\norme{})$ un evn et $f:x\mapsto \frac{x}{\norme{x}+1}$. Montrer que $f$ est continue sur $E$, bijective de $E$ sur $B(0,1)$, de réciproque continue.
+\end{Exo}
+
+% \begin{Exo}
+% 	Montrer de diverses façons que $\left\{(x,y)\in\R^2,xy=1\right\}$ est un fermé de $\R^2$. Est-il borné? Ouvert?
+% \end{Exo}
+
+\begin{Exo}\ 
+		Soit $u\in L(E,F)$, on rappelle qu'en utilisant la définition quantifiée de la continuité en $0$ on peut montrer que $u$ est continue sur $E$ ssi il existe $K>0$ tel que:
+		$$\forall x\in E,\norme{u(x)}_F\leqslant K\norme{x}_E$$
+	\begin{enumerate}
+		\item
+		Déterminer la  limite de la suite $\left(\frac{X^n}{n}\right)_n$ dans $(\R[X],\norme{}_{\infty})$. (Rappel: si $P=\sum_{k=0}^{N}a_kX^k$ alors $\norme{P}_{\infty}=\sum_{k=0}^N|a_k|$).
+		$D:P\mapsto P'$ est-elle continue sur $(\R[X],\norme{}_{\infty})$?\item
+		Pour $P=\sum_k a_kX^k:N(P)=\sum_k k!|a_k|$. (On admet que $N$ est une norme sur $\R[X]$). Montrer que $D$ est continue sur $(\R[X],N)$.
+		\item
+		Ici $E=C^{\infty}(\R,\R)$ et on note pour $\lambda$ réel $e_{\lambda}:x\mapsto \exp(\lambda x)$. Soit $N$ une norme sur $E$, comparer $N(e_{\lambda})$ et $N(D(e_{\lambda}))$. Existe-t-il une norme sur $E$ pour laquelle $D$ soit continue?
+		\item
+		Soit $c\in\R$ et $n>0$. Montrer que $u:P\mapsto P(c)$ est continue sur $\R_n[X]$.
+		\item
+		On munit $\R[X]$ de sa norme $\infty$. On fixe $c\in]-1,1[$, montrer que $v:P\mapsto P(c)$ est continue sur $\R[X]$.
+		\item On note	$w:P\mapsto P(1)$. Calculer $w(P_n)$ avec $P_n=\frac{1}{n+1}(1+X+X^2+...+X^n)$. Quelle est la limite de $(P_n)_n$ pour $\norme{ }_{\infty}$? $w$ est-elle continue sur $\R[X]$ muni de la norme $\infty$?
+	\end{enumerate}
+	
+\end{Exo}
+
+
+
+\begin{Exo}
+	 Soit $A$ une partie fermée et bornée d'un evn $\left( E,\left\Vert
+\,\right\Vert \right)$ de dimension finie et $f$ une application de $A$ dans $A$ vérifiant: 
+\begin{equation*}
+	\forall x,y\in A,x\neq y\implies \left\Vert f(x)-f(y)\right\Vert
+	<\left\Vert x-y\right\Vert \text{ }(\ast )
+\end{equation*}
+
+
+\begin{enumerate}
+	\item A l'aide de l'application $h:x\mapsto \left\Vert x-f(x)\right\Vert $	montrer qu'il existe $a$ dans $A$ tel que pour tout $x$ de $A:\left\Vert
+	a-f(a)\right\Vert \leqslant \left\Vert x-f(x)\right\Vert$.
+	
+	\item En déduire que $f$ possède un unique point fixe qui est $a$.
+
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $A$ un fermé de $\R$ et $f:A\to A$ contractante, c'est à dire qu'il existe $k\in[0,1[$ tel que $f$ soit  $k$-lipschitzienne sur $A$.
+	\begin{enumerate}
+		\item
+		Montrer que $f$ admet au plus un point fixe dans $A$.
+		
+		Soit $a$ dans $A$ et $(x_n)_n$ définie par $x_0=a$ et $\forall n\in\N:x_{n+1}=f(x_n)$.
+		\item
+		Montrer que pour tout entier $n:|x_{n+1}-x_n|\leqslant k^n|x_1-x_0|$. 
+		\item
+		En déduire que$\sum_n(x_{n+1}-x_n)$ converge absolument.
+		\item
+		En déduire que $(x_n)_n$ converge et que $f$ a un unique point fixe dans $A$.
+	\end{enumerate}
+
+\end{Exo}
+
+\begin{Exo}\ 
+\begin{enumerate}
+	\item
+	Soit $f:\R\to\R$ continue $T$ périodique. Montrer qu'il existe $c\in\R$ tel que $f(\R)=f([c,c+T/2])$.
+	\item
+	Soit $f:\R^2\to \R$ continue et $C$ le cercle de centre $0$ et de rayon $r>0$. Montrer qu'il existe deux points de $C$ diamétralement opposés en lesquels $f$ coïncide.
+\end{enumerate}
+\end{Exo}
+
+\end{document}

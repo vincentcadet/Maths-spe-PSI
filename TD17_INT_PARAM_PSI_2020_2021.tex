@@ -1,0 +1,391 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD17}}
+\chead{\textsc{Intégrales à paramètre}}
+\rhead{\textit{2021-2022}} 
+
+\everymath{\displaystyle}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathbf{i}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+\vspace*{3mm}
+\textbf{}
+\emph{\textbf{
+	L'absence diminue les médiocres passions et augmente les grandes, comme le vent éteint les bougies et allume le feu. (La Rochefoucauld)
+}}
+\vspace*{2mm}
+
+%\textsc{Théorème de convergence dominée}
+%
+%Soit $(f_n)$ une suite de fonctions continues par morceaux de $I$ dans $\mathbb K$, et $f,\varphi:I\to\mathbb K$ continues par morceaux avec $\varphi$ positive.
+%On suppose que 
+%\begin{enumerate}
+%	\item
+%pour tout $t\in I$, $(f_n(t))$ converge vers $f(t)$;
+%\item
+%pour tout $t\in I$ et tout $n\geq 1$, $|f_n(t)|\leq \varphi(t)$;
+%\item
+%la fonction $\varphi$ est intégrable sur $I$.
+%\end{enumerate}
+%Alors toutes les fonctions $f_n$ et $f$ sont intégrables sur $I$, et on a 
+%$$\lim_{n\to+\infty}\int_I f_n=\int_I f.$$
+%
+%
+%\vspace*{3mm}
+%\textsc{Théorème d'intégration terme à terme}
+%
+%Soit $(u_n)$ une suite de fonctions continues par morceaux de $I$ dans $\mathbb K$, et $f:I\to\mathbb K$ continue par morceaux.
+%On suppose que 
+%\begin{enumerate}
+%	\item
+%pour tout $t\in I$, la série $\sum_{n\geq 1}u_n(t)$ converge vers $f(t)$;
+%\item la série $\sum_{n\geq 1}\int_I |u_n(t)|dt$ est convergente.
+%\end{enumerate}
+%Alors $f$ est intégrable sur $I$, et on a 
+%$$\sum_{n\geq 1}\int_I u_n=\int_I f$$
+%
+%\vspace*{3mm}
+%%
+%%\begin{center}
+%%\textbf{Régularité d'une intégrale à paramètres}
+%%\end{center}
+%\textsc{Théorème de continuité des intégrales à paramètres}
+%
+%Soit $A$ une partie de 
+%$\R$, $I$ un intervalle de $\mathbb R$ 
+%et $f$ une fonction définie sur $A\times I$ à valeurs dans $\mathbb K$. On suppose que 
+%\begin{enumerate}
+%	\item
+%	pour tout $t\in I$, la fonction $x\mapsto f(x,t)$ est continue sur $A$;
+%	\item
+%pour tout $x\in A$, la fonction $t\mapsto f(x,t)$ est continue par morceaux sur $I$;
+%\item il existe $g:I\to\mathbb R_+$ continue par morceaux et intégrable telle que, 
+%pour tout $x\in A$ et tout $t\in I$, 
+%$$|f(x,t)|\leq g(t)$$
+%\end{enumerate}
+%Alors la fonction $F:x\mapsto \int_I f(x,t)dt$ est continue sur $A$.
+%
+%\vspace*{3mm}
+%
+%\textsc{Théorème de dérivabilité des intégrales à paramètres}
+%
+%Soit $I,J$ deux intervalles de $\mathbb R$ 
+%et $f$ une fonction définie sur $J\times I$ à valeurs dans $\mathbb K$. On suppose que 
+%\begin{enumerate}
+%	\item
+%pour tout $x\in J$, la fonction $t\mapsto f(x,t)$ est continue par morceaux sur $I$ et
+%intégrable sur $I$;
+%\item
+%$f$ admet une dérivée partielle $\frac{\partial f}{\partial x}$ définie sur $J\times I$;
+%\item
+%pour tout $x\in J$, la fonction $t\mapsto \frac{\partial f}{\partial x}(x,t)$ est continue par morceaux sur $I$;
+%\item
+%pour tout $t\in I$, la fonction $x\mapsto \frac{\partial f}{\partial x}(x,t)$ est continue sur $J$;
+%\item
+%il existe $g:I\to\mathbb R_+$ continue par morceaux et intégrable telle que, 
+%pour tout $x\in J$ et tout $t\in I$, 
+%$$\left|\frac{\partial f}{\partial x}(x,t)\right|\leq g(t).$$
+%\end{enumerate}
+%Alors la fonction $F:x\mapsto \int_I f(x,t)dt$ est de classe $\mathcal C^1$ sur $J$ et, pour tout $x\in J$, $F'(x)=\int_I \frac{\partial f}{\partial x}(x,t)dt$.
+%
+%
+%\newpage
+%\vspace*{3mm}
+%\textsc{Classe $\mathcal C^k$ des intégrales à paramètres}
+%Soit $I,J$ deux intervalles de $\mathbb R$, $f$ une fonction définie sur $J\times I$ à valeurs dans $\mathbb K$ et $k\geq 1$. On suppose que 
+%\begin{enumerate}
+%	\item
+%	$f$ admet des dérivées partielles par rapport à la première variable $\frac{\partial^j f}{\partial x^j}$ définies sur $J\times I$ pour tout $j\leq k$;
+%\item 
+%pour tout $x\in J$ et tout $0\leq j\leq k$, la fonction $t\mapsto \frac{\partial^j f}{\partial x^j}(x,t)$ est continue par morceaux sur $I$ et
+%intégrable sur $I$;
+%\item pour tout $t\in I$, la fonction $x\mapsto \frac{\partial^k f}{\partial x^k}(x,t)$ est continue sur $J$;
+%\item
+%il existe $g:I\to\mathbb R_+$ continue par morceaux et intégrable telle que, 
+%pour tout $x\in J$ et tout $t\in I$, 
+%$$\left|\frac{\partial^k f}{\partial x^k}(x,t)\right|\leq g(t).$$
+%\end{enumerate}
+%
+%Alors la fonction $F:x\mapsto \int_I f(x,t)dt$ est de classe $\mathcal C^k$ sur $J$ et, pour tout $x\in J$ et tout $0\leq j\leq k$, 
+%$$F^{(j)}(x)=\int_I \frac{\partial^j f}{\partial x^j}(x,t)dt.$$
+%\hrule
+
+%\begin{Exo}
+%	
+%	\begin{enumerate}
+%		\item Démontrer que, pour tout entier naturel $n$, la fonction $t\longmapsto \dfrac{1}{1+t^{2}+t^{n}e^{-t}}$ est int\'{e}grable sur $[0,+\infty[$.
+%		\item Pour tout $n\in\mathbb{N}$, on pose $u_{n}=\displaystyle\int_{0}^{+\infty }\dfrac{\text{d}t}{1+t^{2}+t^{n}e^{-t}}$. Calculer $\underset{n\rightarrow +\infty }{\lim }u_{n}$.
+%	\end{enumerate}
+%	
+%\end{Exo}
+
+\begin{Exo}
+	Déterminer la limite quand $n$ tend vers $+\infty$ de $I_n=\int_0^{+\infty}\E^{-t^n}\diff t$.
+\end{Exo}
+
+\begin{Exo}[trick d'écriture]
+	Soit $n \in \mathbb{N}$. Montrer que pour tout $x \in[0, n]$,
+	$
+	\left(1-\frac{x}{n}\right)^{n} \leqslant e^{-x}
+	$. 
+	En déduire la limite de $I_n=\int_{0}^{n}\left(1-\frac{x}{n}\right)^{n} \mathrm{~d} x$ lorsque $n$ tend vers $+\infty$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $f:[0,1] \rightarrow \mathbb{R}$ continue. Déterminer
+	$$
+	\lim _{n \rightarrow+\infty} \int_{0}^{1} n f(t) e^{-n t} \mathrm{~d} t
+	$$
+\end{Exo}
+
+%\begin{Exo}
+%	Soit $f:\mathbb R_+\to\mathbb R$ une fonction continue et bornée.
+%\begin{enumerate}
+%	\item On pose $I_n=n\int_0^{+\infty}f(x)e^{-nx}\diff x$. Déterminer $\ell=\lim_{n\to+\infty}I_n$.
+%	\item (plus difficile...) On suppose de plus que $f$ est $\mathcal C^1$, de dérivée bornée, et vérifie $f'(0)\neq 0$. Déterminer un équivalent de $\ell-I_n$.
+%\end{enumerate}
+%\end{Exo}
+
+
+
+
+
+
+\begin{Exo}
+	On pose, pour $n\geq 1$, 
+$I_n=\int_0^1 \frac{\diff t}{1+t^n}.$
+\begin{enumerate}
+	\item Déterminer $\ell=\lim_{n\to+\infty}I_n$.
+	\item Déterminer un équivalent de $\ell-I_n$.
+\end{enumerate}
+\end{Exo}
+
+%
+%
+%\begin{Exo}\ 
+%	\begin{enumerate}
+%	\item 
+%	\begin{enumerate}
+%		\item Démontrer que
+%		$\sum_{n=0}^{+\infty}\int_0^1 x^{2n}(1-x)\diff x=\int_0^1\frac{\diff x}{1+x}.$
+%		\item En déduire que 
+%		$\sum_{k=1}^{+\infty}\frac{(-1)^{k+1}}{k}=\ln 2.$
+%	\end{enumerate}
+%	\item En calculant de deux façons $\sum_{n=0}^{+\infty}(-1)^n\int_0^1  x^{2n}(1-x)\diff x$, déterminer la valeur de la somme
+%	$$\sum_{n=0}^{+\infty}\frac{(-1)^n}{(2n+1)(2n+2)}.$$
+%\end{enumerate}
+%\end{Exo}
+
+
+\begin{Exo}\ 
+	\begin{enumerate}
+		\item Démontrer que $\int_0^{+\infty}\frac{t}{e^t-1}\diff t=\sum_{n\geq 1}\frac 1{n^2}$.
+		\item Démontrer que, pour tout  réel $a$, on a
+		$\int_0^{+\infty}\frac{\E^{-t}\sin(at)}{1-\E^{-t}}\diff t=\sum_{n=1}^{+\infty}\frac a{a^2+n^2}.$
+	\end{enumerate}
+\end{Exo}
+
+	\begin{Exo}[Subtilité...]\ 
+		\begin{enumerate}
+			\item
+			Montrer que pour tout $x>0:\frac{\cos(x)}{1+\E^x}=\sum_{n=1}^{+\infty}u_n(x)$ avec $u_n(x)=(-1)^n\cos(x)\E^{-nx}$.
+			\item
+			Le théorème d'intégration terme à terme s'applique-t-il?
+			\item
+			Intégrer terme à terme en appliquant le théorème de convergence dominée à la suite des sommes partielles.
+		\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	On pose, pour $x\in\mathbb R$, 
+	$F(x)=\int_0^{+\infty}\frac{\sin(xt)}t\E^{-t}\diff t.$
+	\begin{enumerate}
+		\item Justifier que $F$ est bien définie sur $\mathbb R$ et étudier sa parité.
+		\item Justifier que $F$ est $\mathcal C^1$ et donner une expression de $F'(x)$ pour tout $x\in\mathbb R$.
+		\item Calculer $F'(x)$.
+		\item En déduire une expression simplifiée de $F(x)$.
+	\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}
+
+	Montrer que $g(x)=\int_0^1\frac{\ln(1+xt)}{t}\diff t$ définit une fonction sur $]-1,1[$ au moins. Montrer que $g$ est développable en série entière sur $]-1,1[$ et en déduire $g'$ sur $]-1,1[$.
+
+\end{Exo}
+\newpage
+
+
+\begin{Exo}[technique!]\ 
+	\begin{enumerate}
+		\item
+		Soit $a\in\C$. Redémontrer que $\int_0^{+\infty}\E^{-at}\diff t$ converge absolument ssi $\Re(a)>0$ et préciser sa valeur.
+		\item
+		Déterminer l'ensemble de définition de  $g:x\mapsto \int_0^{+\infty}\frac{1-\E^{xt}}{t}\E^t \diff t$, expliciter sa dérivée et déterminer $g$.
+	\end{enumerate}	
+\end{Exo}
+
+
+
+\begin{Exo}
+	On pose $f(x)=\int_0^{+\infty}\E^{-t^2}\cos(xt)\diff t$.
+	\begin{enumerate}
+		\item
+		Montrer que $f$ est définie et de classe $C^1$ sur $\R$.
+		\item
+		Montrer que $f$ vérifie $2f'(x)+xf(x)=0$ pour tout réel $x$.
+		\item
+		En déduire $f$ (on pourra noter $I=\int_0^{+\infty}\E^{-t^2}\diff t$).
+	\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}[Après un développement en série entière]\ 
+	
+	Démontrer que $\int_0^{+\infty}\cos(\sqrt x)e^{-x}dx=\sum_{n=0}^{+\infty}(-1)^n \frac{n!}{(2n)!}$.
+\end{Exo}
+
+\begin{Exo}[fonction $\Gamma$ d'Euler]
+	On note $\Gamma(x)=\int_0^{+\infty}\E^{-t}t^{x-1}\diff t$.
+	\begin{enumerate}
+		\item
+		Vérifier que $\Gamma$ est définie sur $\R_+^*$ et que pour tout $x>0:\Gamma(x+1)=x\Gamma(x)$. En déduire $\Gamma(n)$ pour $n\in \N^*$.
+		\item
+		Montrer que $\Gamma$ est de classe $C^1$ sur $\R_+^*$ et préciser sa dérivée.
+		\item Donner un équivalent de $\Gamma$ en $0$.
+		\item Montrer qu'en fait $\Gamma$ est  de classe $C^{\infty}$ sur $\R_+^*$.
+		\item Préciser la limite de $\Gamma$ en $+\infty$ et esquisser son graphe. On pourra préciser $\Gamma(1/2)$ en posant $t=u^2$.
+	\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}
+	On pose $F(x)=\int_0^{+\infty}\frac{dt}{1+t^x}.$
+	\begin{enumerate}
+		\item Déterminer le domaine de définition de $F$ et démontrer que $F$ est continue sur ce domaine de définition.
+		\item Démontrer que $F$ est de classe $\mathcal C^1$ sur $]1,+\infty[$ et démontrer que, pour tout $x>1$, 
+		$$F'(x)=\int_1^{+\infty}\frac{t^x\ln (t)}{(1+t^x)^2}\left(\frac 1{t^2}-1\right)dt.$$
+		En déduire le sens de variation de $F$.
+		\item Déterminer la limite de $F$ en $+\infty$.
+		\item On suppose que $F$ admet une limite $\ell$ en $1^+$. Démontrer que pour tout $A>0$ et tout $x>1$, on a $\ell\geqslant \int_1^A \frac{dt}{1+t^x}$.  En déduire que $\lim_{x\to 1^+}F(x)=+\infty$.
+	\end{enumerate}
+	
+\end{Exo}
+
+\begin{Exo}[transformée de Fourier]\ 
+	\begin{enumerate}
+		\item
+		Soit $f:\R\to\C$ intégrable sur $\R$, montrer que sa transformée de Fourier $\widehat{f}:x\mapsto\int_{-\infty}^{+\infty}\E^{-\I x t}f(t)\diff t$ est définie et continue sur $\R$.
+		\item
+		On suppose de plus $f$ de classe $C^1$ et telle que $f'$ soit intégrable sur $\R$. Exprimer $\widehat{f'}(x)$ en fonction de $\widehat{f}(x)$ pour $x$ réel.
+		\item
+		On suppose ici que $f$ et $g:x\mapsto xf(x)$ sont intégrables sur $\R$. Montrer que $\widehat{f}$ est dérivable sur $\R$ et exprimer sa dérivée à l'aide de $\widehat{g}$.
+	\end{enumerate}
+\end{Exo}
+\end{document}

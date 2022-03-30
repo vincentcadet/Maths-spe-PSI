@@ -1,0 +1,530 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm,headsep=5pt}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD5}}
+\chead{\textsc{Séries numériques}}
+\rhead{\textit{2021-2022}} 
+
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathbf{i}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}
+\everymath{\displaystyle}
+\newcommand{\conj}[1]{\overline{#1}}
+%\renewcommand{\headrulewidth}{0pt}%pas de ligne en haut
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+\textit{Point n'est besoin d'espérer pour entreprendre, ni de réussir pour persévérer. (Guillaume d'Orange)}
+
+\begin{Exo}
+Convergence et somme de $$\sum_{n\geqslant 0} \frac{2^{n-2}}{3^{n+2}}\quad \sum_{n\geqslant 0}\frac{2^n+1}{4^n}\quad\sum_{n\geqslant 0}\frac{(1+\I)^n}{(1+2\I)^n}$$
+\end{Exo}
+
+\begin{Exo}
+Montrer que $\sum_n \cos n$ diverge.
+\end{Exo}
+
+%\begin{Exo}[Equivalent de $H_n$]
+%\`A l'aide d'une comparaison série-intégrale démontrer que $H_n\sim\ln n$ ou l'on a noté $H_n=\displaystyle\sum\limits_{k=1}^{n}\frac{1}{k}$. Retrouver la nature de la série dite \textbf{harmonique} $\sum_n\frac{1}{n}$.
+%\end{Exo}
+
+%\begin{Exo}[Un calcul de somme]\ 
+%	
+%	\begin{enumerate}
+%		\item
+%		En observant que pour tout entier $k>0$ on a $\frac{1}{k}=\int_{0}^{1}t^{k-1}dt$, montrer que:
+%		$$\sum_{k=1}^{n}\frac{(-1)^k}{k}=\int_{0}^{1}\frac{1-(-t)^n}{1+t}dt$$
+%		\item En déduire la convergence et la somme de la série $\sum_{n>0}\frac{(-1)^n}{n}$.
+%		\item Une série convergente est-elle absolument convergente?
+%	\end{enumerate}
+%	
+%\end{Exo}
+
+\begin{Exo}[Un calcul de somme]\ 
+	
+	\begin{enumerate}
+		\item
+		En observant que pour tout entier $k \geqslant 0$ on a $\frac{1}{2k+1}=\int_{0}^{1}t^{2k}dt$, montrer que:
+		$$\sum_{k=0}^{n}\frac{(-1)^k}{2k+1}=\int_{0}^{1}\frac{1-(-t^2)^{n+1}}{1+t^2}dt$$
+		\item En déduire la convergence et la somme de la série $\sum_{n\geqslant 0}\frac{(-1)^n}{2n+1}$.
+		\item Une série convergente est-elle absolument convergente?
+	\end{enumerate}
+	
+\end{Exo}
+
+\begin{Exo}
+	Convergence et somme de $\sum_n\left(\frac{1}{\sqrt{n+1}}+\frac{1}{\sqrt{n-1}}-\frac{2}{\sqrt{n}}\right)$ et de $\sum_n \ln\left(1-\frac{1}{n^2}\right)$.
+\end{Exo}
+
+
+\begin{Exo}
+	 Convergence et somme de $\sum_{n>0}\frac{1}{n^2+3n}$, $\sum_{n>0}\frac{(-1)^n}{n(n+1)}$ et $\sum_{n>0}\frac{1}{n^2(n+1)}$.
+\end{Exo}
+
+%\begin{Exo}[Quelques calculs de sommes]
+%	\ 
+%\begin{enumerate}
+%	\item
+%	Calculer les sommes (après avoir justifié leur existence...): $$\sum_{n=0}^{\infty}\frac{(-1)^n}{2^nn!}\quad\sum_{n=0}^{\infty}\frac{n}{n!}\quad\sum_{n=0}^{\infty}\frac{n(n-1)}{n!}\quad\sum_{n=0}^{\infty}\frac{2n^2+3n-1}{n!}$$
+%	\item
+%	CV et somme de $\sum_{n>0}\frac{1}{n^2+3n}$, $\sum_{n>0}\frac{(-1)^n}{n(n+1)}$ et $\sum_{n>0}\frac{1}{n^2(n+1)}$.
+%	\item CV et somme de $\sum_n \ln\left(1-\frac{1}{n^2}\right)$
+%	%\item (Plus difficile) Montrer que $\sum_{n \geqslant 1}(-1)^n \ln \left(1+\frac{1}{n}\right)$ converge, expliciter $S_{2n}$ sa somme partielle de rang $2n$ et donner sa limite via Stirling.
+%\end{enumerate}
+%
+%\end{Exo}
+
+
+\begin{Exo}
+	Nature et somme de $\sum_n \ln\left(1+\frac{(-1)^n}{n}\right)$. On pourra calculer $u_{2n}+u_{2n+1}$.
+\end{Exo}
+
+
+
+\begin{Exo}[Sommation par tranche]
+	\ 
+	
+	Convergence et somme de la série de terme général $u_n=\frac{\lfloor \sqrt{n+1}\rfloor-\lfloor \sqrt{n}\rfloor }{n}$
+\end{Exo}
+
+\begin{Exo}[Comparaison à une série de Riemann]
+	Soit $\sum_n u_n$ à termes positifs. Que dire de sa nature quand:
+	\begin{enumerate}
+		\item
+		Il existe $a\in \R$ tel que $n^au_n\to \ell\in \R_+^*$.
+		\item 
+		$nu_n\to +\infty$
+		\item 
+		$n^2u_n\to 0$
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+\ 
+Nature des séries  de terme général:
+\begin{multicols}{3}
+\begin{enumerate}
+\item $\sin \left( \sqrt{4n^{2}+1}\pi \right)$
+\item $\left( \cos \frac{1}{n}\right) ^{n^{3}}$
+\item $\frac{1}{2^{\sqrt{n}}}$
+\item $e-\left( 1+\frac{1}{n}\right) ^{n}$
+\item $\frac{1}{n^{n+\frac{1}{n}}}$
+\item $\frac{n^{3}+2^{n}}{n^{2}+3^{n}}$
+\item $\arctan \frac{n}{n^{2}+1}$
+\item $\int_{0}^{\pi /n}\frac{\sin ^{3}x}{1+x}dx$
+\item $\sqrt{\ln (n+1)}-\sqrt{\ln(n)}$
+\item $\left( \frac{1}{\ln n}\right) ^{\ln n}$
+\item $\int_{n}^{2n}\frac{dt}{1+t^{3/2}}$
+\item $\frac{n^{\ln n}}{\left( \ln n\right) ^{n}}$
+\item $\dfrac{2.4.6\dots (2n)}{n^{n}}$
+\item $\dfrac{a^{n}}{1+a^{2n}}$
+\item $\frac{(2n)!}{n!a^{n}n^{n}},\left( a>0\right)$
+\item $\frac{n^{a}n!e^{n}}{(n+1)^{n}}$
+\item $e^{\cos \frac{1}{n}}-e^{\cos \frac{2}{n}}$
+\item $n^{n^{-a}}-1$ avec $a>0$
+\item $\frac{1}{\sqrt{n^2-1}}-\frac{1}{\sqrt{n^2+1}}$
+\item $\cos(n\pi+1/n)$
+%\item $(-1)^n \frac{\ln n}{\sqrt{n}}$
+%\item $(-1)^n \sqrt{n}\sin \frac{1}{n}$
+\item $\ln\left(1+\frac{(-1)^n}{n} \right)$
+\item $\left(\frac{\sqrt{n}}{1+\sqrt{n}}\right)^n$
+\end{enumerate}
+\end{multicols}
+
+\end{Exo}
+
+
+\begin{Exo}[Constante d'Euler $\gamma$]
+\ 
+On note pour $n>0:H_n=\sum_{k=1}^{n}\frac{1}{k}$.
+\begin{enumerate}
+	\item
+	Montrer que $\forall n>0:\int_1^{n+1}\frac{\diff t}{t} \leqslant H_n\leqslant 1+\int_1^n \frac{\diff t}{t}$, en déduire un équivalent de $H_n$.
+	\item
+	Posons $u_n=H_n-\ln n$. Déterminer un équivalent de $u_{n+1}-u_n$, en déduire que $(u_n)_n$ converge vers une limite que l'on notera $\gamma$ (constante d'Euler, environ $0,57$). Ainsi:
+	\[H_n=\ln n +\gamma+\varepsilon_n\text{ avec }\varepsilon_n\to 0\]
+	
+	\textbf{Applications:}
+		\item
+	Convergence et somme de la somme de la série harmonique alternée $\sum_{n>0}\frac{(-1)^{n+1}}{n}$.
+	\item
+	Calculer la somme de la série $\sum_{n>0}\frac{1}{1^2+2^2+...+n^2}$.
+	\item
+	Déterminer suivant $a>0$ la nature de $\sum_n a^{H_n}$.
+\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soit $(u_{n})_{n}$ une suite décroissante de réels positifs.
+On suppose que la série $\sum_n u_{n}$ converge.
+
+\begin{enumerate}
+	\item Montrez que $\lim_{n}nu_{n}=0.$
+	
+	\item On pose $v_{n}=nu_{n}-nu_{n+1}.$ Montrez que $\sum_n v_{n}$ converge et a même somme que $\sum_n u_{n}$.
+\end{enumerate}
+\end{Exo}
+
+%\begin{Exo}
+%Soit $ u_n=\frac{(-1)^{n+1}}{\sqrt{n+1}}-\frac{(-1)^n}{\sqrt{n}}$ et $v_n=u_n+\frac{1}{n}$. Montrer que $\sum_n u_n$ converge et que $u_n\sim v_n$. Nature de $\sum_n v_n$?
+%\end{Exo}
+
+\begin{Exo}[Un classique]
+Montrer que $(2+\sqrt{3})^n+(2-\sqrt{3})^n \in 2\Z$. Préciser la nature de $\sum_n \sin\left ( (2-\sqrt{3})^n \pi \right)$ puis celle de $\sum_n \sin\left ( (2+\sqrt{3})^n \pi \right)$.
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $\sum_n u_{n}$ une série réelle semi-convergente. Pour tout $n$, on pose $u_{n}^{+}=\max \left(0,u_{n}\right) $ et $u_{n}^{-}=\max \left( 0,-u_{n}\right) $. Montrez que $\sum_n u_{n}^{+}$ et $\sum_n u_{n}^{-}$ sont divergentes.
+\end{Exo}
+
+\begin{Exo}
+	Nature suivant $b>0$ de $\sum_n\frac{n^n}{n!b^n}$.
+\end{Exo}
+
+\begin{Exo}
+	Etudier $\sum_n \frac{\sqrt{1}+\sqrt{2}+...+\sqrt{n}}{n^{\alpha}}$.
+\end{Exo}
+
+
+\begin{Exo}[Comparaison série-intégrale]\ 
+	
+	\begin{enumerate}
+		\item
+		Trouver la partie entière de $\sum_{k=1}^{10^9}\frac{1}{k^{2/3}}$.
+		
+		\item
+		Trouver un équivalent de $\sum_{k=n+1}^{+\infty}\frac{1}{k^{2}}$ et de de $\sum_{k=1}^n\sqrt{k}$.
+		\item 
+		Nature de $\sum_{n}\frac{1}{n^a \ln n}$ suivant $a\in\R$.
+	\end{enumerate}
+	
+\end{Exo}
+
+\begin{Exo}
+	Soit $(a_{n})_{n}$ suite positive et $(u_{n})_{n}$ définie par $u_{0}>0$ et pour tout $n:u_{n+1}=u_{n}+\frac{a_{n}}{u_{n}}$.
+	\begin{enumerate}
+	\item
+	Montrer que $u$ est croissante et à termes strictement positifs.
+	\item On suppose que $\sum_{n a_{n}}$ converge, montrer que $u$ converge.
+	\item On suppose que $u$ converge, montrer que $\sum_{n} a_{n}$ converge.
+	\end{enumerate}
+	
+\end{Exo}
+
+
+\begin{Exo}
+	Etudier $\sum_n \frac{\sqrt{1}+\sqrt{2}+...+\sqrt{n}}{n^{\alpha}}$.
+\end{Exo}
+
+\begin{Exo}[terme général défini par une suite récurrente]
+	Soit la suite définie par $x_0>0$ et pour tout $n$ de $\N:x_{n+1}=\frac{\mathrm{e}^{-x_n}}{n+1}$. Déterminer la nature de   $(x_n)_n$, un équivalent de $x_n$ puis la nature de $\sum_n x_n$.
+\end{Exo}
+
+\begin{Exo}[terme général défini implicitement]
+	\ 
+	\begin{enumerate}
+		\item
+		Montrer que pour tout $n>2$ il existe exactement deux solutions dans $\R_+^*$ de $x^n=\mathrm{e}^x$ notée $x_n,y_n$ tels que $x_n<y_n$.
+		\item
+		Montrer que $x_n$ tend vers $1$.
+		\item
+		Déterminer la nature de la série de terme général $u_n=\frac{x_n-1}{y_n}$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[Séries alternées]
+\ 
+
+Nature de:
+\begin{multicols}{3}
+\begin{enumerate}
+	\item
+	$\sum_n \sin\left( \pi\sqrt{n^2+1}\right)$
+	\item
+	$\sum_n \frac{(-\ln n)^n}{n^{\ln n}}$
+	\item
+	$\sum_{n}u_n=\frac{(-1)^n}{n!^{1/n}}$
+\end{enumerate}
+\end{multicols}
+
+\end{Exo}
+
+\begin{Exo}[Attention!]
+	On note $u_n=
+	\frac{(-1)^n}{\sqrt{n}}$ et $v_n=\frac{(-1)^n}{\sqrt{n}+(-1)^{n+1}}$.
+	\begin{enumerate}
+		\item
+		Montrer que $\sum_n u_n$ converge.
+		\item
+		Déterminer $a$ réel tels que $v_n=\frac{(-1)^n}{\sqrt{n}}+\frac{a}{n}+o\left(\frac{1}{n}\right)$, en déduire que $\sum_n v_n$ est divergente.
+		\item
+		$\sum_n u_n$ et $\sum_n v_n$ sont-elles de même nature? Qu'illustre cet exemple?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Nature et somme de $\sum_n u_{n}$ avec $u_{n}=\frac{1}{n}\cos \left( 2n\frac{\pi }{3}\right)$.
+\end{Exo}
+
+\begin{Exo}
+	On admet que $\sum_{n=1}^{+\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$. Préciser: $\sum_{n=1}^{+\infty}\frac{1}{(2n)^2},\sum_{n=1}^{+\infty}\frac{1}{(2n+1)^2},\sum_{n=1}^{+\infty}\frac{(-1)^n}{(n)^2}$.
+\end{Exo}
+
+\begin{Exo}[Avec une intégrale] On note $u_n=\int_0^{\pi/4} \tan^n xdx$.
+\begin{enumerate}
+\item Calculer $u_{n+2}+u_n$ et montrer que $u$ est décroissante.
+\item En comparant $u_n$ et $u_n+u_{n+2}$ en déduire la nature de $\sum_n u_n$.
+\item
+Donner la nature de $\sum_n(-1)^n I_n$.
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	 Soient $\sum u_{n}$, $\sum v_{n}$, $\sum w_{n}$  séries réelles telles que $\sum u_{n}$ et $\sum w_{n}$ convergent,
+et $u_{n}\leqslant v_{n}\leqslant w_{n}$ pour tout $n$. Montrez que $\sum v_{n}$ converge.
+
+\end{Exo}
+
+
+\begin{Exo}[Plus général...]
+\ 
+Toutes les séries sont à termes réels...
+\begin{enumerate}
+\item On suppose \textbf{ici} que $\sum u_n$ est à termes positifs, montrer que si $\sum_n u_n$ CV alors $\sum_n u_n^2,\sum_n \frac{u_n}{1+u_n}$ et $\sum_n u_n u_{2n}$ CV. 
+\item Donner un exemple où $\sum u_n$ CV et $\sum u_n^2$ DV.
+\item On suppose que $\sum u_n$  et $\sum u_n^2$ CV, montrer que $\sum_n \frac{u_n}{1+u_n}$ CV. Et si on suppose juste que $\sum u_n$ CV?
+\item Soit $u,v$ dans $\R_+^{\N}$, montrer que si $\sum_n u_n$ et $\sum_n v_n$ convergent alors $\sum_n \sqrt{u_n v_n}$ converge.
+%\item Soit $u$ dans $\R_+^{\N}$, on pose pour $n\in \N:v_n=\frac{1}{1+n^2u_n}$. Exprimer $\sqrt{u_nv_n}$ en fonction de $n,v_n$, en déduire que $\sum_n u_n$ et $\sum_n v_n$ ne peuvent converger simultanément.
+\end{enumerate}
+\end{Exo}
+
+
+
+
+
+
+
+\begin{Exo}[Calculs approchés]
+\ 
+
+\begin{enumerate}
+\item Calculer une valeur approchée à $10^{-4}$ près de $\sum_{n=1}^{+\infty}\frac{1}{n^n}$.
+\item Calculer une valeur approchée à $10^{-6}$ près de $e=\sum_{n=0}^{+\infty}\frac{1}{n!}$. On montrera que $0\leq R_n\leqslant \frac{1}{n!n}$.
+\item Calculer une valeur approchée à $10^{-4}$ près de $\sum_{n=0}^{+\infty}\frac{(-1)^n}{n^5}$.
+\item Calculer une valeur approchée à $10^{-4}$ près de $\sum_{n=1}^{+\infty}\frac{n^2+n+1}{2^n}$. Savez-vous calculer sa valeur exacte?
+\end{enumerate}
+\end{Exo}
+
+%
+%\begin{Exo}[Accélération élémentaire de convergence]
+%Soit $u_n=\frac{1}{n(n+1)}$ et $v_n=\frac{1}{n^2}$.
+%\begin{enumerate}
+%\item Recalculer la somme de la série $\sum_{n>0}\frac{1}{n(n+1)}$.
+%\item "Intuiter" que la série $\sum_n (u_n-v_n)$ converge plus rapidement que $\sum_n u_n$ (chercher par exemple un équivalent de $u_n-v_n$). Le vérifier via Python.
+%\item Comment améliorer à l'aide $\sum_n \frac{1}{n(n+1)(n+2)}$ (Commencer par calculer sa somme!)?
+%\end{enumerate}
+%\end{Exo}
+
+
+
+\begin{Exo}[Exponentielle]
+\ 
+On pourra admettre ici que pour tout réel $x$ la série  $\sum_{n\geqslant 0} \frac{x^n}{n!}$ converge et que sa somme vaut $\mathrm{e}^x$.
+\begin{enumerate}
+\item Soit $P \in \R[X]$, montrez que $\displaystyle\sum_{n\geqslant 0}\frac{P(n)}{n!}$ CV. On note $S_P$ sa somme.
+\item Déterminer pour $k\in \N^*: S_{P_k}$ avec $P_k(X)=X(X-1)...(X-k+1)$
+\item En déduire $S_{X^3+3X^2-X+2}$.
+\end{enumerate}
+\end{Exo}
+
+%\begin{Exo}[constante d'Euler]\ 
+%	
+%	\begin{enumerate}
+%		\item
+%			Montrer que la suite $(u_n=H_n-\ln n)_n$ converge vers une limite strictement positive $\gamma$ appelée constante d'Euler. (On pourra montrer que $\sum (u_{n+1}-u_n)$ converge). On peut montrer que $\gamma \simeq 0,57$.
+%			
+%			On a ainsi $H_n=\ln n+\gamma +o(1)$.
+%		\item
+%		Retrouver la somme de la série harmonique alternée $\sum_{n>0}\frac{(-1)^{n+1}}{n}$.
+%		\item
+%		Calculer la somme de la série $\sum_{n>0}\frac{1}{1^2+2^2+...+n^3}$.
+%	\end{enumerate}
+%
+%\end{Exo}
+
+\begin{Exo}
+	Montrer via un produit de séries que $\displaystyle\sum_{n\geqslant 0} \frac{n+1}{3^n}$ converge et préciser sa somme.
+\end{Exo}
+
+\begin{Exo}
+	On suppose que $\displaystyle\sum_nu_n$ CVA, montrer que $\displaystyle\sum_n \left(\frac{1}{2^n}\sum_{k=0}^{n}2^k u_k\right)$ converge et préciser sa somme.
+\end{Exo}
+
+\begin{Exo}
+	Nature et somme de $\sum_{n\geqslant 1}w_n$ avec $w_n=\sum_{k=1}^{n}\frac{1}{k^2(n-k)!}$.
+\end{Exo}
+
+%\begin{Exo}[Critère de la loupe]
+%\ 
+%
+%\begin{enumerate}
+%\item Soit $(u_n)_{n\geq 1}$ décroissante positive. On note $v_n=2^n u_{2^n}$. Montrer que:
+%$$\forall n \in \N^*:\frac{1}{2}\left( v_1+v_2+...+v_n\right) \leqslant \sum_{k=1}^{2^n-1}u_k\leqslant v_0+v_1+...+v_n$$
+%\item En déduire que $\sum u_n$ et $\sum v_n$ ont même nature.
+%\item Déterminer les valeurs de $a\in \R$ pour lesquelles $\sum \frac{1}{n^a}$ et $\sum \frac{1}{n \ln ^a n}$ convergent.
+%
+%\end{enumerate}
+%\end{Exo}
+
+%\begin{Exo}[Somme de la série de Bâle]
+%\ 
+%
+%On pose $I_{n}=\int_{0}^{\frac{\pi }{2}}t^{2}\cos ^{2n}tdt$ et $S_{n}=\sum_{p=1}^{n}\frac{1}{p^{2}}.$ On rappelle que $C_{n}=\int_{0}^{\frac{\pi }{2}}\cos ^{2n}tdt=\frac{3\times 5\times ...\times \left( 2n-1\right) }{2\times 4\times 6\times ...\times \left( 2n\right) }\frac{\pi }{2}$
+%
+%\begin{enumerate}
+%\item A l'aide de Stirling justifier:
+%\begin{equation*}
+%\frac{2\times 4\times 6\times ...\times \left( 2n\right) }{3\times 5\times
+%...\times \left( 2n-1\right) }\sim \sqrt{n\pi }
+%\end{equation*}
+%
+%\item Trouver une relation entre $I_{n}$ et $I_{n-1}$ et $C_{n}$, en déduire que $\left( \frac{\pi ^{2}}{6}-S_{n}\right) \frac{\pi }{4}\leq \frac{2\times 4\times 6\times ...\times \left( 2n\right) }{3\times 5\times
+%...\times \left( 2n-1\right) }I_{n}$
+%
+%\item Démontrer (observer que sur $[0,\pi/2]$ on a $x\leq \frac{\pi}{2}\sin x$) que $I_{n}\leq \frac{\pi ^{2}}{4\left( 2n+1\right) }$ et
+%conclure.
+%\end{enumerate}
+%
+%\end{Exo}
+%\begin{Exo}
+%	On rappelle que: $H_{n}=1+\frac{1}{2}+...+\frac{1}{n}=\ln (n)+\gamma
+%	+0(1)$ o\`{u} $\gamma $ est la constante d'Euler. Soit $u_{n}=\frac{\nu (n)}{n(n+1)}\,o\grave{u}$ $\nu (n)$ est le nombre de 1 figurant dans l'écriture de binaire de $n$. Le but de l'exercice est d'\'{e}tudier la série  de terme général $u_n$
+%	
+%	\begin{enumerate}
+%		\item Montrer que:
+%		
+%		\begin{enumerate}
+%			\item $\nu (2n)=\nu (n)$ et $\nu (2n+1)=1+\nu (n)$.
+%			
+%			\item $\nu (n)\leq 1+\frac{\ln (n)}{\ln (2)}$.
+%		\end{enumerate}
+%		
+%		\item Montrer que la s\'{e}rie $\sum_{n\geqslant 1} u_{n}$ est
+%		convergente.
+%		
+%		\item On pose: $v_{n}=u_{2n}+u_{2n+1}$ et $w_{n}=\frac{1}{(2n+1)(2n+2)}$.
+%		
+%		\begin{enumerate}
+%			\item Montrer que la série $\sum_{n\geq 1} v_{n}$ est
+%			convergente et calculer sa somme en fonction de celle de la série $\sum_{n\geq 1} u_{n}$.
+%			
+%			\item Montrer que: $v_{n}=\frac{u_{n}}{2}+w_{n}$.
+%			
+%			\item Calculer la somme de la série $\sum_{n\geq 1} w_{n}$. En
+%			déduire celle de la série $\sum_{n\geq 1} u_{n}$.
+%		\end{enumerate}
+%	\end{enumerate}
+%\end{Exo}
+
+\end{document}

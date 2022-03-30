@@ -1,0 +1,530 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD}}
+\chead{\textsc{Espaces vectoriels normés}}
+\rhead{\textit{2021-2022}} 
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+%
+\emph{\textbf{\og Si nous sommes maîtres des mots que nous n’avons pas prononcés, nous devenons esclaves de ceux que nous avons laissé échapper.\fg  (Churchill)}}
+%
+%\begin{center}
+%\textsc{Les exercices ... sont à chercher pour vendredi}   
+%\end{center}
+
+
+	\begin{Exo}[une norme sur $\R^2$]
+	Montrer que $N((x,y))=|x|+|x+2y|$ définit une norme sur $\R^2$ et représenter sa boule unité fermée.
+\end{Exo}
+
+%	\begin{Exo}[une norme sur $\R^2$]
+%		Montrer que $N((x,y))=\max\left(|x|,|y|,|x-y|\right)$ définit une norme sur $\R^2$ et représenter sa boule unité fermée.
+%	\end{Exo}
+ \begin{Exo}
+	Montrer que dans l'evn $(E,\norme{})$ on a 
+$\forall(x,y)\in E^2,\norme{x}+\norme{y}\leqslant 2\max\left(\norme{x+y},\norme{x-y}\right)$.
+\end{Exo}
+
+
+%\begin{Exo}[pénible...]
+%	Soit $N:\mathbb{R}^{2}\rightarrow \mathbb{R},$ telle que $N\left(
+%	x,y\right) =\sup_{t\in R}\left( \frac{\left\vert x+ty\right\vert }{1+t^{2}}%
+%	\right) .$ V\'{e}rifier que $N$ est d\'{e}finie, que c'est une norme et d%
+%	\'{e}terminer la sph\'{e}re unit\'{e} pour cette norme.
+%\end{Exo}
+
+
+ \begin{Exo}[une norme sur les polynômes]
+		On pose pour $P\in \mathbb{R}\left[ X\right] :\left\Vert P\right\Vert
+=\sup_{\left[ 0,1\right] }\left\vert P-P^{\prime }\right\vert .$ Montrez
+que c'est une norme sur $\mathbb{R}\left[ X\right]$.
+\end{Exo}
+
+\begin{Exo}
+	Notons $E=C\left([a,b],\R\right)$ et pour $f$ dans $E:N_1(f)=\int_a^b|f|$ et $N_{\infty}(f)=\sup_{[a,b]}|f|$. Montrer que ce sont deux normes sur $E$.
+\end{Exo}
+
+\begin{Exo}[utilisation de l'homogénéité]
+Soit $N_{1}$ et $N_{2}$ deux normes sur un evn $E$ telles que $S^1\left(0,1\right)=S^{2}\left( 0,1\right)$. 
+% $B_{f}^1\left(0,1\right)=B_f^{2}\left( 0,1\right)$. 
+Montrer que $N_{1}=N_{2}$. 
+%Idem si on suppose que $B^1\left(0,1\right)=B^{2}\left( 0,1\right)$
+\end{Exo}
+
+ \begin{Exo}[de l'intérêt de dessiner...]
+	Soit $E$ un evn; $a$ et $b\in E,$ $\alpha \in \mathbb{K}$ et $r$ et $%
+	s\in \mathbb{R}_{+}^{\ast }.$ Montrer que:
+	
+	\begin{enumerate}
+		%		\item $B^{\prime }\left( a+b,r+s\right) =B^{\prime }\left( a,r\right)+B^{\prime }\left( b,s\right) .$
+		
+		%	\item $B^{\prime }\left( \alpha a,\left\vert \alpha \right\vert r\right)=\alpha B^{\prime }\left( a,r\right) .$
+		
+		\item $B_f\left( a,r\right) \cap B_f\left( b,s\right) \neq
+		\varnothing \iff \left\Vert a-b\right\Vert \leqslant s+r.$
+		
+		\item $B_f\left( a,r\right) \subset B_f\left( b,s\right)
+		\iff \left\Vert a-b\right\Vert \leqslant s-r.$
+		
+		\item $B_f\left( a,r\right) =B_f\left( b,s\right)
+		\iff a=b$ et $s=r.$
+		
+		
+	\end{enumerate}
+\end{Exo}
+
+
+
+ \begin{Exo}[Normes équivalentes]
+ 	Soit deux normes $N$ et $N'$ sur $E$. On dit que $N'$ est  équivalente à $N$ s'il existe deux réels $a,b>0$ tels que: $aN\leqslant N'\leqslant bN$.
+\begin{enumerate}
+	\item Montrer que ceci définit une relation d'équivalence. On dira par la suite $N$ et $N'$ sont équivalentes.
+	\item
+	Montrer que sur $\R^2$,  $N_1$ et $N_{\infty}$  sont équivalentes.
+	\item
+	Montrer que si deux normes $N,N'$ sont équivalentes alors elles ont les mêmes parties bornées, les mêmes les suites convergentes  et que la limite est la même pour $N$ et pour $N'$.
+	\item 
+	
+		On note pour $P=\displaystyle\sum_{k=0}^na_kX^k:N_1(P)=\displaystyle\sum_{k=0}^n|a_k|$ et $N_{\infty}(P)=\displaystyle \underset{0\leqslant k\leqslant n}\max{|a_k|}$.
+	\begin{enumerate}
+		\item
+		Montrer que l'on définit ainsi deux normes sur $\R[X]$.
+		\item
+		Soit pour tout $n$ dans $\N:P_n=\displaystyle\sum_{k=0}^nXk$. Préciser $N_1(P_n)$ et $N_{\infty}(P_n)$. Ces deux normes sont elles équivalentes sur $\R[X]$? Montrer qu'elles sont équivalentes sur $\R_n[X]$.
+	\end{enumerate}
+	
+%	Soit $E=\mathbb{R}\left[ X\right] $ muni des deux normes: 
+%	\begin{equation*}
+%	N_{1}\left( P\right) =\sup_{t\in \left[ 0,1\right] }\left| P\left( t\right)
+%	\right| \text{ et }N_{2}\left( P\right) =\sup_{t\in \left[ 1,2\right]
+%	}\left| P\left( t\right) \right|
+%	\end{equation*}
+%	
+%	\begin{enumerate}
+%		\item Soit $P_{n}\left( t\right) =\left( 1-\frac{t}{2}\right)
+%		^{n}$, étudier la limite de $(P_n)_n$ pour chacune de ces deux normes.
+%		\item Soit $A=\left\{ P\in E;P\left( 0\right) =0\right\} ,$ montrer que	c'est un fermé pour $N_{1}$ mais pas pour $N_{2}$.
+%		\item $N_{1}$ et $N_{2}$ sont-elles équivalentes ?
+%	\end{enumerate}
+\end{enumerate}
+ \end{Exo}
+
+\begin{Exo}
+	Notons $E=C\left([0,1],\R\right)$ et pour $f$ dans $E:N(f)=|f(0)|+\sup_{[0,1]}|f'|$ et $N_{\infty}(f)=\sup_{[0,1]}|f|$. Montrer que $B_f^{N}(0,1)\subset B_f^{N_{\infty}}(0,1)$. Déterminer $f$ dans  $B_f^{N_{\infty}}(0,1)$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $\mathcal{B}$ l'ensemble des suites bornées de nombres complexes. Montrer que l'on définit deux normes sur $\mathcal{B}$ en posant:
+	$\forall u=(u_n)_n\in\mathcal{B},N(u)=\sum_{n=0}^{\infty}\frac{|u_n|}{2^n},N'(u)=\sum_{n=0}^{\infty}\frac{|u_n|}{n!}$. 
+	Montrer aussi que $N'\leqslant 2N$ et qu'elles ne sont pas équivalentes.
+\end{Exo}
+
+%\begin{Exo}[Normes sur les polynômes]
+%	On note pour $P=\displaystyle\sum_{k=0}^na_kX_k:N_1(P)=\displaystyle\sum_{k=0}^n|a_k|$ et $N_{\infty}(P)=\displaystyle \underset{0\leqslant k\leqslant n}\max{|a_k|}$.
+%\begin{enumerate}
+%	\item
+%	Montrer que l'on définit ainsi deux normes sur $\R[X]$.
+%	\item
+%	Soit pour tout $n$ dans $\N:P_n=\displaystyle\sum_{k=0}^nX_k$. Préciser $N_1(P_n)$ et $N_{\infty}(P_n)$. Ces deux normes sont elles équivalentes sur $\R[X]$?
+%	\item Montrer qu'elles sont équivalentes sur $\R_n[X]$.
+%\end{enumerate}
+%\end{Exo}
+
+
+\begin{Exo}[parties bornées]
+	Montrer que la réunion et la somme de deux parties bornées est encore bornée.
+\end{Exo}
+
+\begin{Exo}
+	Montrer que l'ensemble $\mathcal{P}$ des matrices de $M_n(\R)$ dont tous les coefficients sont entre $0$ et $1$ est fermé, borné et convexe.
+\end{Exo}
+
+\begin{Exo}[en passant...]
+	Existe-t-il une norme $N$ sur $M_n(\C)(n>1)$ vérifiant $\forall(A,B)\in M_n(\C),N(AB)= N(A)N(B)$?
+\end{Exo}
+
+\begin{Exo}[Deux limites???]
+	On munit $\R[X]$ des normes (?) définies par: si $P=a_0+a_1X+...+a_nX^n,N(P)=|a_0-a_1-a_2-...-a_n|+|a_1|+|a_2|+...+|a_n|$ et $N'(P)=\sup_{[0,1/2]}|P|$. Montrer que $X^n\overset{N}{\to}-1$ et $X^n\overset{N'}{\to}0$.
+\end{Exo}
+
+\begin{Exo}[norme confortable sur les matrices]
+	Soit $n>1$.
+	\begin{enumerate}
+		\item
+		Montrer que si on note pour $A\in M_n(\C):N(A)=n\underset{1\leqslant i,j \leqslant n}{\max}|a_{i,j}|$ on définit une norme $N$ sur $M_n(\C)$ qui vérifie $\forall(A,B)\in M_n(\C)^2,N(AB)\leqslant N(A)N(B)$.
+%		Montrer que si on note pour $A\in M_n(\C):N(A)=\underset{1\leqslant i\leqslant n}{\max}\left(\displaystyle \sum\limits_{j=1}^{n}|a_{i,j}|\right)$ on définit une norme $N$ sur $M_n(\C)$ qui vérifie $\forall(A,B)\in M_n(\C)^2,N(AB)\leqslant N(A)N(B)$.
+%		
+		\item Montrer alors que si $A_k\to A$ et $B_k\to B$ alors $A_k B_k\to AB$ dans $M_n(\K)$.\footnote{On peut aussi le faire à la main, faites-le!}
+		\item Soit $A\in M_n(\K)$ telle que $A^k\underset{k\infty}{\to}P$. Montrer que $P$ est une matrice de projection (ie $P^2=P$).
+		\item Soit $(A_k)_k$ une suite de matrices inversibles convergeant vers $A$, telle que $(A_k^{-1})_k$ converge vers $B$. Montrer que $A$ est inversible d'inverse $B$. Si $A_k=\frac{1}{2^k}I_n$, la suite  $(A_k^{-1})_k$  est-elle convergente? 
+		\item Etudier la convergence de la suite $(A^n)_n$ avec $A=\frac{1}{2}\begin{pmatrix}
+			-1 & -2 \\
+			3 & 4
+		\end{pmatrix}$.
+	
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+On munit $E=C([0,1],\R)$ des normes $\norme{f}_1=\int_0^1|f|$ et 	$\norme{f}_{\infty}(f)=\sup_{[0,1]}|f|$. Enfin on note $A=\left\{f_n:x\mapsto nx^n,n\in\N\right\}$. $A$ est-elle bornée pour $\norme{ }_1$? Pour $\norme{ }_{\infty}$?
+\end{Exo}
+
+\begin{Exo}
+	Montrer que $A=\left\{(x_1,\dots,x_p)\in\R^p,\forall i\neq j,x_i \neq x_j\right\}$ est un ouvert de $\R^p$.
+\end{Exo}
+	
+
+%	\begin{Exo}[Une suite de matrices]
+%		 Soit $A=\left( 
+%\begin{array}{ll}
+%	a+\cos \theta & \sin \theta \\ 
+%	\sin \theta & a-\cos \theta%
+%\end{array}%
+%\right) $ et $A_{n}=A^{n}.$
+%
+%\begin{enumerate}
+%	\item Soit $B$ telle que $A=aI_{2}+B,$ calculer $B^{2}$ puis montrer que $%
+%	A_{n}$ est de la forme $\alpha _{n}I_{2}+\beta _{n}B.$
+%	
+%	\item Calculer $\alpha _{n}$ et $\beta _{n}$ et en d\'{e}duire l'ensemble
+%	des $a$ tels que $\left( A_{n}\right) _{n\in \mathbb{N}}$ converge.
+%\end{enumerate}
+%\end{Exo}	
+
+
+
+\begin{Exo}[amusant]
+	Soit $A$ dans $M_n(\Z)$, on suppose que la suite $(A^k)_k$ converge vers la matrice nulle. Montrer que $A$ est nilpotente. Ce résultat subsiste-t-il si $A$ n'est plus supposée à coefficients entiers relatifs?
+\end{Exo}
+
+
+\begin{Exo}
+	Soit pour $n$ dans $\N^*:A_n=\begin{pmatrix}
+		1/n & 1 \\
+		0 & 0
+	\end{pmatrix}
+	$ et $B_n=\begin{pmatrix}
+		1/n & 0 \\
+		0 & 0
+	\end{pmatrix}
+	$, montrer que $A_n$ et $B_n$ sont semblables, qu'elles convergent respectivement vers $A$ et $B$ à préciser. $A$ et $B$ sont-elles semblables?
+\end{Exo}
+%\begin{Exo}[amusant bis]
+%	Soit $(A_k)_k$ une suite de matrices inversibles convergeant vers $A$, telle que $(A_k^{-1})_k$ converge vers $B$. Montrer que $A$ est inversible d'inverse $B$. Si $A_k=\frac{1}{2^k}I_n$, la suite  $(A_k^{-1})_k$  est-elle convergente? 
+%\end{Exo}
+
+\begin{Exo}
+	Soit $\mathcal{P}=\left\{M\in M_n(\R),M^2=M\right\}$. Montrer que $\mathcal{P}$ est un fermé de $M_n(\R)$. En étudiant les matrices de la forme $\begin{pmatrix}
+		1 & a \\
+		0 & 0
+	\end{pmatrix}$ montrer que $\mathcal{P}$ n'est pas borné.
+\end{Exo}	
+
+
+	
+%	\item Montrer que $N\left( x,y\right) =\int_{0}^{1}\left\vert
+%	x+ty\right\vert dt$ d\'{e}finit une norme sur $\mathbb{R}^{2}$ et d\'{e}%
+%	terminer sa sph\'{e}re unit\'{e}.
+	
+%	\item Soit $(E,\norme{})$ un evn, $A$ une partie non vide de $E$ et $x$ dans $E$. On appelle distance de $x$ à $A$ le réel: 
+%	\begin{equation*}
+%	d(x,A)=\inf_{y\in A}\norme{x-y}
+%	\end{equation*}
+%	\begin{enumerate}
+%		\item Montrer que $d(x,A)$ est toujours défini.
+%		\item Montrer que $N\left( x,y\right) =\max \left( \left\vert x+y\right\vert,\left\vert x-y\right\vert \right) $ définit une norme sur $\mathbb{R}^{2}$ et déterminer la distance de $\left( 0,0\right) $ à la droite d'équation $2x+y=6$.
+%		\item 	 Déterminer $f:x\in\R\mapsto d(x,\mathbb{Z})$ et tracer la courbe représentative.
+%		
+%		\item Soit $E=M_{2}(\R)$ muni de $\left\Vert {}\right\Vert _{\infty} $ et soit $A\in M_{2}(\R)\setminus GL_{2}(\mathbb{R})$. Montrer que $d\left( I_2,A\right) =\frac{1}{2}$.
+%		
+%			\item Soit $E=B\left( \left[ 0,1\right] ,\mathbb{R}\right) $ muni de sa norme $\left\Vert \,\right\Vert _{\infty }$ et $A=C\left( \left[ 0,1	\right] ,\R\right) .$ On note $f$ la fonction définie sur $\left[0,1\right]$ par: $\begin{cases}
+%f\left( x\right) =1\text{ si }x\in \left[ 0,\frac{1}{2}\right] \\ 
+%f\left( x\right) =2\text{ sinon}
+%			\end{cases}$.
+%			
+%			Trouver $g\in A$ telle que $d\left( f,g\right) =\frac{1}{2}$.
+%		Ensuite soit $g\in A$ telle que $\norme{f-g}<\frac{1}{2}$, montrer
+%		que c'est absurde. En déduire la distance de $f$ à $A$.
+%		
+%		
+%%		\item Soit $E=C\left( \left[ 0,1\right] ,\R\right) $ muni de la norme de la convergence uniforme et $$A=\left\{ f\in E;f\left( 0\right)=0\text{ et }\int_{0}^{1}f\geq 1\right\}$$ Montrez que si $f$ est dans $A$ alors $\left\Vert f\right\Vert _{\infty }>1$. Calculez ensuite $d\left(0,A\right)$.
+%	\end{enumerate}
+	
+\begin{Exo}[encore du dessin...]
+	 On note pour $n$ dans $\N^*$ et $\lambda$ dans $\R_+^*$:
+\[
+B_n=\left\{
+(x,y)\in\R^2,\left(x-\frac{1}{n}\right)^2+\left(y-\frac{1}{n}\right)^2\leqslant\frac{\lambda}{n^2}
+\right\}
+\]
+\begin{enumerate}
+	\item
+	Déterminer une condition nécessaire sur $\lambda$ pour avoir:
+	$\forall n>0,B_{n+1}\subset B_n$
+	\item
+	Déterminer pour quelles valeurs de $\lambda$ l'ensemble $B=\displaystyle\bigcup_{n\in\N^*}B_n$ est fermé.
+\end{enumerate}
+\end{Exo}
+
+ \begin{Exo}Soit $F$ un sev de $E$:
+ 	\begin{enumerate}
+ 		\item
+ 		Montrer que si $F$ admet un point intérieur alors $F=E$.
+ 		\item
+ 		Montrer que  $\overline{F}$ est encore un sev de $E$.
+ 	\end{enumerate}
+ \end{Exo}
+
+	
+\begin{Exo}
+	 	Soit deux parties $A$ et $B$ d'un evn, montrer que:
+	
+	\begin{enumerate}
+		\item Si $A$ est ouvert, $A+B$ est ouvert.
+		
+		\item On se place dans $\mathbb{R}^{2}.$ Soit $A=\left\{ \left( x,0\right)
+		,x\in \mathbb{R}\right\} $ et $B=\left\{ \left( x,y\right) \in \mathbb{R}%
+		^{2};xy=1\right\} .$ D\'{e}terminez $A+B.$ La somme de deux ferm\'{e}s
+		est-elle ferm\'{e}e?
+	\end{enumerate}
+\end{Exo}
+	
+	 
+\begin{Exo}[classique matriciel non trivial...]\ 
+		\begin{enumerate}
+		\item
+		Soit $A\in M_n(\R)$. Montrer que $x\in\R\mapsto \det(A-xI_n)$ est une fonction polynômiale dont on précisera le degré.
+		\item
+		En déduire qu'il existe une suite de matrices inversibles qui converge vers $A$. On dit que $GL_n(\R)$ est dense dans $M_n(\R)$.
+		\item
+		$GL_n(\R)$ est-il un ouvert? Un fermé de $M_n(\R)$?
+	\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}[polynôme à deux variables]
+	Soit $P$ une fonction polynôme à deux variables. On suppose qu'il existe un ouvert $\Omega$ de $\R^2$ sur lequel $P$ s'annule.
+	\begin{enumerate}
+		\item
+		Montrer que $\Omega$ contient un sous-ensemble de la forme $I\times J$ avec $I,J$ deux intervalles de $\R$ non réduits à un point.	En déduire que $P$ est identiquement nulle.
+		\item
+		Donner un exemple de polynôme à deux variables non nul ayant une infinité de racines.
+	\end{enumerate}
+\end{Exo}
+	
+%\begin{Exo}
+%		 On rappelle qu'une partie $A$ d'un evn est \textbf{convexe} ssi: 
+%	\begin{equation*}
+%	\forall a,b\in A,\left[ a,b\right] =\left\{ ta+\left( 1-t\right) b,t\in	\left[ 0,1\right] \right\} \subset A
+%	\end{equation*}
+%	
+% On suppose $A$ fermée. Montrez que $A$ convexe ssi $\forall x,y\in
+%		A,\frac{x+y}{2}\in A$ (on pourra s'inspirer de la démonstration des fermés emboités dans $\R$)
+%\end{Exo}
+%		
+
+		
+		
+
+	
+
+	
+
+
+	
+% \begin{Exo}[trivial mais beaucoup trop abstrait peut-être...]
+% 	On munit $C([0,1],R)$ de la norme $\norme{}_{\infty}$. Soit $A=\left\{f\in C([0,1],\R),\forall x\in [0,1],3+f(x)\leqslant \exp(f(x))\right\}$. Montrer que $A$ est fermée mais non bornée.
+% \end{Exo}
+%	
+%\begin{Exo}
+%		Montrez que dans un evn: $\overline{B\left( a,r\right) }=B^{\prime
+%}\left( a,r\right) ,\overset{\circ }{\overbrace{B^{\prime }\left( a,r\right) 
+%}}=B\left( a,r\right) $ et que $S\left( a,r\right) $ est un fermé d'intérieur vide.
+%	\end{Exo}
+
+
+%	\item
+	
+	
+%	\begin{enumerate}
+%		\item Comparer pour l'inclusion $A,\overline{A},\overset{\circ}{A}$.
+%		
+%		\item Si $A$ est ouvert qu'est $\overset{\circ }{A}$? Si $A$ est fermé qu'est $\overline{A}$?
+%		
+%		\item Donner une caractérisation de $\overline{A}$ et $\overset{\circ }{A}$ par les quantificateurs. Préciser l'adhérence et l'intérieur	de $E$ et de $\varnothing$.
+%		
+%		\item Montrer que l'adhérence et l'intérieur préservent l'inclusion.
+%		
+%		\item Montrer que $\overline{A}$ est l'ensemble des limites des suites	convergentes de $A.$
+%		
+%		\item Montrer que $E\setminus \overset{\circ }{A}=\overline{E-A}$.
+%		
+%		\item On se place dans $\R$ usuel, préciser $\overline{A}$ et $\overset{\circ }{A}$ dans les cas suivants: $A=\R,\varnothing ,\mathbb{Q},\R\setminus \mathbb{Q},\left[a,b\right[ ,\left[ a,b\right] ,\left[ a,+\infty \right[ ,\left[ a,b\right[ \cap \mathbb{Q}$.
+%		
+%		\item Montrer que $A$ est fermé ssi $A=\overline{A}$ ssi $\overline{A}\subset A$. Enoncer une caractérisation analogue pour les ouverts.
+%		
+%		\item Soit $A,B\in E,$ comparer pour l'inclusion:
+%		
+%		\item $\overset{\circ }{\overbrace{A\cap B}}$ et $\overset{\circ }{A}\cap 
+%		\overset{\circ }{B},\overset{\circ }{\overbrace{A\cup B}}$ et $\overset{%
+%			\circ }{A}\cup \overset{\circ }{B},\overline{A\cup B}$ et $\overline{A}\cup 
+%		\overline{B},\overline{A\cap B}$ et $\overline{A}\cap \overline{B}.$
+%		
+%		\item On note $\alpha :A\mapsto \overset{\circ }{\overline{A}}$ et $\beta
+%		:A\mapsto \overline{\overset{\circ }{A}}.$ Montrer que $\alpha $ et $\beta $
+%		sont idempotentes ie $\alpha \circ \alpha =\alpha $ et $\beta \circ \beta
+%		=\beta .$ D\'{e}terminer une partie $A$ de $\mathbb{R}$ telle que $A,%
+%		\overline{A},\overset{\circ }{A},\overset{\circ }{\overline{A}},\overline{%
+%			\overset{\circ }{A}},\overline{\overset{\circ }{\overline{A}}},\overset{%
+%			\circ }{\overline{\overset{\circ }{A}}}$ soient tous distincts.
+%	\end{enumerate}
+%	
+%
+%	\item Soit $(E,\norme{})$ un evn, $A$ une partie non vide de $E$ et $x$ dans $E$. On appelle distance de $x$ à $A$ le réel: 
+%	\begin{equation*}
+%	d(x,A)=\inf_{y\in A}\norme{x-y}
+%	\end{equation*}
+%	
+%	\begin{enumerate}
+%		\item Justifier que $d(x,A)$ est bien définie.
+%		\item Caractériser les points à distance nulle de $A$
+%		
+%		\item Montrer que $d(x,A)=d\left( x,\overline{A}\right) .$
+%		
+%		\item Vérifier que:
+%			$\forall x,y\in E,$ $d\left( x,A\right) \leqslant \norme{x-y}+d\left( y,A\right)$.		
+%%			\item $\forall x,y\in E,$ $d\left( x,y\right) \leqslant d\left(x,A\right)+\delta (A)+d\left( y,A\right) $ (si $A$ est born\'{e}e).
+%%		\end{enumerate}
+%		
+%		\item On pose pour $r>0$ $B\left( A,r\right) =\left\{ x\in E;d\left(x,A\right) <r\right\}$. Est-ce un ouvert ? Qu'est ce que $\underset{r>0}{%
+%			\bigcap }B\left( A,r\right) $ ?
+%		
+%		\item On pose pour $r>0$ $B^{\prime }\left( A,r\right) =\left\{ x\in
+%		E;d\left( x,A\right) \leq r\right\} .$ Est-ce un fermé ? Comparer $%
+%		\underset{a\in A}{\bigcup }B^{\prime }\left( a,r\right) $ et $B^{\prime
+%		}\left( A,r\right) $.
+%		
+%		\item Soient $B$ et $C$ deux parties de $E.$ Montrer que $\left\{
+%		x\in E;d\left( x,B\right) =d\left( x,C\right) \right\} $ est un ferm%
+%		\'{e}. Dessiner cet ensemble lorsque $E=\mathbb{R}^{2},$ $B=\left[ 0,1\right]
+%		$ et $\mathbb{C}$ est le segment d'extremités $\left( 2,0\right) $ et $%
+%		\left( 3,1\right) .$
+%		
+%		\item Déduire de cette étude qu'un fermé est intersection dénombrable d'ouverts. Que peut on en déduire pour un ouvert?
+%	\end{enumerate}
+
+\end{document}

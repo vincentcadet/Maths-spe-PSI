@@ -1,0 +1,561 @@
+  
+\documentclass[12pt,a4paper]{article}
+
+
+
+
+
+
+
+%\usepackage{fullpage}
+%\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{textcomp}
+%\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\addtolength{\hoffset}{-1cm}
+ \addtolength{\voffset}{-2cm}
+ \addtolength{\textwidth}{4cm}
+\addtolength{\textheight}{4cm}
+
+
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD 18}}
+\chead{\textsc{Equations différentielles linéaires}}
+\rhead{\textit{2021-2022}} 
+
+
+\everymath{\displaystyle}
+
+
+
+
+
+
+%ensembles de nombres------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\DeclareMathOperator{\K}{\mathbb{K}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\N}{\mathbb{N}}
+\DeclareMathOperator{\C}{\mathbb{C}}
+\DeclareMathOperator{\U}{\mathbb{U}}
+
+
+
+
+%applications relations----------------------------------------------
+
+
+
+
+\DeclareMathOperator{\Id}{\mathrm{Id}}
+\DeclareMathOperator{\Class}{\mathcal{C}}
+\DeclareMathOperator{\DL}{\mathrm{DL}}
+
+\newcommand{\lci}{l.c.i. }
+\newcommand{\set}[2]{
+\left\{
+\begin{array}{ccc}
+#1 & / & #2
+\end{array}
+\right\}
+}
+\newcommand{\appli}[5]
+{
+%E,F,f,x,y
+\left\{
+\begin{array}{ccc}
+#1 & \overset{#3}{\longrightarrow} & #2 \\
+#4 & \longmapsto & #5 
+\end{array}
+\right.
+}
+\newcommand{\applilight}[3]
+{
+%E,F,f
+#3 : #1  \longrightarrow  #2
+}
+\newcommand{\reciproque}[1]{
+#1^{*} 
+}
+
+
+
+
+
+%fonctions usuelles--------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\ch}{\mathrm{ch}}
+\DeclareMathOperator{\sh}{\mathrm{sh}}
+\DeclareMathOperator{\tah}{\mathrm{th}}
+\DeclareMathOperator{\sgn}{\mathrm{sgn}}
+\DeclareMathOperator{\cotan}{\mathrm{cotan}}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\equi}[3]
+{
+% f,g,a
+#1\underset{#3}{\sim}#2
+}
+\newcommand{\bigo}[3]
+{
+% f,g,a
+#1\underset{#3}{=}\mathcal{O}\left(#2\right)
+}
+\newcommand{\plusbigo}[4]
+{
+% f,g,h,a : f =_a g+O(h)
+#1\underset{#4}{=}#2 + \mathcal{O}\left(#3\right)
+}
+\newcommand{\smallo}[3]
+{
+% f,g,a
+#1\underset{#3}{=}\mathbf{o}\left(#2\right)
+}
+\newcommand{\plussmallo}[4]
+{
+% f,g,h,a : f =_a g+o(h)
+#1\underset{#4}{=}#2 + \mathbf{o}\left(#3\right)
+}
+
+
+
+
+
+%complexes--------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Real}{\mathcal{R}e}
+\DeclareMathOperator{\Imaginary}{\mathcal{I}m}
+\DeclareMathOperator{\I}{\mathbf{i}}
+
+
+
+
+
+%polynomes----------------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Xd}{\mathrm{X}}
+\DeclareMathOperator{\val}{\mathrm{val}}
+\DeclareMathOperator{\X}{\mathrm{X}}
+%\DeclareMathOperator{\deg}{\mathrm{deg}}
+
+
+
+
+
+%algebre lineaire---------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\Diag}{\mathrm{Diag}}
+\DeclareMathOperator{\Vect}{\mathrm{Vect}}
+\DeclareMathOperator{\Ima}{\mathrm{Im}}
+\DeclareMathOperator{\Ker}{\mathrm{Ker}}
+\DeclareMathOperator{\GL}{\mathrm{GL}}
+\DeclareMathOperator{\tr}{\mathrm{tr}}
+\DeclareMathOperator{\Lcal}{\mathcal{L}}
+\DeclareMathOperator{\Mat}{\mathrm{Mat}}
+\DeclareMathOperator{\Com}{\mathrm{Com}}
+\DeclareMathOperator{\M}{\mathcal{M}}
+\DeclareMathOperator{\rg}{\mathrm{rg}}
+\newcommand{\tribu}{\mathcal{A}}
+\renewcommand{\Pr}{\mathbb{P}} 
+\newcommand{\ev}{espace vectoriel }
+\newcommand{\evs}{espaces vectoriels }
+\newcommand{\transpo}[1]{
+ \mathstrut^t\! #1
+}
+
+
+
+
+
+%arithmetique-------------------------------------------------
+
+
+
+
+
+\DeclareMathOperator{\pgcd}{pgcd}
+
+\newcommand{\modulobis}[3]{
+% x,y,alpha
+#1\equiv #2\; \left(\text{mod}\;#3\right)
+}
+\newcommand{\modulo}[3]{
+% x,y,alpha
+#1\equiv #2\; \left[#3\right]
+}
+
+
+
+
+
+%calcul differentiel et integral----------------------------
+
+
+
+
+\DeclareMathOperator{\der}{\mathrm{d}}
+
+
+
+
+%denombrement probas-----------------------------------------
+
+
+
+
+\DeclareMathOperator{\Card}{\mathrm{Card}}
+\DeclareMathOperator{\PR}{\mathbf{P}}
+\DeclareMathOperator{\E}{\mathrm{e}}
+\DeclareMathOperator{\V}{\mathbf{V}}
+\DeclareMathOperator{\COV}{\mathbf{Cov}}
+
+\newcommand{\VA}{v.a. }
+\newcommand{\VAR}{v.a.r. }
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+
+
+
+
+%geometrie---------------------------------------------------
+
+
+
+
+\newcommand{\fle}[1]{
+\overrightarrow{#1}
+}
+\newcommand{\ang}[2]{
+\widehat{
+\left(
+#1 , #2
+\right)
+}
+}
+\newcommand{\scal}[2]{
+\left( #1 |  #2 \right)
+}
+
+
+
+
+%recurrence--------------------------------------------------
+
+
+
+
+\newcommand{\recurr}[4]{
+% u, n_0, u(n_0), u(n+1)
+\left\{
+\begin{array}{cl}
+& #1_{#2}=#3 \\
+\forall n\geqslant #2 \quad &    #1_{n+1}=#4   
+\end{array}
+\right.
+}
+\newcommand{\recurrdouble}[6]{
+% u, n_0,n_1, u(n_0), u(n_1), u(n+2)
+\left\{
+\begin{array}{cl}
+& #1_{#2}=#4 \qquad #1_{#3}=#5\\
+\forall n\geqslant #2 \quad &    #1_{n+2}=#6   
+\end{array}
+\right.
+}
+
+
+
+
+%divers----------------------------------------------------
+
+
+
+
+\DeclareMathOperator{\lcro}{\textnormal{\textlbrackdbl}}
+\DeclareMathOperator{\rcro}{\textnormal{\textrbrackdbl}}
+
+\newcommand{\ssi}{ssi }
+\newcommand{\dis}{\displaystyle}
+
+
+%--------------------------------------------------------
+
+
+
+
+
+
+
+%--------------------------------------------------------------------
+%-------------DOCUMENT-----------------------------------------------
+%--------------------------------------------------------------------
+
+
+\begin{document}
+
+\emph{\textbf{
+La guerre, c'est le massacre de gens qui ne se connaissent pas, au profit de gens qui se connaissent et ne se massacrent pas. (Paul Valéry)
+}}
+
+%\emph{\textbf{
+%		\emph{\textbf{
+%				Quel que soit le temps passé à faire des mathématiques, ce n'est jamais du temps perdu. (Cédric Villani)
+%		}
+%}}
+
+\begin{enumerate}
+%\item
+%
+%Etudier $x\left( x+1\right) y^{\prime }+y=\arctan x.$ On s'attachera
+%au probl\'{e}me de raccordement.
+
+\item Soient $a,b$ continues sur $\R$ et impaires. Montrer que les solutions de $y'+ay=b$ sont paires.
+
+\item
+ R\'{e}soudre $3xy^{\prime }-4y=x$ sur $\R_-^*$ et $\R_+^*$. Y-a-t'il des solutions définies sur $\R$?
+\item R\'{e}soudre $y^{\prime \prime }-y^{\prime }-e^{2x}y=e^{3x}$ en
+effectuant le changement de variable $u=e^{x}.$
+
+\item D\'{e}terminer la fonction $f$ continue sur $\mathbb{R}$ vérifiant pour tout $x$ réel $:f\left( x\right) -\int_{0}^{x}tf\left( t\right) dt=1$.
+\item On se propose de r\'{e}soudre $\left( E\right) :f^{\prime \prime
+}\left( -x\right) +f\left( x\right) =x+\cos x.$
+
+Soit $\phi :x\mapsto f\left( x\right) +f\left( -x\right) $ et $\psi
+:x\mapsto f\left( x\right) -f\left( -x\right) .$ Trouver des ED simples v%
+\'{e}rifi\'{e}es par $\phi $ et $\psi .$ En d\'{e}duire les solutions de $%
+\left( E\right) .$
+\item R\'{e}soudre sur $\mathbb{R}$ les \'{e}quations $xy^{\prime }+2y=\frac{%
+	x^{2}}{1+x^{2}}$ et $xy^{\prime }+y=e^{x}.$
+\item Trouver les solutions polyn\^{o}miales de:%
+$
+	\left( E\right) :x^{2}y^{\prime \prime }\left( x\right) -xy^{\prime }\left(
+	x\right) -3y\left( x\right) =0
+$
+R\'{e}soudre ensuite sur $\mathbb{R}_{+}^{\ast }$ et $\mathbb{R}_{-}^{\ast }.$
+Dimension de l'espace des solutions sur $\mathbb{R}?$
+
+\item \textbf{Etude qualitative}
+Soit $q$ une fonction continue int\'{e}grable sur $\mathbb{R}_{+}$ et
+soit $\left( E\right) :y^{\prime \prime }+qy=0.$
+
+\begin{enumerate}
+	\item Montrer que si $f$ a une limite en $+\infty $ et si $\int_{0}^{+\infty
+	}f$ converge alors cette limite est nulle.
+	
+	\item Montrer que, si $f$ est une solution born\'{e}e de l'\'{e}quation alors $\lim_{\infty }f^{\prime }=0$.
+	\item Soit $f,g$ deux solutions born\'{e}es et $w=f^{\prime }g-fg^{\prime }$
+	leur wronskien. Calculer $w^{\prime }$ et en d\'{e}duire que $f$ et $g$ sont
+	li\'{e}es.
+	\item En déduire que $(E)$ admet nécessairement une solution non bornée sur $\R_+$.
+\end{enumerate}
+
+%\item \textbf{Etude qualitative}
+%Soit $p:\mathbb R\to\mathbb R_+$ une fonction continue non identiquement nulle. 
+%On se propose de démontrer que toutes les solutions de l'équation différentielle $y''(x)+p(x)y(x)=0$
+%s'annulent. Pour cela, on raisonne par l'absurde et on suppose que $f$ est une solution ne s'annulant pas.
+%\begin{enumerate}
+%	\item
+%	Justifier que $f$ est de signe constant. Dans la suite, quitte à changer $f$ en $-f$, on supposera $f>0$.
+%	\item
+%	Soit $a\in\mathbb R$ quelconque. Justifier que la courbe représentative de $f$ est en-dessous de sa tangente en $(a,f(a))$.
+%	\item
+%	En déduire que $f'(a)=0$ puis conclure.
+%\end{enumerate}
+\item 
+\begin{enumerate}
+	\item
+	Résoudre sur $\R:y'''-2y''-y'+2y=0$ via un système différentiel d'ordre $1$.
+	\item Résoudre sur $\R:\begin{cases}
+		x''=y\\y'=-2x+x'+2y
+	\end{cases}$
+\end{enumerate}
+
+\item 	Chercher les solutions développables en séries entières de:
+$$(E):(1+x^2)y''(x)+4xy'(x)+2y(x)=0$$ En déduire toutes les solutions de $(E)$.
+
+\item
+On considère le système différentiel (S) définie par
+$$
+\left\{\begin{array}{l}
+	x^{\prime}=x+2 y-z \\
+	y^{\prime}=2 x+4 y-2 z \\
+	z^{\prime}=-x-2 y+z
+\end{array} \quad\right. \text { avec } \quad\left\{\begin{array}{l}
+	x(0)=1 \\
+	y(0)=0 \\
+	z(0)=0
+\end{array}\right.
+$$
+Justifier que le système $(S)$ admet une unique solution $f=(x, y, z)$ sur $\mathbb{R}$ puis montrer que $f(\mathbb{R})$ est inclus dans le plan d'équation $x+z=1$.
+
+%\item Justifier que si $a,b$ sont des constantes et si $P$ est un polynôme alors $y''+ay'+by=\E^{\lambda t}P(t)$ admet une solution particulière de la forme $t\mapsto Q(t)\E^{\lambda t}$ avec $\deg(Q)=\deg(P)$ augmenté de la multiplicité de $\lambda$ comme racine de $X^2+aX+b$. (faire le changement de fonction inconnue $y(t)=z(t)\E^{\lambda t})$.
+
+\item \textbf{Réflechir avant de se lancer...}
+Résoudre $X'=AX$ avec $A=\begin{pmatrix}
+	4 & 0 & 2 & 0 \\
+	0 & 4 & 0 & 2 \\
+	2 & 0 & 4 & 0 \\
+	0 & 2 & 0 & 4
+\end{pmatrix}$
+\item Résoudre $\begin{cases}
+x''=3x+y\\y''=2x+2y
+\end{cases}$
+
+\item
+Trouver les solutions développables en série entière de $2xy'+y=\frac{2}{1-x}$.
+\item Résoudre $y''-2y'+5y=-4\E^{-x}\cos(x)$.
+\item Résoudre $y''-2y'+y=x,y(0)=y'(0)=0$. (chercher une solution particulière simple...)
+\item
+On considère sur $\mathbb{R}$ l'équation différentielle:
+$
+(t+1)^{2} y^{\prime \prime}-2(t+1) y^{\prime}+2 y=0
+$
+\begin{enumerate}
+	
+
+\item Déterminer les solutions polynomiales de $(E)$
+\item En déduire les solutions de $(E)$ sur les intervalles $]-\infty,-1[$ et $]-1,+\infty[$.
+\item En déduire les solutions de $(E)$ sur $\mathbb{R}$.
+\end{enumerate}
+
+%\item Déterminer une équation différentielle linéaire du second ordre admettant $x \mapsto \mathrm{e}^{x^{2}}$ et $x \mapsto \mathrm{e}^{-x^{2}}$ comme solution.
+\item En posant $z=\left(1+\mathrm{e}^{x}\right) y$, résoudre sur $\mathbb{R}$ l'équation différentielle
+$$
+\left(1+\mathrm{e}^{x}\right) y^{\prime \prime}+2 \mathrm{e}^{x} y^{\prime}+\left(2 \mathrm{e}^{x}+1\right) y=x \mathrm{e}^{x}
+$$
+\item En posant $z=x y$, résoudre sur $\mathbb{R}$ l'équation différentielle
+$
+x y^{\prime \prime}+2(x+1) y^{\prime}+(x+2) y=0
+$.
+\item  En posant $z=y-y^{\prime}$, résoudre sur $\mathbb{R}$ l'équation différentielle 
+$
+x y^{\prime \prime}-(1+x) y^{\prime}+y=1
+$.
+
+\item
+Résoudre  $X^{\prime}=A X+B$ où
+$
+A(t)=\left(\begin{array}{cc}
+	1+t & t \\
+	-t & 1-t
+\end{array}\right)  \text { et }  B(t)=\left(\begin{array}{c}
+	-\mathrm{e}^{t} \\
+	\mathrm{e}^{t}
+\end{array}\right)
+$.
+\item Déterminer les fonctions $f, g: \mathbb{R} \rightarrow \mathbb{R}$ continues telles que
+$$
+\forall x \in \mathbb{R}, \quad f(x)=\int_{0}^{x} g(t) \mathrm{d} t \quad \text { et } \quad g(x)=\int_{0}^{x} f(t) \mathrm{d} t
+$$
+
+\item
+
+Résoudre les systèmes suivants.
+\begin{multicols}{3}
+\begin{enumerate}
+	\item
+	$\left\{\begin{array}{l}
+		x^{\prime}=4 x-2 y \\
+		y^{\prime}=x+y
+	\end{array} \quad\right.$
+	\item
+	$\left\{\begin{array}{l}
+		x^{\prime}=4 x-2 y \\
+		y^{\prime}=x+y
+	\end{array} \quad\right.$
+	\item
+	$\left\{\begin{array}{l}
+	x^{\prime}=x-4 y \\
+	y^{\prime}=x-3 y
+\end{array} \quad\right.$
+	\item
+	$\left\{\begin{array}{l}
+		x^{\prime}=-x+3 y \\
+		y^{\prime}=-2 x+4 y
+	\end{array}\right.$
+\end{enumerate}
+\end{multicols}
+\item Résoudre $X'=AX$ avec:
+$
+(i) A=\left(\begin{array}{ccc}
+	1 & 1 & 0 \\
+	-1 & 2 & 1 \\
+	1 & 0 & 1
+\end{array}\right)\quad(ii) A=\left(\begin{array}{ccc}
+	0 & 1 & -1 \\
+	1 & 4 & -2 \\
+	2 & 6 & -3
+\end{array}\right) \text { . }
+$
+\item
+
+		R\'{e}soudre le syst\'{e}me $\left\{ 
+\begin{array}{l}
+	x^{\prime }=\frac{x}{2}+\frac{e^{t}}{2}y  \\ 
+	y^{\prime }=\frac{e^{-t}}{2}x-\frac{y}{2}+e^{t}%
+\end{array}%
+\right. $ en remarquant que $\left( 
+\begin{array}{c}
+	e^{t} \\ 
+	1%
+\end{array}%
+\right) $ est solution du syst\'{e}me homog\'{e}ne.
+
+%		
+\item
+Montrer que les sevs propres de $M\left( t\right) =\left( 
+\begin{array}{cc}
+	t-2 & 1 \\ 
+	-3 & 2+t%
+\end{array}%
+\right) $ sont ind\'{e}pendants de $t.$ R\'{e}soudre ensuite le syst\`{e}me:%
+\begin{equation*}
+	\left\{ 
+	\begin{array}{l}
+		x^{\prime }\left( t\right) =\left( t-2\right) x\left( t\right) +y\left(
+		t\right)  \\ 
+		y^{\prime }\left( t\right) =-3x\left( t\right) +\left( 2+t\right) y\left(
+		t\right) 
+	\end{array}%
+	\right. 
+\end{equation*}
+\item On consid\`ere l'\'equation diff\'erentielle :$y''+6y'+9y=d(x) \quad (E)$
+\begin{enumerate}
+	\item R\'esoudre l'\'equation diff\'erentielle
+	homog\`ene associ\'ee \`a $(E)$.
+	\item Trouver une solution particuli\`ere de $(E)$
+	lorque, respectivement, on pose :
+	$ d(x) = \E^{-3x}$ et $d(x)=\cos x.$
+	\item Donner la forme g\'en\'erale des solutions de $(E)$
+	lorsque :
+	$d(x) = 2\E^{-3x}+50\cos x.$
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

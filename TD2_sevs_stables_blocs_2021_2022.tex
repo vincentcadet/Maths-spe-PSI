@@ -1,0 +1,263 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD2}}
+\chead{\textsc{sous-espace stables, blocs}}
+\rhead{\textit{2021-2022}} 
+
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+\emph{\textbf{“Tout est difficile avant d'être simple.
+		” (Thomas Feller)}}
+%
+%\begin{center}
+%\textsc{Les exercices ... sont à chercher pour vendredi}   
+%\end{center}
+
+\begin{Exo}
+	Soit $F=\vect(e_1,...,e_p)$ un sev du $\K$-ev $E$ et $f\in L(E)$. Montrer que $F$ est stable par $f$ ssi pour tout $i\in\{1,...,p\}$ on a $f(e_i)\in F$.
+\end{Exo}
+
+\begin{Exo}
+	Montrer que si $u$ laisse stable toutes les droites vectorielles de $E$ alors $u$ est une homothétie vectorielle. Complément: soit $k$ dans $\N^*$, montrer que si $u$ laisse stable tous les sevs de $E$ de dimension $k$ alors $u$ est une homothétie vectorielle.
+\end{Exo}
+
+\begin{Exo}
+Déterminer les sevs stables par $u\in L(\R^2)$ de matrice dans la base canonique $A=\begin{pmatrix}
+0 & 1 \\
+-1 & 0
+\end{pmatrix}$. Idem si $A=\begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix}$.
+\end{Exo}
+
+\begin{Exo}
+	Montrer que si $u$ et $v$ de $L(E)$ commutent alors $\ker u$ et $\Ima u$ sont stables par $v$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $F$ sev du $\K$-ev $E$,$u\in L(E)$ et $\lambda \in \K$.
+	\begin{enumerate}
+		\item
+		Montrer que $\ker(u-\lambda id_E)$ est $u$-stable et préciser l'endomorphisme induit.
+		\item
+		Montrer que $F$ est $u$-stable ssi il est stable par $u-\lambda id_E$.
+		\item
+		Montrer que si $F$ est $u$-stable alors il est stable par $u^2$. Réciproque?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Montrer que si $F$ sev de $E$ est stable par $f$ et $g$ de $L(E)$ alors il l'est   par $f+g$ et par $f\circ g$. Retrouver que le produit de deux matrices triangulaires supérieures l'est encore.
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soit $p$ un projecteur de $E$ et $u$ dans $L(E)$. Montrer que $u$ et $p$ commutent ssi $\ker p$ et $\Ima p$ sont stables par $u$.
+\end{Exo}
+
+\begin{Exo}
+	Déterminer les sous espaces de $\R[X]$ stables par l'endomorphisme de dérivation.
+\end{Exo}
+
+
+
+\begin{Exo}
+	Soit $D:P\mapsto P'$ l'opérateur de dérivation sur $\R[X]$. Supposons qu'il existe un endomorphisme $\Delta$ de $\R[X]$ tel que $D=\Delta^2$.
+	\begin{enumerate}
+		\item
+		Montrer que  $\R_1[X]$ est stable par $\Delta$.
+		\item Donner la matrice dans la base canonique de $\R_1[X]$ de l'endomorphisme induit par $D$ sur $\R_1[X]$.
+		\item Conclure quand à l'existence de $\Delta$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $E$ un $\K$-ev,$u\in L(E)$ et $\lambda \in \K$. Montrer que si un hyperplan $H$ de $E$ contient $\Ima(u-\lambda id_E)$ alors $H$ est stable par $u$.
+\end{Exo}
+
+\begin{Exo}
+	Montrer que si un sev $F$ de $E$ (avec $\dim(E)$ finie) est stable par $u\in L(E)$ alors il est stable par $u^{-1}$. Rejustifier le fait que l'inverse d'une matrice en damier est encore en damier.
+\end{Exo}
+%
+\begin{Exo}
+	Montrer qu'un endomorphisme d'un $\C$-ev de dimension finie admet toujours une droite stable. Ce résultat subsiste-t-il dans un $\R$-ev?
+\end{Exo}
+
+
+\begin{Exo}
+	Soit $u\in L(\R^4)$ de matrice dans la base canonique $A$ la matrice Attila.
+	\begin{enumerate}
+		\item
+		Déterminer le noyau et l'image de $A$
+		\item
+		En déduire deux sevs $F,G$ de dimension $1$ et $3$ stables par $u$ et supplémentaires.
+		\item
+		Préciser $u_F,u_G$ et donner la matrice dans une base adaptée.
+	\end{enumerate}
+\end{Exo}
+\newpage
+\begin{Exo}
+	Soit $u\in L(\R^3)$ et $B=(e_1,e_2,e_3)$ la base canonique de $\R^3$. On suppose que $u(e_1)=e_2,u(e_2)=e_3,u(e_3)=e_1$.
+	\begin{enumerate}
+		\item
+		Former la matrice $A$ de $u$ dans $B$.
+		\item
+		Montrer qu'il n'existe qu'une seule droite $D$ stable par $u$. En donner un vecteur de base et préciser $u_D$ l'endomorphisme induit par $u$ sur $D$.
+		\item
+		Vérifier que $P=\vect(e_1-e_2,e_1-e_3)$ est stable par $u$.
+		\item Justifier que $P$ est le seul plan stable par $u$, montrer ensuite que $F$ et $P$ sont supplémentaires et donner la matrice de $u$ dans une base adaptée à cette somme directe.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $u:P\in \R[X]\mapsto XP$.
+	\begin{enumerate}
+		\item
+		Montrer que $u$ est endomorphisme de $\R[X]$.
+		\item
+		$u$ admet-il des sevs stables de dimension finie?
+		\item
+		Soit $F=\{P\in\R[X],P(1)=0\}$, montrer que $F$ est un sev de $\R[X]$. Est-il stable par $u$?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	On rappelle que toute matrice de rang $r$ est équivalente à la matrice $J_r$ dont tous les coefficients sont nuls sauf les $a_{1,1},a_{2,2},...,a_{r,r}$ qui valent $1$. Déterminer alors le rang de $\begin{pmatrix}
+		A_1 & 0 \\
+		0 & A_2
+	\end{pmatrix}$ en fonction de celui de $A_1$ et de celui de $A_2$.
+	
+\end{Exo}
+
+\begin{Exo}
+	On suppose $A,B$ inversibles, montrer que $\begin{pmatrix}
+		0 & A \\
+		B & 0
+	\end{pmatrix}$ l'est et expliciter son inverse.
+\end{Exo}
+
+\begin{Exo}
+	Soit $A,B,C,D$ dans $M_n(\K)$ telles que $D$ soit inversible et $CD=DC$. Montrer que:
+	\[\det\begin{pmatrix}
+		A & B \\
+		C & D
+	\end{pmatrix}=\det(AD-BC)
+	\]
+	On pourra commencer avec $n=1$...
+\end{Exo}
+
+\end{document}

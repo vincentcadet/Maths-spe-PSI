@@ -1,0 +1,226 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B-PSI TD8}}
+\chead{\textsc{Fonctions vectorielles-Arcs paramétrés}}
+\rhead{\textit{2021-2022}} 
+
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathbf{i}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+	
+
+\begin{Exo}
+	Donner un arc paramétré $(I,f)$ de support: 
+	\begin{enumerate}
+		\item
+		La droite du plan affine passant par $A=(a_1,a_2)$ et dirigée par le vecteur $u=(u_1,u_2)$,
+		\item
+		La droite du plan affine passant par $A=(a_1,a_2)$ et  $B=(b_1,b_2)\neq A$,
+		\item
+		Le segment joignant $A$ et $B$.
+	\end{enumerate}
+	
+\end{Exo}
+
+\begin{Exo}
+	Soit l'arc paramétrique $f(t)=\left((t-2)^3,t^2-4\right)$, déterminer les points d'inflexion ainsi que l'équation de la tangente en ces points.
+\end{Exo}
+
+\begin{Exo}
+		Soit l'arc paramétrique $f(t)=\left(\exp(t),t^2\right)$, déterminer les points d'inflexion ainsi que l'équation de la tangente en ces points.
+\end{Exo}
+
+\begin{Exo}
+	Donner le tableau de variation de $x,y$ si la courbe ci-dessous est celle de l'arc $f=(x,y)$.
+	\begin{center}
+	%\begin{figure}[h]
+	\includegraphics[scale=.4]{courbeparam4.png}
+	%\end{figure}
+	\end{center}
+\end{Exo}
+
+\begin{Exo}
+	\'Etudier et tracer la courbe de Lissajous $t\mapsto (\sin(2t),\cos(3t))$.
+\end{Exo}
+
+\begin{Exo}[Folium de Descartes]
+
+	On considère la courbe paramétrée 
+	$$t\mapsto \left(\frac{t}{1+t^3},\frac{t^2}{1+t^3}\right).$$
+	\begin{enumerate}
+		\item Que déduit-on du changement de variables $t\mapsto 1/t$? Sur quel intervalle peut-on réduire l'étude?
+		\item Construire la courbe. On étudiera ses branches infinies, et on précisera la position de la courbe par rapport à sa ou ses asymptotes.
+	\end{enumerate}
+	
+\end{Exo}
+
+\begin{Exo}
+	\'Etudier la courbe paramétrée suivante : $t\mapsto \left(t+\frac 1t,t+\frac 1{2t^2}\right)$, $t\in\mathbb R^*$.
+	On étudiera en particulier la position par rapport aux asymptotes, et la tangente aux points stationnaires. On pourra aussi chercher un point d'inflexion.
+\end{Exo}
+
+\begin{Exo}
+	Tracer l'arc $f(t)=\left(\frac{3t}{1+t^3},\frac{3t^2}{1+t^3}\right)$.
+\end{Exo}
+
+\begin{Exo}
+	Démontrer que la courbe paramétrée $t\mapsto \left(\displaystyle 2t-\frac 1{t^2},2t+t^2\right)$ possède un point double dont on donnera les coordonnées.
+
+\end{Exo}
+
+
+
+
+\begin{Exo}
+	\'Etudier les branches infinies de la courbe paramétrée $t\mapsto \left(\frac{t^3}{t^2-9},\frac{t(t-2)}{t-3}\right).$
+
+\end{Exo}
+
+
+\begin{Exo}
+	Déterminer la longueur de la courbe représentative de $f:t\in [0,1]\mapsto t^{3/2}$.
+\end{Exo}
+
+\begin{Exo}
+	Montrer que l’arc paramétré défini par $M(t)=(e^{t-1}-t,t^3-3t)$	comporte un point de rebroussement de seconde espèce que l’on précisera ; on situera, au voisinage de	ce point, les deux branches de la courbe de part et d’autre d’un arc de parabole.
+\end{Exo}
+
+\begin{Exo}[Déltoïde]
+	Tracer le support de l'arc défini par $M(t)=2\cos t+\cos(2t),2\sin t-\sin(2t))$ et $t\in[-\pi,\pi]$. On pourra comparer $M(-t)$ et $M(t)$ et étudier la nature de $M(2\pi/3)$.  Préciser aussi la longueur de l'arc
+\end{Exo}
+
+\begin{Exo}
+	Etudier et tracer le support de $(\R,M)$ avec $M:t\mapsto ((1-t)^2e^t,2(1-t)e^t)$.
+\end{Exo}
+
+\begin{Exo}
+	Soit l'arc param\'{e}tr\'{e} $(\R^*,M)$ avec pour $t\in\R^*:M(t)=(x(t),y(t))$:%
+	\begin{equation*}
+		\left\{ 
+		\begin{array}{c}
+			x(t)=t^{2}+\frac{2}{t} \\ 
+			y(t)=t^{2}+\frac{1}{t^{2}}%
+		\end{array}%
+		\right. .
+	\end{equation*}
+	
+	\begin{enumerate}
+				\item Faire les tableaux de variation de $x$ et $y$.
+		\item Pr\'{e}ciser les branches infinies et les asymptotes \'{e}ventuelles et la
+		position de la courbe par rapport \`{a} celles-ci.
+		
+		\item D\'{e}terminer le point double de cette courbe (ie chercher $t,t'$ tels que $M(t)=M(t')$).
+		
+		\item D\'{e}terminer le(s) point(s) singulier(s). Donner la nature et d\'{e}%
+		terminer la tangente en ce(s) point(s).
+		
+
+		
+		\item Tracer avec soin cette courbe.
+	\end{enumerate}
+\end{Exo}
+\end{document}

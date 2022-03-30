@@ -1,0 +1,507 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage[charter]{mathdesign}
+
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.2cm,rmargin=1.2cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B TD16}}
+\chead{\textsc{Endomorphismes symétriques- Isométries}}
+\rhead{\textit{2021-2022}} 
+\setlength{\headsep}{1mm}
+\DeclareMathOperator{\lcro}{\textnormal{\textlbrackdbl}}
+\DeclareMathOperator{\rcro}{\textnormal{\textrbrackdbl}}
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ps}[2]{\left\langle#1,#2\right\rangle}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathbf{i}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\E}{\mathrm{e}}
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+
+\emph{\textbf{
+\og Le travail est un trésor.\fg (Jean de La Fontaine)
+}}
+
+
+\begin{Exo}
+	Soit $A\in GL_n(\R)$, comparer $^t(A^{-1})$ et $(^tA)^{-1}$. Que dire de l'inverse d'une matrice symétrique?
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_n(\R)$, montrer que $^tAA$ est diagonalisable. On suppose que $A^tAA=I_n$, que vaut $A$?
+\end{Exo}
+
+\begin{Exo}
+	Soit $A=\begin{pmatrix}
+		a & b \\
+		b & c
+	\end{pmatrix}
+	\in S_2(\R)$ de valeurs propres $\lambda \leqslant \mu$. Montrer que $\lambda\leqslant a\leqslant \mu$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $a$ unitaire dans $E$ euclidien, et $k$ réel. CNS sur $k$ pour que $f:x\in E\mapsto x+k\ps{x}{a}a$ soit un automorphisme orthogonal.
+\end{Exo}
+
+\begin{Exo}
+	Soit $A=\begin{pmatrix}
+		a & b & b \\
+		b & a & b \\
+		b & b & a
+	\end{pmatrix}$, CNS sur $a,b$ réels pour que $A$ soit orthogonale. Etudier dans chaque cas la nature de l'endomorphisme de matrice $A$ dans la base canonique de $\R^3$.
+	
+\end{Exo}
+
+%\begin{enumerate}
+%	\item  On pose pour tout $A,B\in M_{p,q}(\Bbb{R}),\left\langle
+%	A,B\right\rangle =Tr\left( ^{t}AB\right) .$ Soit $A\in M_{p}\left( \Bbb{R}%
+%	\right) ,B\in M_{q}\left( \Bbb{R}\right) $ et $f:M\in M_{p,q}\left( \Bbb{R}%
+%	\right) \mapsto f\left( M\right) =AM-MB.$ D\'{e}terminez $f^{*}.$
+%	
+%	\item  \textbf{Polyn\^{o}mes de Legendre:} on munit $\Bbb{R}\left[ X\right] $
+%	du produit scalaire $\left\langle P,Q\right\rangle =\int_{-1}^{1}P\left(
+%	t\right) Q\left( t\right) dt$ et on pose $P_{n}\left( x\right) =\left(
+%	\left( x^{2}-1\right) ^{n}\right) ^{\left( n\right) }$.
+%	
+%	\begin{enumerate}
+%		\item  Montrez que $P_{n}$ est un polyn\^{o}me de degr\'{e} $n$ admettant $n$
+%		racines distinctes dans $\left] -1,1\right[ .$ Pr\'{e}cisez le coefficient
+%		dominant.
+%		
+%		\item  Montrez que $\left( P_{n}\right) _{n}$ est une suite de \textbf{polyn%
+%			\^{o}mes orthogonaux} et d\'{e}duisez-en une base orthonormale $\left(
+%		L_{n}\right) _{n}$ pour $\left( \Bbb{R}\left[ X\right] ,\left\langle
+%		,\right\rangle \right) $. Les $L_{n}$ sont appel\'{e}s polyn\^{o}mes de
+%		Legendre.
+%		
+%		\item  Soit $E=\Bbb{R}_{n}\left[ X\right] $ muni du produit scalaire $%
+%		\left\langle P,Q\right\rangle =\int_{-1}^{1}P\left( t\right) Q\left(
+%		t\right) dt$ et $d$ l'endomorphisme de d\'{e}rivation. On cherche \`{a} d%
+%		\'{e}terminer $d^{*}.$
+%		
+%		\begin{enumerate}
+%			\item  R\'{e}pondre \`{a} la question pour $n=2.$
+%			
+%			\item  Soit $a\in \Bbb{R};$ montrez qu'il existe un unique polyn\^{o}me $%
+%			H_{a}\in \Bbb{R}_{n}\left[ X\right] $ tel que $\forall P\in E,P\left(
+%			a\right) =\left\langle H_{a},P\right\rangle .$ Calculer $H_{a}$ \`{a} l'aide
+%			des polyn\^{o}mes de Legendre.
+%			
+%			\item  Exprimez $d^{*}$ \`{a} l'aide de $d,H_{-1}$ et $H_{1}.$
+%			
+%			\item  Traitez int\'{e}gralement le cas $n=5.$
+%		\end{enumerate}
+%	\end{enumerate}
+%	
+%	\item  Quelles sont les matrices de $M_{n}\left( \Bbb{R}\right) $ \'{e}gales 
+%	\`{a} leur comatrice ?
+\begin{Exo}
+	Quelles sont les matrices orthogonales triangulaires supérieures?
+\end{Exo}
+
+\begin{Exo}
+	Montrer que si $u$ est un endomorphisme symétrique d'un espace euclidien $E$ alors $\ker(u)$ et $\Ima(u)$ sont supplémentaires orthogonaux.
+\end{Exo}
+
+\begin{Exo}
+	Quelles sont les matrices symétriques réelles nilpotentes?
+\end{Exo}
+	
+\begin{Exo}
+	Soit $u,v$ deux vecteurs libres de $E$ euclidien et $f:x\in E\mapsto \ps{x}{u}v+\ps{v}{x}u$. Montrer que $\phi$ est diagonalisable et préciser ses éléments propres.
+\end{Exo}
+	
+  \begin{Exo}
+		Soit $A=\left( a_{i,j}\right)_{i,j} \in O_{n},$ montrer que $\left|
+	\sum_{i,j}a_{ij}\right| \leqslant n\leqslant \sum_{i,j}\lvert a_{i,j}\rvert\leqslant n\sqrt{n}$.
+	\end{Exo}
+	
+	  \begin{Exo}
+	  	Soit $E$ euclidien et $f\in O\left( E\right) ,$ montrez que: 
+	\[
+	f^{2}=-id_{E}\Leftrightarrow \left( \forall x\in E,f\left( x\right) \perp
+	x\right) \Leftrightarrow \left( \forall \left( x,y\right) \in
+	E^{2},\left\langle f\left( x\right) ,y\right\rangle =-\left\langle x,f\left(
+	y\right) \right\rangle \right) 
+	\]
+	  \end{Exo}
+	
+%	\item  Soit $M\in GL_{n}\left( \Bbb{R}\right) ,$ montrez qu'il existe $P$
+%	orthogonale et $T$ triangulaire sup\'{e}rieure, uniques, telles que $M=PT.$
+%	(interpr\'{e}tez le proc\'{e}d\'{e} d'orthonormalisation de Schmidt). D\'{e}%
+%	duisez-en que si $E$ est un ev euclidien de BON $\left(
+%	e_{1},...,e_{n}\right) $ et $u_{1},...,u_{n}$ des vecteurs de $E$ alors $%
+%	\left| \det_{\left( e_{i}\right) }\left( u_{j}\right) \right| \leq \left\|
+%	u_{1}\right\| ...\left\| u_{n}\right\| $ (in\'{e}galit\'{e} d'Hadamard) et pr%
+%	\'{e}cisez le cas d'\'{e}galit\'{e}.
+	  \begin{Exo}
+		Trouvez les sev de $\Bbb{R}^{3}$ stables par $A=\left( 
+	\begin{array}{lll}
+		1 & 1 & 0 \\ 
+		-3 & -2 & 0 \\ 
+		0 & 0 & 1
+	\end{array}
+	\right) .$
+	\end{Exo}
+
+\begin{Exo}
+	Diagonaliser avec matrice de passage orthogonale $A=\begin{pmatrix}
+		1 & -2 & 0 \\
+		-2 & 0 & 2 \\
+		0 & 2 & -1
+	\end{pmatrix}$ et $B=\begin{pmatrix}
+	1 & -1 & 1 \\
+	-1 & 1 & -1 \\
+	1 & -1 & 1
+\end{pmatrix}$.
+
+	
+\end{Exo}
+	
+	  \begin{Exo}
+	  	Diagonaliser en moins d'une minute la matrice: $\frac{1}{2}\left( 
+	\begin{array}{cccc}
+		1 & 1 & 1 & 1 \\ 
+		1 & 1 & -1 & -1 \\ 
+		1 & -1 & 1 & -1 \\ 
+		1 & -1 & -1 & 1
+	\end{array}
+	\right) .$
+	  \end{Exo}
+	
+	 \begin{Exo}
+	 	 D\'{e}crire les isom\'{e}tries de $\Bbb{R}^{3}$ dont les matrices
+	sont: $$\frac{1}{3}\left( 
+	\begin{array}{ccc}
+		2 & -2 & 1 \\ 
+		2 & 1 & -2 \\ 
+		1 & 2 & 2
+	\end{array}
+	\right) ,\frac{1}{3}\left( 
+	\begin{array}{ccc}
+		-1 & 2 & 2 \\ 
+		2 & -1 & 2 \\ 
+		2 & 2 & -1
+	\end{array}
+	\right) $$
+	
+	$$\frac{1}{7}\left( 
+	\begin{array}{ccc}
+		-2 & 6 & -3 \\ 
+		6 & 3 & 2 \\ 
+		-3 & 2 & 6
+	\end{array}
+	\right) ,\frac{1}{4}\left( 
+	\begin{array}{ccc}
+		3 & 1 & -\sqrt{6} \\ 
+		1 & 3 & -\sqrt{6} \\ 
+		-\sqrt{6} & \sqrt{6} & 2
+	\end{array}
+	\right) ,\frac{1}{4}\left( 
+	\begin{array}{ccc}
+		-3 & -1 & -\sqrt{6} \\ 
+		1 & 3 & -\sqrt{6} \\ 
+		-\sqrt{6} & \sqrt{6} & 2
+	\end{array}
+	\right) $$
+	 \end{Exo}
+	
+%	\item  Soit $a_{1},...,a_{n}\in \Bbb{R}$ et $A=\left( a_{i}a_{j}\right)
+%	_{1\leq i,j\leq n},$ montrez que $A$ est diagonalisable et determinez ses
+%	\'{e}l\'{e}ments propres.
+%	
+%	\item  Soit $u,v$ deux endomorphismes sym\'{e}triques qui commutent, montrez
+%	qu'il existe une BON commune de diagonalisation. Enoncez ce r\'{e}sultat
+%	matriciellement.
+	\newpage
+	 \begin{Exo}
+	 	Une matrice $M\in S_{n}$ est dite positive (resp. strictement
+	positive) ssi $^{t}MXM\geq 0$ (resp. $>0$) pour tout $X$ de $\Bbb{R}^{n}.$
+	On note alors $M\in S_{n}^{+}$ (resp. $S_{n}^{++}$).
+	
+	\begin{enumerate}
+		\item  Montrez que $A\in S_{n}^{+}\iff  Sp\left( A\right) \subset 
+		\R_{+}\Leftrightarrow \exists M\in M_n(\R) ;A=$ $%
+		^{t}MM.$ Proposez et d\'{e}montrez un r\'{e}sultat analogue pour $%
+		S_{n}^{++}. $
+		
+		\item  Montrez que $\left( 
+		\begin{array}{lllll}
+			2 & 1 & 0 & \cdots & 0 \\ 
+			1 & 2 & 1 & \ddots & \vdots \\ 
+			0 & 1 & \ddots & \ddots & 0 \\ 
+			\vdots & \ddots & \ddots & \ddots & 1 \\ 
+			0 & \cdots & 0 & 1 & 2
+		\end{array}
+		\right) \in S_{n}^{++}.$
+		
+		\item  Montrez que si $A\in S_{n}^{+}$ il existe une unique matrice $M\in
+		S_{n}^{+}$ telle que $A=M^{2}$. On note $M=\sqrt{A}$. Calculer $M$ si $A=\left( 
+		\begin{array}{ll}
+			1 & 2 \\ 
+			2 & 5
+		\end{array}
+		\right) $
+		\item Pensez vous que  $\begin{pmatrix}
+			0 & 1 \\
+			0 & 0
+		\end{pmatrix}$ admette une racine carrée? Et $\begin{pmatrix}
+		1& 0 \\
+		0 & -1
+	\end{pmatrix}$?
+	\end{enumerate}
+	 \end{Exo}
+ 
+%Pour l'unicité si $A=M^2=N^2$ on écrit $M=PD^tP,N=Q\Delta ^tQ$. $M^2=N^2$ équivaut à $RD^2=\Delta^2R$ et en calculant les termes $(i,j)$ de chaque produit on trouve $r_{i,j}\lambda_i^2=r_{i,j}\mu_j^2$, par suite soit $r_{i,j}$ est nul soit $\lambda _i=\mu_j$ d'où $RD=\Delta R$ ie $M=n$.
+	
+	  \begin{Exo}
+	  	Soit $A\in M_{n}(\R)$, montrer que $\det \left(I_n+^{t}AA\right) >0.$
+	  \end{Exo}
+	
+	\begin{Exo}
+		Soit $A\in S_n(\R)$ de valeurs propres $\lambda_1,...,\lambda_n$, montrer que $\sum_{1\leqslant i,j\leqslant n}a_{i,j}^2=\sum_{i=1}^n \lambda_i^2$. En déduire les valeurs propres de la matrice $A=\begin{pmatrix}
+			0 & 1 & \dots & 1 & 0 \\
+			1 & 0 & \dots & 0 & 1 \\
+			\vdots & \vdots &  & \vdots & \vdots \\
+			1 & 0 & \dots & 0 & 1 \\
+			0 & 1 & \dots & 1 & 0
+		\end{pmatrix}$
+		 
+	\end{Exo}
+	
+%	\item  Soit $u\in L\left( E\right) ,$ v\'{e}rifier que $u^{*}\circ u$ est
+%	d\'{e}fini positif. En d\'{e}duire que que $\left\| \left| u\right| \right\|
+%	^{2}=\max \left\{ \left| \lambda \right| ,\lambda \in Sp\left( u^{*}\circ
+%	u\right) \right\} .$ Que dire si $u$ est sym\'{e}trique ?
+%	
+%	\item  Soit $u\in L\left( E\right) ,$ montrer que $\left\| \left| u\right|
+%	\right\| :=\sup_{\left\| x\right\| =1}\left\| u\left( x\right) \right\|
+%	=\sup_{\left\| x\right\| =\left\| y\right\| =1}\left\langle u\left( x\right)
+%	,y\right\rangle .$
+	
+%	\item  On suppose $A\in M_{n}\left( \Bbb{R}\right) ,A^{3}=^{t}AA,$ $A$
+%	est-elle diagonalisable sur $\Bbb{R}$ , sur $\Bbb{C}$ ?
+%	
+	 \begin{Exo}
+	 	 On munit $E=\Bbb{R}_{n}\left[ X\right] $ du produit scalaire $%
+	\left\langle P,Q\right\rangle =\int_{-1}^{1}PQ$ et on note $u\in L\left(
+	E\right) :$%
+	\[
+	u:P\longmapsto 2XP^{\prime }+\left( X^{2}-1\right) P^{\prime \prime } 
+	\]
+	Montrer que $u$ est diagonalisable et que des vecteurs propres associ\'{e}s
+	\`{a} des valeurs propres distinctes sont orthogonaux. Pr\'{e}ciser ses
+	\'{e}l\'{e}ments de r\'{e}ductions dans le cas $n=3.$
+	 \end{Exo}
+	
+%	\item  \textbf{Endomorphisme associ\'{e} \`{a} une forme bilin\'{e}aire}
+%	
+%	\begin{enumerate}
+%		\item  Soit $\phi $ une forme bilin\'{e}aire sur $E$ euclidien. Montrer
+%		qu'il existe un unique endomorphisme (dit associ\'{e} \`{a} $\phi $) $u\in
+%		L\left( E\right) $ tel que: 
+%		\[
+%		\forall x,y\in E,\phi \left( x,y\right) =\left\langle u\left( x\right)
+%		,y\right\rangle 
+%		\]
+%		
+%		\item  En d\'{e}duire une nouvelle introduction de l'adjoint d'un
+%		endomorphisme.
+%		
+%		\item  Montrer que $\phi $ est sym\'{e}trique ssi $u$ l'est.
+%		
+%		\item  Montrer que si $\phi $ est une $fbs$ il existe une BON de $E$ qui
+%		soit $\phi -$orthogonale (ie $i\neq j$ implique $\phi \left(
+%		e_{i},e_{j}\right) =0$). Interpr\'{e}tation matricielle ?
+%	\end{enumerate}
+%	
+%	\item  Application: soit $\phi $ une fbs sur $E$ et $q\left( x\right) =\phi
+%	\left( x,x\right) $ la forme quadratique associ\'{e}e. Montrer que les
+%	bornes de $\left\{ \frac{q\left( x\right) }{\left\| x\right\| ^{2}},x\neq
+%	0\right\} =\left\{ q\left( x\right) ,\left\| x\right\| =1\right\} $ sont les
+%	valeurs propres extr\^{e}males de l'endomorphisme associ\'{e} \`{a} $\phi .$
+%	D\'{e}terminer $\sup \left\{ \frac{P\left( 0\right) P\left( 1\right) }{%
+%		\int_{0}^{1}P^{2}},P\in \Bbb{R}_{2}\left[ X\right] \right\} $ (prendre $\phi
+%	\left( P,Q\right) =\frac{1}{2}\left( P\left( 0\right) Q\left( 1\right)
+%	+P\left( 1\right) Q\left( 0\right) \right) $)
+%%\end{enumerate}
+
+\begin{Exo}
+
+Soit $u_1,...,u_p$ des endomorphismes symétriques de $E$ euclidien, vérifiant $\sum_{i=1}^{p}rg(u_i)=\dim E$ et $\forall x\in E,\ps{\sum_{i=1}^{p}u_i(x)}{x}=0$.
+\begin{enumerate}
+	\item
+	Montrer que $\sum_{i=1}^{p}u_i=id_E$ (observer que cet endomorphisme est symétrique...)
+	\item
+	Montrer que $E=\bigoplus_{i=1}^p\Ima (u_i)$.
+	\item
+	Montrer que $u_i$ est le projecteur orthogonal sur $\Ima (u_i)$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_n(\R)$ non nulle telle que $A^3+9A=0$.
+	\begin{enumerate}
+		\item
+		Etudier la diagonalisabilité de $A$ sur $\R$ puis sur $\C$.
+		\item
+		Montrer que si $n$ est impair alors $A$ n'est pas inversible.
+		\item
+		Montrer que $A$ ne peut pas être symétrique.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Déterminer les $A$ dans $S_n(\R)$ telles que $A^3+2A^2+6A+5I_n=0_n$.
+\end{Exo}
+
+\begin{Exo}
+		Soit $(E,\ps{}{})$ un espace euclidien de dimension $n>0$ et $a$ un vecteur de norme $1$. On pose pour $x$ dans $E$:
+	$$f(x)=x+\ps{a}{x}a$$
+	\begin{enumerate}
+		\item
+		Montrer que $f$ est un endomorphisme  symétrique de $E$.
+		\item
+		Déterminer $\ker(f-id_E)$et sa dimension? En déduire une première valeur propre de $f$ et sa multiplicité.
+		\item
+		Calculer $f(a)$, en déduire un second sev propre de $f$.
+		\item
+		Donner le polynôme caractéristique puis la trace de $f$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in S_n^+(\R)$, montrer qu'il existe $B\in M_n(\R)$ telle que $A=\ ^tBB$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $u\in S(E)$ de valeurs propres $\lambda_1\leqslant \lambda_2\leqslant \dots \leqslant \lambda_n$. Montrer que pour tout $x$ de $E$ on a:
+	$$\lambda_1 \norme{x}^2\leqslant \ps{x}{u(x)}\leqslant \lambda_n\norme{x}^2$$
+\end{Exo}
+
+\begin{Exo}
+	Ecrire la matrice dans la base canonique $(i,j,k)$ de:
+	\begin{enumerate}
+		\item
+		La symétrie orthogonale d'axe le plan d'équation $x-2y+z=0$.
+		\item
+		La rotation d'axe dirigé par $i-j+k$ et d'angle $\frac{\pi}{3}$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $A\in M_n(\R)$ et $M=\ ^tAA$.
+	\begin{enumerate}
+		\item
+		Montrer que $M$ est symétrique de spectre inclus dans $\R_+$.
+		\item
+		Montrer que $A$ et $M$ ont même noyau, puis qu'elles ont même rang.
+		\item
+		Montrer enfin que $\Ima(M)=\Ima(\ ^tA)=(\ker(A))^{\perp}$.
+	\end{enumerate}
+\end{Exo}
+
+\end{document}

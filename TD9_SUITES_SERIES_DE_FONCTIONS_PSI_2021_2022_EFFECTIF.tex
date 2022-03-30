@@ -1,0 +1,577 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.5cm,rmargin=1.5cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{pifont}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\setlength\headsep{2mm}
+
+\lhead{\textit{CSI2B-PSI TD9}}
+\chead{\textsc{Suites et séries de fonctions}}
+\rhead{\textit{2021-2022}} 
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\E}{\mathrm{e}}
+\newcommand{\diag}{\mathrm{diag}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+\DeclareMathOperator{\Ima }{Im}
+\DeclareMathOperator{\vect}{Vect}
+\DeclareMathOperator{\tr}{Trace}
+\newcommand{\conj}[1]{\overline{#1}}
+\everymath{\displaystyle}
+{%
+	\theoremstyle{break}
+	\theoremprework{%
+		\rule{0.5\linewidth}{0.3pt}}
+	\theorempostwork{\hfill%
+		\rule{0.5\linewidth}{0.3pt}}
+	\theoremheaderfont{\scshape}
+	\theoremseparator{ ---}
+	\newtheorem{Prop}{%
+		\textcolor{blue}{Proposition}}[section]
+}
+
+{%
+	\theoremstyle{break}
+	\theoremprework{%
+		\rule{0.6\linewidth}{0.5pt}}
+	\theorempostwork{\hfill%
+		\rule{0.6\linewidth}{0.5pt}}
+	\theoremheaderfont{\scshape}
+	\newtheorem{Theo}{%
+		\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+	\theoremheaderfont{\sffamily\bfseries}
+	\theorembodyfont{\sffamily}
+	\newtheorem{Def}{%
+		\textcolor{green}{Définition}}[section]
+}
+
+{%
+	\theorembodyfont{\small}
+	\theoremsymbol{$\square$}
+	\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+	\theorembodyfont{\small}
+	\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+	\theorembodyfont{\small}
+	\newtheorem{Exo}{Exercice}
+}
+
+{%
+	\theoremnumbering{Roman}
+	\theorembodyfont{\normalfont}
+	\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+%--------------------------------------------------------------------
+%-------------DOCUMENT-----------------------------------------------
+%--------------------------------------------------------------------
+
+
+\begin{document}
+
+\emph{\textbf{
+		Les vrais informaticiens confondent toujours Halloween et Noël car pour eux 
+}}
+
+\emph{\textbf{
+	Oct 31 = Dec 25.
+		(Andrew Rutherford)
+}}
+
+\begin{Exo}
+	Montrer que la limite simple d'une suite de fonctions croissantes sur $I$ est croissante sur $I$.
+\end{Exo}
+
+%\begin{Exo}
+%Soit $f_n:x\in\R\mapsto \frac{1}{(1+x^2)^n}$. CVS,CVU sur $\R$? CVU sur $[a,+\infty[$ avec $a>0$?
+%\end{Exo}
+
+\begin{Exo}
+	
+
+\end{Exo}
+\begin{Exo}
+Soit $f_n:x\in\R_+\mapsto \mathrm{e}^{-nx}\sin(nx)$. CVS,CVU sur $\R_+$? CVU sur $[a,+\infty[$ avec $a>0$?
+\end{Exo}
+
+\begin{Exo}
+	Soit $f_n:x\in\R\mapsto \frac{nx}{1+n^2x^2}$. Etudier la CVS de $(f_n)_n$ sur $\R$, déterminer $\lim_n f_n(1/n)$, étudier  la CVU de $(f_n)_n$ sur $\R$ puis montrer qu'il y a CVU sur tout segment de $\R_+^*$.
+
+\end{Exo}
+
+%\begin{Exo}
+%	Soit $f_n:x\in[0,1]\mapsto \begin{cases}
+%0\text{ si }x=0\\nx^n\ln x
+%	\end{cases}$. 	Etudier la CVS et la CVU de $(f_n)_n$ sur $[0,1]$ puis la CVU sur tout segment de $[0,1[$.
+%
+%\end{Exo}
+
+\begin{Exo}
+Pour $a\geqslant 0$ on note $f_n:x\in[0,1]\mapsto n^a x^n(1-x)$. Déterminer la limite simple de $(f_n)_n$ puis déterminer les valeurs de $a$ pour lesquelles il y a CVU.
+\end{Exo}
+
+\begin{Exo}
+	Soit $\left( f_{n}\right) ,\left( g_{n}\right) $ deux suites de fonctions continues sur $\left[ a,b\right] $ à valeurs r\'{e}elles, convergeant	uniformément vers $f$ et $g$ sur $\left[ a,b\right]$. Montrez que $f_{n}g_{n}$ converge uniformément vers $fg$ sur $\left[ a,b\right]$.Montrez que ce résultat est en défaut si on ne travaille pas sur un
+	segment.
+\end{Exo}
+
+%\begin{Exo}
+%	Soit $f_{n}:\left[ a,b\right] \rightarrow R$ des fonctions convexes
+%	convergeant simplement vers une fonction $f$. Montrer que la convergence est
+%	uniforme. (ind: {rendre une subdivision r\'{e}guli\`{e}re de $[a,b]$ et
+%		encadrer $f_{n}$ par les cordes associ\'{e}es.)}
+%\end{Exo}
+
+%\begin{Exo}
+%	Soit $f_{n}$ convergeant uniform\'{e}ment vers $f$, et $g$ une fonction uniformément continue. Démontrer que $g\circ f_{n}\to g\circ f$ uniformément.
+%\end{Exo}
+
+\begin{Exo}
+	Soit $f_{n}$ convergeant uniform\'{e}ment vers $f$, montrez que $\frac{f_{n}}{1+f_{n}^{2}}$ CVU vers $\frac{f}{1+f^{2}}$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $f_{n}$ convergeant uniform\'{e}ment sur $\R$ vers $f$, montrez que $\sin \left( f_{n}\right)$ CVU sur $\R$. (On pourra observer que $\sin$ est lipschitzienne sur $\R$.)
+\end{Exo}
+
+%\begin{Exo}
+%	Soit $\left( f_{n}\right) _{n}$ une suite de fonctions de $[a,b]$ dans $\R$, lipschtiziennes de m\^{e}me rapport $M>0$. On suppose que la	suite $\left( f_{n}\right) _{n}$ est simplement convergente sur $[a,b]$, vers une application $f$. Montrer que $f$ est encore lipschitzienne et que la convergence est
+%	uniforme. (Indication : commencer par traiter le cas où $f$ est
+%	l'application nulle.)
+%\end{Exo}
+
+%\begin{Exo}
+%	On pose $f_{n}(x)=x^{n}(1-x)$ et $g_{n}(x)=x^{n}\sin (\pi x)$. Montrer que	la suite $(f_{n})$ converge uniform\'{e}ment vers la fonction nulle sur $[0,1]$. En déduire qu'il en est de même pour la suite $(g_{n})$. (On utilisera la concavité de sin sur $[0,\pi ]$). 
+%\end{Exo}
+
+\begin{Exo}
+	Soit $f_{n}(x)=n\cos ^{n}x\sin x$. Chercher la limite simple, $f$, des
+	fonctions $f_{n},$ calculer $\lim_{n\infty}\int_{0}^{\pi/2}f_{n}(t)dt$.
+	Y-a-t'il CVU de $(f_n)n$ vers $f$ sur $[0,\pi/2]$ ? 
+\end{Exo}
+
+%\begin{Exo}
+%	D\'{e}terminer la limite simple des fonctions $f_{n}:x\mapsto \dfrac{x^{n}e^{-x}}{n!}$ sur $\R_{+}$ et montrer qu'il y a convergence uniforme.
+%	Calculer ensuite $\lim_{n\infty }\int_{0}^{+\infty }f_{n}$. Que conclure ?
+%\end{Exo}
+
+%\begin{Exo}
+%	On pose $f_{n}\left(x\right)=3^{n}\left(x^{2^{n}}-x^{2^{n+1}}\right)$
+%	pour $x\in[0,1]$. Etudiez la convergence simple de $\left(f_{n}\right) _{n}.$ Comparer $\int_{0}^{1}\lim_{n}f_{n}$ et $\lim_{n}\int_{0}^{1}f_{n}.$ Que conclure ?
+%\end{Exo}
+
+%\begin{Exo}
+%	On pose $f_{n}\left( x\right) =1+x^{2}\sin \left( \frac{1}{nx}\right) $ si $x\neq 0,$ $f_{n}\left( 0\right) =1$. Montrez qu'il y a $CVU$  sur tout segment de $\R$ mais pas $CVU$ sur $\R$
+%\end{Exo}
+
+\begin{Exo}
+	Soit $(P_n)_n$ une suite de fonctions polynômiales convergeant uniformément vers $f$ sur $\R$. Montrer qu'il existe $n_0\in\N$ tel que $\forall x\in\R,\forall n\geqslant n_0,\lvert P_n(x)-f(x)\rvert\leqslant 1$. En déduire que $f$ est une fonction polynôme.
+\end{Exo}
+
+\begin{Exo}
+	Soit $P_n:x\mapsto \left(1+\frac{x}{n}\right)^n$. Préciser la limite simple, y-a-t'il CVU sur $\R$?
+\end{Exo}
+
+\begin{Exo}[difficile]
+On pose pour $x\geqslant 0:f_n(x)=\left(1+\frac{x}{n}\right)^{-n}$. Montrer que $(f_n)_n$ CVU sur $\R_+$ vers une fonction à préciser.	
+\end{Exo}
+
+\begin{Exo}
+	Soit $(f_n)_n$ une suite de fonctions convergeant uniformément sur un intervalle $I$ vers une fonction $f$ continue sur $I$, et soit $(x_n)_n$ suite de $I$ de limite $x$ dans $I$. Montrer que $f_n(x_n)$ tend vers $f(x)$ quand $n$ tend vers l'infini.
+\end{Exo}
+
+
+%\begin{Exo}
+%	Soit $f_n:x\in\R_+\mapsto \frac{x}{x^2+n^2}$.
+%	\begin{enumerate}
+%		\item
+%		Montrer que $\sum_nf_n$ converge simplement sur $\R_+$.
+%		\item Etudier la CVN sur $\R_+$ puis sur $[a,+\infty[$ avec $a>0$.
+%		\item
+%		Etudier la CVU sur $\R_+$ puis sur $[a,+\infty[$ avec $a>0$.
+%		\item Montrer que $\sum_n (-1)^n f_n$ CVU sur $\R_+$.
+%	\end{enumerate}
+%\end{Exo}
+
+\begin{Exo}
+	CVS et somme de $\sum_n f_n$ avec $f_n:x\mapsto \frac{\sin(nx)}{n2^n}$.
+\end{Exo}
+
+\begin{Exo}
+	Soit $f_n:x\mapsto \frac{1}{n+n^2x}$.
+	\begin{enumerate}
+		\item
+		Déterminer l'ensemble de définition de $S=\sum_{n=1}^{+\infty}f_n$. Préciser sa monotonie.
+		\item Montrer que $S$ est continue sur $\R_+^*$.
+		\item Préciser sa limite en $+\infty$.
+		\item A l'aide d'une comparaison série intégrale donner un équivalent en $0$ et en $+\infty$ de $S(x)$.
+	\end{enumerate}
+\end{Exo}
+
+%\begin{Exo}
+%	Soit $f_n:x\in\R_+\mapsto nx^2\E^{-\sqrt{n}}$.
+%	\begin{enumerate}
+%		\item
+%		Montrer que $\sum_nf_n$ converge simplement sur $\R_+$.
+%		\item Etudier la CVN sur $\R_+$ puis sur $[a,+\infty[$ avec $a>0$.
+%		\item
+%		Etudier la CVU sur $\R_+$ puis sur $[a,+\infty[$ avec $a>0$.
+%		
+%	\end{enumerate}
+%\end{Exo}
+
+
+
+\begin{Exo}
+	Etudier CVS,CVU,CVN sur $\R$ de $\sum_n f_n$ avec:
+	\begin{enumerate}
+		\item
+		$f_n(x)=\frac{x}{\left(1+x^2\right)^n}$ avec $n\in\N$.
+		\item
+		$f_n(x)=(-1)^{n}\frac{x}{\left(1+x^2\right)^n}$ avec $n\in\N$.
+		\item
+		$f_n(x)=\frac{(-1)^n}{n+x^2}$ avec $n\in\N^*$.
+	\end{enumerate}
+	
+\end{Exo}
+
+
+\begin{Exo}
+	Etudier sur $\R_+$ la CVS,CVN,CVU de la série de fonctions $\sum_n f_n$ avec $f_n=\frac{1}{n+1}\mathbf{1}_{[n,n+1[}$.
+\end{Exo}
+
+\begin{Exo}
+	Notons pour $n>0$ et $x\in\R:f_n(x)=\frac{x}{x^2+n^2}$.
+	\begin{enumerate}
+		\item
+		Montrer que $\sum_n f_n$ CVU sur tout $[-a,a]$ avec $a>0$. En déduire que $S=\sum_{n=1}^{+\infty}f_n$ est continue sur $\R$.
+		\item
+		Calculer $\int_0^{+\infty}\frac{x}{x^2+t^2}\diff t$.
+		\item
+		A l'aide d'une comparaison série-intégrale trouver un équivalent de $S(x)$ quand $x$ tend vers $+\infty$.
+		\item
+		Y-a-t'il CVU sur $\R_+$?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	On considére la série de fonctions $\Sigma f_{n}$ avec $%
+	f_n(x) =\frac{x\E^{-nx}}{\ln n}$ sur $\R_+.$
+	
+	\begin{enumerate}
+		\item A l'aide d'une comparaison série intégrale, montrer que $\sum_n \frac{1}{n\ln n}$ diverge.
+		\item Montrer qu'il y a CVS sur $\R_{+},$ CVN sur $\left[
+		a,+\infty \right[ $ pour tout $a>0$. Y-a-t'il CVN sur $\R_+$?
+		\item Montrer que la somme $S$ de cette série est continue sur $\R_+$.
+		\item Montrer que $S$ est $C^{1}$ sur $\R_+^*$ mais non dérivable à droite en $0$.		
+		\item Montrer enfin que pour tout entier $k$ on a $\lim_{\infty
+		}x^{k}S\left( x\right) =0$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Vérifier que l'on peut définir une fonction $f$ sur $\R_+^*$ en posant:
+	\[\forall x\geqslant 0,f(x)=\sum_{n=0}^{+\infty}\frac{(-1)^n}{n!(x+n)}\]
+	\begin{enumerate}
+		\item
+		Montrer que $f$ est continue sur $\R_+^*$
+		\item
+		Montrer que pour tout $x>0:xf(x)-f(x+1)=\E^{-1}$, en déduire un équivalent de $f$ en $0^+$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Vérifier que l'on peut définir une fonction $f$ sur $\R_+^*$ en posant: $\forall x> 0,f(x)=\sum_{n=1}^{+\infty}\frac{\E^{-nx}}{n}$. 
+	Montrer que $f$ est $C^1$ sur $\R_+^*$, préciser $f'$ et en déduire $f$.
+\end{Exo}
+\newpage
+\begin{Exo}[fonction zéta et zéta alternée de Riemann]\ 
+	
+	\begin{enumerate}
+		\item
+		Montrer que l'on définit une fonction sur $]1,+\infty[$ en posant $\zeta(x)=\sum_{n=1}^{+\infty}\frac{1}{n^x}$.
+		\item
+		Montrer que $\zeta$ est de classe $C^k$ sur $]1,+\infty$ pour tout entier naturel $k$ et préciser $\zeta'$.
+		\item
+		A l'aide d'une comparaison série-intégrale démontrer que $\zeta(x)\underset{1}{\sim}\frac{1}{x-1}$. \label{equivalent}
+		\item Montrer que quand $x\to+\infty$ on a $\zeta(x)=1+2^{-x}+\underset{+\infty}{o}\left(2^{-x}\right)$.
+		\item
+		Montrer que pour tout $x>0$ la série $\sum_{n>0}\frac{(-1)^{n-1}}{n^x}$ converge. On note $\eta(x)$ sa somme.
+		\item
+		Montrer que $\eta$ est $C^{\infty}$ sur $\R_+^*$.
+		\item Montrer que pour tout $x>1:\eta(x)=\left(1-2^{1-x}\right)\zeta(x)$.
+		\item à l'aide de l'équivalent de $\zeta$ en $1$ trouvé en \ref{equivalent} retrouver la valeur de $\sum_{n=1}^{+\infty}\frac{(-1)^{n-1}}{n}$.
+		\item Déterminer la limite en $0$ de $\eta$.
+		\item A l'aide d'un DL en $1$ de $\eta$ donner la valeur de $\sum_{n=1}^{+\infty}\frac{(-1)^n\ln n}{n}$.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	on note pour $n\geqslant 0:f_n(x)=\begin{cases}(-1)^{n+1}x^{2n+2}\ln(x)\text{ si }x\in]0,1]\\
+		0\text{ si }x=0
+	\end{cases}$.
+	\begin{enumerate}
+		\item
+		CVS de $\sum_n f_n$ et fonction somme?
+		\item Montrer qu'il y a CVU sur $[0,1]$.
+		\item En déduire $\int_0^1\frac{\ln x}{1+x^2}\diff x=\sum_{n=0}^{+\infty}\frac{(-1)^{n+1}}{(2n+1)^2}$ et calculer sa valeur en admettant que $\sum_{n=1}^{+\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$.
+	\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+	D\'{e}montrer que $\int_{0}^{1}\frac{dt}{t^{t}}=\underset{n=1}{\overset%
+		{\infty }{\sum }}\frac{1}{n^{n}}$ et que $\int_{0}^{1}t^{t}dt=\underset{n=1}{%
+		\overset{\infty }{\sum }}\frac{(-1)^{n-1}}{n^{n}}.$ Valeur approch\'{e}e ?
+	%Calculer $\int_{0}^{1}\frac{\ln (1+t)}{t}dt$ (rappel: $\underset{n=1}{%\overset{\infty }{\sum }}\frac{1}{n^{2}}=\frac{\pi ^{2}}{6}$).
+	
+\end{Exo}
+\begin{Exo}
+	Dans tout le probl\'{e}me $\alpha $ d\'{e}signe un r\'{e}el. Soit $%
+	\left( u_{n}\right) _{n\geq 1}$ la suite de fonctions d\'{e}finies sur $%
+	\left[ 0,1\right] $ par: $u_{n}(0)=0$ et $u_{n}(x)=-n^{\alpha }x^{n}\ln
+ x $ pour $x>0.$
+	
+	\begin{enumerate}
+		\item Etudier suivant les valeurs de $\alpha $ la convergence et la
+		convergence uniforme de la suite $\left( u_{n}\right) $ sur $[0,1]$. Pour
+		quelles valeurs de $\alpha $ a-t'on $\lim_{n}\int_{0}^{1}u_{n}(x)dx=%
+		\int_{0}^{1}\lim_{n}u_{n}(x)dx$ ?
+		
+		\item On étudie maintenant la série de fonctions $\Sigma u_{n}.$
+		
+		\begin{enumerate}
+			\item Vérifier que pour tout $x\in \left[ 0,1\right] $ $
+			\Sigma u_{n}(x)$ converge. On note $S(x)$ la somme de cette s\'{e}rie.
+			
+			\item Pour quelle valeurs de $\alpha $ la s\'{e}rie $\Sigma u_{n}$ est-elle
+			normalement convergente sur $[0,1]$ ?
+			
+			\item Pour $\alpha =0$ calculer $S$ et \'{e}tudier sa continuit\'{e} sur $%
+			[0,1].$
+			
+			\item Pour quelles valeurs de $\alpha $ $S$ est-elle continue \`{a} gauche
+			en $1$?
+			
+			\item La fonction $S$ est-elle continue sur $[0,1[$?
+		\end{enumerate}
+	\end{enumerate}
+\end{Exo}
+%	
+%	\item Montrer que la s\'{e}rie $\Sigma \frac{x^{2}}{1+x^{2}}\left( \frac{1}{%
+	%		1+x^{2}}\right) ^{n}$ CVA sur $\left[ -1,1\right] mais$ pas uniform\'{e}%
+%	ment. Sa somme est-elle continue sur $\left[ -1,1\right] ?$
+%	
+%	\item On consid\'{e}re la s\'{e}rie de fonctions $\Sigma f_{n}$ avec :$%
+%	\forall n>0,\forall x\in \left[ 0,\pi \right] ,f_{n}\left( x\right) =\sin
+%	x\cos ^{n}x.$
+%	
+%	\begin{enumerate}
+	%		\item Montrez que la s\'{e}rie $\Sigma f_{n}$ est simplement convergente sur 
+	%		$\left[ 0,\pi \right] $. Justifier rapidement pourquoi la convergence n'est
+	%		pas uniforme sur $\left[ 0,\pi \right] $.
+	%		
+	%		\item Prouver qu'il y a convergence normale sur $\left[ a,\pi -a\right] $
+	%		pour tout $0<a<\frac{\pi }{2}.$
+	%		
+	%		\item Calculez le reste d'indice $N$ de $\Sigma f_{n}$ et retrouvez la non $%
+	%		CVU$ sur $\left[ 0,\pi \right] .$
+	%		
+	%		\item Montrez qu'il y a $CVU$ mais pas $CVN$ sur $\left[ a,\pi \right] $
+	%		avec $0<a<\pi .$
+	%	\end{enumerate}
+%	
+%	\item 
+%	
+%	\item On consid\'{e}re la s\'{e}rie de fonctions $\left[ f_{n}\right] $ avec 
+%	$f_{n}\left( x\right) =\frac{e^{-nx}}{\left( n+x\right) ^{2}}.$
+%	
+%	\begin{enumerate}
+	%		\item Etudiez la convergence de cette s\'{e}rie sur $\R_{+}.$
+	%		
+	%		\item Montrez que sa somme $S$ est continue, positive, d\'{e}croissante sur $%
+	%		\R_{+}.$
+	%		
+	%		\item Pr\'{e}cisez $S\left( 0\right) $ et $\lim_{+\infty }S.$
+	%		
+	%		\item Montrez que $S$ est $C^{1}$ sur $\R_{+}^{*},$ convexe sur $%
+	%		\R_{+}.$
+	%		
+	%		\item Montrez que $S$ n'est pas d\'{e}rivable en $0.$ On pourra montrer que $%
+	%		\lim_{0}S^{\prime }=-\infty .$
+	%	\end{enumerate}
+%	
+%	\item Soit $f(x)=\sum_{n=0}^{\infty }\dfrac{1}{x(x+1)\dots (x+n)}$.
+%	
+%	\begin{enumerate}
+	%		\item \'{E}tablir l'existence et la continuit\'{e} de $f$ sur $\R%
+	%		_{+}^{*}.$
+	%		
+	%		\item Calculer $f(x+1)$ en fonction de $f(x)$.Tracer la courbe de $f$.
+	%	\end{enumerate}
+
+%	\item Existence et calcul de $S\left( x\right) =\Sigma _{n=1}^{\infty }\frac{%
+	%		1}{n!}\int_{1}^{x}\left( \ln t\right) ^{n}dt$
+%	
+%	\item On note $P_{n}\left( X\right) =1+X+\frac{X^{2}}{2!}+...+\frac{X^{n}}{n!%
+	%	}$ et $r_{n}=\min \left\{ \left\vert z\right\vert ;z\in \mathbb{C}%
+%	,P_{n}\left( z\right) =0\right\} .$ Montrez que $r_{n}\rightarrow +\infty .$
+%	(on pourra proc\'{e}der par l'absurde).
+%	
+%\begin{Exo}
+%	Etant donn\'{e} $\alpha \in ]0,2\pi \lbrack $ on pose pour $x\in \left[
+%	0,1\right] $ et $n\in \mathbb{N}^{\ast }$ $u_{n}(x)=\frac{x^{n}\sin n\alpha 
+%	}{n}.$
+%	
+%	\begin{enumerate}
+%		\item Montrer que $\sum_n u_n$ converge uniform\'{e}ment sur $%
+%		[0,1].$ On pose pour $x\in \left[ 0,1\right] ,$ $F(x)=\underset{n=1}{\overset%
+%			{\infty }{\sum }}\frac{x^{n}\sin n\alpha }{n}.$
+%		
+%		\item Montrer que $F$ est d\'{e}rivable sur $[0,1[,$ d\'{e}terminer $%
+%		F^{\prime }(x)$ et v\'{e}rifier que pour $x\in \left[ 0,1\right]$:
+%		\[F(x)=\arctan \frac{x\sin \alpha }{1-x\cos \alpha }\]
+%		\item En d\'{e}duire $F(1)$.
+%		
+%		\item Graphe de la fonction $S$ d\'{e}finie sur $\R$ par $S(\theta )=\underset{n=1}{\overset{\infty }{\sum }}\frac{\sin n\theta }{n}$.
+%	\end{enumerate}
+%\end{Exo}
+%	
+%	\item On pose $f\left( x\right) =\sum_{n=1}^{\infty }\arctan \frac{x}{%
+	%		x^{2}+n^{2}}.$ Etudier la CV et la CVU. Pr\'{e}cisez la limite de $f$ en $%
+%	+\infty .$
+%	
+%	\item Justifier: $\int_{0}^{1}\ln x\ln \left( 1-x\right)
+%	dx=\sum_{n=1}^{\infty }\frac{1}{n\left( n+1\right) ^{2}}.$ Calculer une
+%	valeur approch\'{e}e.
+%	
+%	\item Pour $a>0$ montrez que $\int_{0}^{1}\frac{dx}{1+x^{a}}%
+%	=\sum_{n=0}^{\infty }\frac{\left( -1\right) ^{n}}{1+na}.$ En d\'{e}duire $%
+%	\sum_{n=0}^{\infty }\frac{\left( -1\right) ^{n}}{2n+1}$ et $%
+%	\sum_{n=0}^{\infty }\frac{\left( -1\right) ^{n}}{3n+1}.$
+%	
+%	\item On pose pour $n\geq 1$ et $x\geq 0,$ $u_{n}\left( x\right) =\frac{nx}{%
+	%		\left( n^{2}+x^{2}\right) ^{2}}.$ Etudier les diverses convergences et
+%	calculez $\lim_{+\infty }\sum_{n=1}^{\infty }u_{n}\left( x\right) .$
+%	
+%	\item On pose pour $x\in \R-\mathbb{Z}_{-}:$ $S(x)=\underset{n=0}{%
+	%		\overset{\infty }{\sum }}\frac{(-1)^{n}}{n!(x+n)}.$
+%	
+%	\begin{enumerate}
+	%		\item Montrer que $S$ est continue.
+	%		
+	%		\item Calculer $xS(x)-S(x+1).$
+	%		
+	%		\item Donner le d\'{e}veloppement asymptotique en $\underset{+\infty }{o}%
+	%		\left( \frac{1}{x^{2}}\right) .$
+	%		
+	%		\item Montrer que pour $x>0,S(x)=\int_{0}^{1}t^{x-1}e^{-t}dt.$
+	%	\end{enumerate}
+%	
+%	\item On pose pour $x$ r\'{e}el $S(x)=\underset{n=1}{\overset{\infty }{\sum }%
+	%	}\frac{1}{n}\arctan \frac{x}{n}.$
+%	
+%	\begin{enumerate}
+	%		\item Montrer que $S$ est d\'{e}finie et d\'{e}rivable sur $\R.$
+	%		
+	%		\item V\'{e}rifier que $S^{\prime }$ est d\'{e}croissante sur $\R%
+	%		_{+}.$
+	%		
+	%		\item D\'{e}terminer $\lim_{+\infty }S(x)$ et $\lim_{+\infty }S^{\prime }(x)$
+	%		.
+	%		
+	%		\item Tracer le graphe de $S.$
+	%	\end{enumerate}
+%\end{enumerate}
+\newpage
+\begin{Exo}
+	Pour tout $n\in \mathbb{N}^*$, on pose\ $f_{n}\left( x\right) =\dfrac{e^{-x}}{%
+		1+n^{2}x^{2}}\ \ $et $u_{n}=\displaystyle\int_{0}^{1}f_{n}\left( x\right) \mathrm{d}x$.
+	
+	\begin{enumerate}
+		\item \'Etudier la convergence simple de la suite de fonctions $\left( f_{n}\right) $  sur $[0,1]$.
+		\item
+		Soit $a\in\left] 0,1 \right[$.  La suite de  fonctions $\left( f_{n}\right) $ converge-t-elle uniformément sur $\left[a,1 \right]$? 
+		\item
+		La suite de  fonctions $\left( f_{n}\right) $ converge-t-elle uniformément   sur $[0,1]$?
+		\item Trouver la limite de la suite $\left( u_{n}\right) _{n\in \mathbb{N}^*}.$
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Pour tout entier naturel $n$, on d\'efinit sur l'intervalle $J = [1,+\infty[$, la fonction $f_n$ d\'efinie par:
+	\[
+	f_n(x) = \frac{(-1)^n}{\sqrt{1+nx}}.
+	\]
+	\begin{enumerate}
+		\item D\'emontrer que la s\'erie de fonctions $\displaystyle\sum_{n\geqslant 0} f_n$ converge simplement sur $J$.
+		
+		On note alors pour tout $x$ de $J$, $\varphi(x)$ sa somme.
+		\item Montrer que cette s\'erie de fonctions ne converge pas normalement sur $J$.
+		\item \'Etudier alors sa convergence uniforme sur $J$.
+		\item D\'eterminer $\ell = \displaystyle\lim_{x\to +\infty} \sum_{n=0}^{+\infty} f_n(x)$.
+		\item Pour $n \in \N^*$, on note $u_n = \dfrac{(-1)^n}{\sqrt{n}}$.
+		\begin{enumerate}
+			\item[5.1.] Justifier la convergence de la s\'erie de terme g\'en\'eral $u_n$. On note $a = \displaystyle\sum_{n=1}^{+\infty} u_n$ sa somme.
+			\item[5.2.] Montrer que l'on a au voisinage de l'infini: $\varphi(x) = \ell + \dfrac{a}{\sqrt{x}}+O\left(\dfrac{1}{x^{3/2}}\right)$.
+		\end{enumerate}
+	\end{enumerate}
+	
+\end{Exo}
+
+\end{document}

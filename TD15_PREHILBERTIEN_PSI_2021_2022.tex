@@ -1,0 +1,544 @@
+  
+\documentclass[12pt,a4paper]{article}
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\frenchbsetup{StandardLists=true}
+\usepackage{enumitem}
+\usepackage{systeme}
+\usepackage{amsmath,amssymb}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fullpage}
+%\usepackage{eulervm}
+\usepackage[charter]{mathdesign}
+
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage[makestderr]{pythontex}
+\restartpythontexsession{\thesection}
+\usepackage{geometry}
+\geometry{tmargin=1.5cm,bmargin=1.5cm,lmargin=1.2cm,rmargin=1.2cm,headheight=12cm}
+\usepackage{array}
+\usepackage[svgnames,table]{xcolor}
+\usepackage[tikz]{ bclogo}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{pifont}
+\usepackage{multicol}
+\usepackage{diagbox} %oblique dans les tableaux
+%\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead{\textit{CSI2B TD15}}
+\chead{\textsc{Espaces préhilbertiens}}
+\rhead{\textit{2021-2022}} 
+\setlength{\headsep}{1mm}
+\DeclareMathOperator{\lcro}{\textnormal{\textlbrackdbl}}
+\DeclareMathOperator{\rcro}{\textnormal{\textrbrackdbl}}
+
+\newcommand{\norme}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ps}[2]{\left\langle#1,#2\right\rangle}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\un}{(u_n)_n}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\K}{\mathbb{K} }
+\newcommand{\I}{\mathbf{i}}
+\renewcommand{\Re}{\mathcal{R}e}
+\renewcommand{\Im}{\mathcal{I}m}
+\DeclareMathOperator{\Ima }{Im}
+\newcommand{\diff}{\mathop{}\mathopen{}\mathrm{d}}%element differentiel
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\E}{\mathrm{e}}
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.5\linewidth}{0.3pt}}
+\theorempostwork{\hfill%
+\rule{0.5\linewidth}{0.3pt}}
+\theoremheaderfont{\scshape}
+\theoremseparator{ ---}
+\newtheorem{Prop}{%
+\textcolor{blue}{Proposition}}
+}
+
+{%
+\theoremstyle{break}
+\theoremprework{%
+\rule{0.6\linewidth}{0.5pt}}
+\theorempostwork{\hfill%
+\rule{0.6\linewidth}{0.5pt}}
+\theoremheaderfont{\scshape}
+\newtheorem{Theo}{%
+\textcolor{red}{Théorème}}[section]
+}
+
+
+{%
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\sffamily}
+\newtheorem{Def}{%
+\textcolor{green}{Définition}}[section]
+}
+
+{%
+\theorembodyfont{\small}
+\theoremsymbol{$\square$}
+\newtheorem*{Dem}{Démonstration}
+}
+
+{%
+\theorembodyfont{\small}
+\newtheorem*{Exemple}{Exemple}
+}
+
+
+{%
+\theorembodyfont{\small}
+\newtheorem{Exo}{Exercice}
+}
+
+{%
+\theoremnumbering{Roman}
+\theorembodyfont{\normalfont}
+\newtheorem{Rem}{Remarque}
+}
+
+
+
+
+\begin{document}
+
+
+\emph{\textbf{
+“Ce n'est pas que je suis si intelligent, c'est que je reste plus longtemps avec les problèmes.” 
+Albert Einstein
+}}
+
+%\begin{Exo}
+%Donner une CNS sur les réels $a,b,c,d$ pour que:
+%$$\phi((x,y),(x',y'))=axx'+bxy'+cx'y+dyy'$$définisse un produit scalaire sur $\R^2$.	
+%\end{Exo}
+
+\begin{Exo}
+	Soit $E=\{P\in\R_n[X],P(0)=P(1)=0\}$
+	\begin{enumerate}
+		\item
+		Montrer que $E$ est un $\R$-ev, en donner une base et la dimension.
+		\item
+		Montrer ensuite que $(P,Q)\mapsto -\int_0^1(P''Q+PQ'')$ définit un produit scalaire sur $E$.
+	\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}
+Montrer que
+$\langle f,g\rangle=f(1)g(1)+\int_0^1 f'(t)g'(t)dt$ définit un produit scalaire sur $E=\mathcal C^1([0,1],\mathbb R)$. En déduire pour toute $f$ de $\mathcal C^1([0,1],\mathbb R)$ on a:
+$$\left(f(1)+\int_0^1 f'(t)dt\right)^2\leqslant 2\left(f(1)^2+\int_0^1f'(t)^2dt\right)$$
+\end{Exo}
+
+%\begin{Exo}
+%	Soient $E$ espace vectoriel euclidien, $ a \in E$ et $\alpha,\beta,\gamma \in \R$.
+%	Résoudre l'équation $$\alpha \ps{x}{x}+ \beta \ps{x}{a} + \gamma = 0$$
+%\end{Exo}
+
+\begin{Exo}
+Dans $\R^3$ une famille $(a,b,c,d)$ de $4$ vecteurs non nuls peut-elle être orthogonale? 
+\end{Exo}
+
+\begin{Exo}
+	Trouver trois vecteurs $u,v,w$  de $\R^2$ tels que $\norme{u+v+w}^2=\norme{u}^2+\norme{v}^2+\norme{w}^2$ sans que $(u,v,w)$ soit une famille orthogonale.
+\end{Exo}
+
+\begin{Exo}
+Déterminer dans $\R_2[X]$ muni de $\ps{P}{Q}=P(-1)Q(-1)+P(0)Q(0)+P(1)Q(1)$ l'orthogonal de $\R_1[X]$.
+\end{Exo}
+
+\begin{Exo}[CCP]\ 
+	\begin{enumerate}
+	\item Montrer que l'application$ \quad (A,B) \mapsto \operatorname{Tr} ( ^t\!A B) \quad $ définit un produit scalaire sur $\mathcal{M}_2(\mathbb R) $.
+	\item Montrer que $E=\left\{\begin{pmatrix} a & b \\ -b & a \end{pmatrix},(a,b)\in \mathbb{R}^2\right\}$ est un sous espace vectoriel de $\mathcal{M}_2(\mathbb{R}) $. 
+	\item Trouver une base orthonormale de $E^\perp$.
+	\item Calculer la distance de $A=  \begin{pmatrix}1 & 1\\1&1\end{pmatrix} \ \ $ à $E^\perp$.
+		\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+On note pour $n\in \N:P_n(X)=((X^2-1)^n)^{(n)}$.
+\begin{enumerate}
+\item
+Calculer $P_n$ pour $0\leqslant n  \leqslant 3$.
+\item
+Montrer que $P_n$ est un polynôme dont on précisera le degré et le coefficient dominant.
+\item
+Justifier que $P_n$ admet $n$ racines distinctes dans $]-1,1[$.
+\item
+Préciser la parité de $P_n$, sa valeur en $1$ puis en $-1$.
+\item
+On munit $\R_n[X]$ du produit scalaire: $\ps{P}{Q}=\int_{-1}^1PQ$, montrer que $(P_0,P_1,...,P_n)$ en est une base orthogonale et préciser la norme de $P_n$.
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+Soit $E$ un espace euclidien et $a$ un vecteur unitaire de $E$. On note pour tout réel $\alpha$:
+$$\phi_{\alpha}:x\in E\mapsto x+\alpha \ps{a}{x}a$$
+\begin{enumerate}
+\item
+Montrer que $\phi_{\alpha}$ est un endomorphisme.
+\item
+Montrer que $\mathcal{A}=\{\phi_{\alpha},\alpha\in \R\}$ est stable par composition, commutatif et contient $id_E$.
+\item Déterminer $\ker \phi_{\alpha}$.
+\item Montrer que si $\alpha\neq -1$ alors $\phi_{\alpha}$ est inversible \textbf{dans} $\mathcal{A}$.
+\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+Soit $x,y$ dans $E$ préhilbertien. Montrer qu'ils sont même norme ssi $x-y \perp x+y$.
+\end{Exo}
+
+
+\begin{Exo}
+Soient $F$ et $G$ deux sous-espaces vectoriels d'un espace préhilbertien $E$. Montrer que :
+$$F\subset (F^{\perp})^{\perp},(F+G)^\perp=F^\perp\cap G^\perp\text{ et }F^\perp+G^\perp\subset (F\cap G)^\perp.$$
+Que se passe-t-il en dimension finie?
+\end{Exo}
+
+\begin{Exo}
+	Si $F$ (donc $E$...) est de dimension infinie on n'a plus nécessairement $E=F\oplus F^{\perp}$. Considérer par exemple l'hyperplan des fonctions nulles en $0$ dans $\mathcal{C}([0,1],\R)$ muni de son produit scalaire usuel.
+\end{Exo}
+
+\begin{Exo}
+		Soit $x,y$ non nuls dans $(E,\ps{}{})$ préhilbertien, redémontrer l'inégalité de Cauchy-Schwarz et le cas d'égalité en développant $\norme{\frac{x}{\norme{x}}-\frac{y}{\norme{y}}}^2$ et $\norme{\frac{x}{\norme{x}}+\frac{y}{\norme{y}}}^2$.
+\end{Exo}
+
+\begin{Exo}
+A l'aide de l'inégalité de Cauchy-Schwarz dans $\R^n$ usuel, montrer que:
+$$\forall n\geqslant 1,\sum_{k=1}^n k\sqrt{k}\leqslant \frac{n(n+1)\sqrt{2n+1}}{2\sqrt{3}}$$
+\end{Exo}
+
+\begin{Exo}
+On suppose $x_1,...,x_n$ dans $\R_+^*$ vérifiant $x_1+...+x_n=1$. Montrer que $\sum_{i=1}^n\frac{1}{x_i}\geq n^2$ et préciser le(s) cas d'égalité.
+\end{Exo}
+
+
+\begin{Exo}
+Rappeler l'énoncé de l'inégalité de Cauchy-Schwarz. Montrer que pour toute fonction continue d'un segment $[a,b]$ dans
+$\R$, on a 
+$$
+  \left(\int_{a}^{b}{f(t)dt}\right)^{2}\leq
+  (b-a)\int_{a}^{b}{\Big(f(t)\Big)^{2}dt}
+$$
+
+Pour quelle(s) fonction(s) a-t-on l'égalité ?
+\end{Exo}
+
+%\begin{Exo}
+%Soit $f$ de classe $\mathcal{C}^1$ sur le segment $[a,b]$ avec $f(a)=0$.
+%\begin{enumerate}
+%\item
+%Soit $x\in [a,b]$, en exprimant $f(x)$ à l'aide d'une intégrale de $f'$, montrer que:
+%$$f(x)^2\leqslant (x-a)\int_a^x f'(t)^2dt$$
+%\item
+%En déduire que $\int_a^b f^2\leqslant \frac{(b-a)^2}{2}\int_a^b f'^2$.
+%\end{enumerate}
+%\end{Exo}
+
+\begin{Exo}
+	Soit $(E,\ps{}{})$ euclidien de BON $(e_1,...,e_n)$ et $f\in L(E)$. Montrer que la trace de $f$ est égale à $\sum_{i=1}^n\ps{f(e_i)}{e_i}$.
+\end{Exo}
+
+\begin{Exo}
+	
+	Soit $(E,\ps{}{})$ euclidien et $u\in L(E)$ tel que pour tout $x$ de $E$ $u(x)$ soit orthogonal à $x$.
+\begin{enumerate}
+	\item
+	Montrer que pour tout $x,y$ de $E$ on a $\ps{u(x)}{y}=-\ps{x}{u(y)}$
+	\item En déduire que $\ker u$ et $\mathrm{Im} u$ sont orthogonaux puis supplémentaires.
+\end{enumerate}
+
+\end{Exo}
+
+\begin{Exo}
+Soit $ E  $ un espace préhilbertien, et $ \left( e_{1},...,e_{n}\right)  $ des
+vecteurs unitaires v\'{e}rifiant :$\forall x\in E,\left\| x\right\| ^{2}=\sum_{i=1}^{n}\left\langle
+x,e_{i}\right\rangle ^{2}$.
+Montrer que $ \left( e_{1},...,e_{n}\right) $  est une base orthonormale de $E$.
+\end{Exo}
+
+\begin{Exo}
+Soit $E$ euclidien de BON $(e_1,...,e_n)$ et $f:E\to E$ vérifiant $f(0)=0$ et $\forall (x,y)\in E^2,\norme{f(x)-f(y)}=\norme{x-y}$.
+\begin{enumerate}
+\item Montrer que $f$ conserve la norme puis le produit scalaire. En déduire que $(f(e_1),...,f(e_n)$ est une BON.
+\item Montrer que $\forall x\in E,f(x)=\sum_{i=1}^n\ps{x}{e_i}f(e_i)$, en déduire que $f$ est linéaire. Que se passe t-il si on ne suppose plus $f(0)=0$?
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+Soit $H$ un hyperplan de $E$ euclidien et $u\in H^{\perp}$. On note $p$ la projection orthogonale sur $H$ et $s$ la symétrie orthogonale par rapport à $H$. Vérifier que:
+$$\forall x \in E:p(x)=x-\frac{\ps{x}{u}}{||u||^2}u\text{ et } s(x)=x-2\frac{\ps{x}{u}}{||u||^2}u$$
+\end{Exo}
+
+\begin{Exo}
+Soit $(E,\ps{}{})$ préhilbertien, montrer qu'un projecteur $p$ est un projecteur orthogonal ssi $$\forall x\in E,\norme{p(x)}\leq \norme{x}$$
+\end{Exo}
+
+\begin{Exo}[un projecteur est symétrique ssi il est orthogonal]
+Soit $(E,\ps{}{})$ préhilbertien, montrer qu'un projecteur $p$ est un projecteur orthogonal ssi $$\forall (x,y)\in E^2,\ps{p(x)}{y}=\ps{x}{p(y)}$$
+\end{Exo}
+
+
+%\begin{Exo}
+%On munit $E = \R_n[X]$ du produit scalaire :
+%Pour $P = \sum_i a_iX^i$ et $Q = \sum_i b_iX^i$,
+%$(P\mid Q) = \sum_i a_ib_i$.
+%
+%Soit $H = \{ P \in E \text{ tq } P(1) = 0 \}$.
+%
+%\begin{enumerate}
+%  \item Trouver une base orthonormale de $H$.
+%  \item Calculer $d(X,H)$.
+%    
+%\end{enumerate}
+%
+%\end{Exo}
+
+
+\begin{Exo}
+Dans $\mathbb R^3$ muni du produit scalaire canonique, orthonormaliser en suivant le procédé de Schmidt la base suivante :
+$$u=(1,0,1),\ v=(1,1,1),\ w=(-1,-1,0)$$
+\end{Exo}
+
+\begin{Exo}
+Construire une BON de $\R_3[X]$ muni de $\ps{P}{Q}=\int_0^1P(t)Q(t)dt$.
+\end{Exo}
+
+\begin{Exo}
+Soit $E$ un espace euclidien de dimension 4, ${\cal B} = (\vec e_1, \dots, \vec e_4)$
+une base orthonormée de $E$, et $F$ le sous-espace vectoriel d'équations dans $\cal B$ :
+$$\begin{cases} x+y+z+t = 0\cr x+2y+3z+4t =0 \cr\end{cases}$$
+
+\begin{enumerate}
+  \item Trouver une base orthonormée de $F$.
+  \item Donner la matrice dans $\cal B$ de la projection orthogonale sur $F$.
+  \item Calculer $d(\vec e_1, F)$.
+\end{enumerate}
+\end{Exo}
+
+
+
+\begin{Exo}
+On munit $\R^n$ du produit scalaire usuel.
+Soit $H = \left \{ (x_1,\dots,x_n) \in \R^n \text{ tq } a_1x_1 + \dots + a_nx_n = 0\right \}$
+où $a_1,\dots,a_n$ sont des réels donnés non tous nuls.
+Chercher la matrice dans la base canonique de la projection orthogonale
+sur $H$.
+
+\end{Exo}
+
+
+
+
+
+
+
+\begin{Exo}
+Soit $E = \R_n[X]$ et $\ps{P}{Q} =  \int_{0}^1 P(t)Q(t)\,d t$.
+
+\begin{enumerate}
+  \item Montrer que $\left(E,\ps{}{} \right)$, est un espace euclidien.
+  \item Soit $K = \R_{n-1}[X]^\bot$ et $P \in K\setminus\{0\}$.
+    Quel est le degré de~$P$~?
+  \item Soit $\Phi\ :\ x  \mapsto  \int_{t=0}^1 P(t)t^x\,d t$.
+    Montrer que $\Phi$ est une fonction rationnelle.
+    
+  \item Trouver $\Phi$ à une constante multiplicative près.
+    
+  \item En déduire les coefficients de~$P$ puis  une base orthogonale de~$E$.
+\end{enumerate}
+
+\end{Exo}
+
+\begin{Exo}[Représentation de Riesz]
+\ 
+\begin{enumerate}
+\item
+Montrer que pour toute forme linéaire $\phi$ sur $E$ euclidien il existe un unique vecteur  $a$ de $E$ tel que $\phi:x\in E\mapsto \ps{x}{a}$ Préciser son noyau.
+\item
+Montrer qu'il existe un unique polynôme $A$ dans $R_n[X]$ tel que pour tout $P$ de $R_n[X]$ $P(0)=\int_0^1A(t)M(t)\diff t$. Montrer aussi que $A$ est de degré $n$. Que se passe-t-il si on remplace $\R_n[X]$ par $R[X]$?
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[Polynômes de Laguerre]\ 
+	\begin{enumerate}
+		\item
+		Montrer que $\ps{P}{Q}=\int_0^{+\infty}\E^{-t}P(t)Q(t)\diff t$ définit un produit scalaire sur $\R[X]$.
+		\item
+		Calculer $\ps{X^p}{X^q}$ avec $p,q$ dans $\N$.
+		\item
+		Construire une BON du sev $\R_2[X]$, en déduire $\inf_{\left( a,b\right)\in\R^3}\int_{0}^{+\infty}\E^{-t}(t^3-at-b)\diff t$.
+	\end{enumerate}
+	
+\end{Exo}
+
+
+
+\begin{Exo}[Polynômes de Tchebychev]
+\
+
+\begin{enumerate}
+\item Montrer que $\left\langle f,g\right\rangle =\int_{0}^{\pi }f\left(
+\cos \theta \right) g\left( \cos \theta \right) d\theta $ d\'{e}finit un ps
+sur $E=C\left( \left[ -1,1\right] ,\R\right) .$
+
+\item Montrer qu'il existe une unique suite de polynômes $\left(
+T_{n}\right) _{n\in \N}$ v\'{e}rifiant:
+$
+\forall \theta \in \R,\cos \left( n\theta \right) =T_{n}\left( \cos
+\theta \right) 
+$.
+On pourra commencer par déterminer les $3$ premiers termes puis
+exploiter les formules trigonométriques développant $\cos \left(
+\left( n+1\right) \theta \right) $ et $\cos \left( \left( n-1\right) \theta
+\right) ...$ Préciser le degré et le coefficient dominant de $T_{n},$
+dit $n^{e}$ polynôme de Tchebychev.
+
+\item Montrer que $\left( T_{n}\right) _{n\in \N}$ est une famille
+orthogonale et calculer $\left\Vert T_{n}\right\Vert .$
+
+\item En d\'{e}duire $\inf_{\left( a_{0},a_{1},...,a_{n-1}\right)
+\in \R^n}\int_{0}^{\pi }\left( \cos ^{n}\theta +a_{n-1}\cos ^{n-1}\theta
++...+a_{1}\cos \theta +a_{0}\right) ^{2}d\theta $ ()On pourra exprimer: $\cos
+^{n}\theta +a_{n-1}\cos ^{n-1}\theta +...+a_{1}\cos \theta +a_{0}$ avec les
+polynômes de Tchebychev et utiliser le théorème de Pythagore.)
+\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[CCP PSI]
+	Soit $a_0,\dots,a_n$ des réels deux à deux distincts. On pose :
+	$\forall (P,Q)\in\mathbb R_n[X]^2,\ (P|Q)=\displaystyle\sum_{k=0}^nP(a_k)Q(a_k).$
+	\begin{enumerate}
+		\item
+		Montrer qu'il s'agit d'un produit scalaire.
+		\item
+		On pose : $F=\left\{P\in\mathbb R_n[X]\ /\ \displaystyle\sum_{k=0}^nP(a_k)=0\right\}$.
+			Justifier rapidement que $F$ est un sous-espace vectoriel de $\mathbb R_n[X]$, calculer sa dimension ainsi que son orthogonal puis calculer la distance de $X^n$ à $F$.
+	\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}[CCP PSI]
+	L'espace euclidien $E=\mathscr M_n(\mathbb R)$ est muni du produit scalaire canonique défini par $\forall(A,B)\in E\times E,\quad (A|B)=\mathrm{tr}\big( ^tAB\big).$
+	$\mathscr S_n(\mathbb R)$ est l'ensemble des matrices symétriques réelles et $\mathscr A_n(\mathbb R)$ celui des matrices antisymétriques réelles de $E$.
+	\begin{enumerate}
+		\item
+		Montrer que $\mathscr S_n(\mathbb R)$ et $\mathscr A_n(\mathbb R)$ sont des sous-espaces supplémentaires orthogonaux dans $E$.
+		\item
+		Exprimer en fonction de $M\in E$ la distance de $M$ à $\mathscr S_n(\mathbb R)$. 
+		\item
+		Faire le calcul pour $M=\begin{pmatrix}1&1&\ldots&1\\2&2&\ldots&2\\\vdots&\vdots&&\vdots\\n&n&\ldots&n\end{pmatrix}$. 
+	\end{enumerate}
+\end{Exo}
+
+
+
+
+%
+%\begin{Exo}
+%Soit $\mathcal{S} _{n}$ le groupe des permutations de $\left\{ 1,2,...,n\right\} $
+%et $f:\sigma \in \mathcal{S}_{n}\mapsto \sum_{k=1}^{n}k\sigma \left( k\right) $
+%
+%\begin{enumerate}
+%\item Calculer $f\left( id_{\mathcal{S} _{n}}\right) $ et $f\left( \sigma
+%_{0}\right) $ ou $\sigma _{0}:k\mapsto n+1-k.$
+%
+%\item Justifier que $f$ a un minimum et un maximum sur $\mathcal{S}_{n}$, déterminer \`{a} l'aide de Cauchy-Schwarz $\max_{\mathcal{S}_{n}}f.$
+%
+%\item Soit $\sigma \in \mathcal{S}_{n},$ montrer que $f\left( \sigma _{0}\circ
+%\sigma \right) =\frac{n\left( n+1\right) ^{2}}{2}-f\left( \sigma \right) $.
+%
+%\item En d\'{e}duire que $f\left( \sigma \right) \geq \frac{n\left(
+%n+1\right) ^{2}}{2}-\max_{\mathcal{S}_{n}}f.$ Calculer cette quantité, la
+%comparer à $f\left( \sigma _{0}\right) .$
+%
+%\item Conclure quand à $\min_{\mathcal{S}_n}f$
+%\end{enumerate}
+%
+%\end{Exo}
+
+
+\begin{Exo}[CCP PC]
+	Soit $E$ un espace euclidien de dimension $n$.
+	
+	Soit $f$ un endomorphisme de $E$ tel que : $\forall(x,y)\in E^{2},\ \ (x|y)=0\Rightarrow(f(x)|f(y))=0$.
+	Soit $(e_{1},\ldots,e_{n})$ une base orthonormée de $E$. 
+	\begin{enumerate}
+		\item
+		$\forall(i,j)\in\{1,\ldots,n\}$, calculer $(f(e_{i}+e_{j})|f(e_{i}-e_{j}))$.
+		\item
+		Montrer qu'il existe $\alpha\in\mathbb{R_{+}}$ tel que $\forall i\in\{1,\ldots,n\}$, $\|f(e_{i})\|=\alpha$.
+	\end{enumerate}
+\end{Exo}
+
+
+\begin{Exo}
+Soit $P \in \R[X]$ de degré inférieur ou égal à 3 tel que
+$ \int_{-1}^1 P^2(t)\,d t = 1$.
+
+Montrer que $\sup\{ |P(x)|,x\in [-1,1]\} \leqslant 2\sqrt2$.
+
+Indications : Pour $a\in\R$ montrer qu'il existe $P_a\in\R_3[X]$ tel que :
+$\forall\ P\in\R_3[X],\ P(a) =  \int_{-1}^1 P(t)P_a(t)\,d t$.
+Calculer explicitement $P_a$, et appliquer l'inégalité de Cauchy-Schwarz.
+\end{Exo}
+
+\begin{Exo}
+	Résoudre pour $n\in \N^*$ et $x_1,...,x_n$ dans $\R$:
+	$\begin{cases}
+		x_1+...+x_n=n\\x_1^2+...+x_n^2=n
+	\end{cases}$.
+\end{Exo}
+
+\begin{Exo}[famille obtusangle]
+	Soit $E$ de dimension $n$ et $(e_1,...,e_p)$ tels que $\ps{e_i}{e_j}<0$ pour tout $i\neq j$.
+	\begin{enumerate}
+		\item
+		Représenter une telle famille dans $\R^2$ usuel.
+		\item
+		On suppose que $\sum_{i=1}^{p}\lambda_i e_i=0$ avec les $\lambda_i$ réels, montrer que $\sum_{i=1}^{p}|\lambda_i| e_i=0$ (notant $u=\sum_{i=1}^{p}\lambda_i e_i$ et $v=\sum_{i=1}^{p}|\lambda_i| e_i=0$, calculer $\ps{u-v}{u+v}$.)
+		\item
+		Montrer alors que $(e_1,...,e_{p-1})$ est libre. Quel est le cardinal maximal d'une telle famille?
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $a,b$ deux vecteurs unitaires de $E$ euclidien et $f:x\in E\mapsto x-\ps{a}{x}b$.
+	\begin{enumerate}
+		\item
+		Montrer que $f$ est un endomorphisme de $E$.
+		\item
+				Donner une condition nécessaire et suffisante sur $\ps{a}{b}$ pour que $f$ soit inversible.
+		\item
+		Déterminer $\ker(f-id_E)$ et $f(b)$ puis donner une condition nécessaire et suffisante sur $\ps{a}{b}$ pour que $f$ soit diagonalisable.
+	\end{enumerate}
+\end{Exo}
+
+\begin{Exo}
+	Soit $ E  $ un espace euclidien de dimension $n$, et $ \left( e_{1},...,e_{n}\right)  $ des
+	vecteurs  v\'{e}rifiant :$\forall x\in E,\left\| x\right\| ^{2}=\sum_{i=1}^{n}\left\langle
+	x,e_{i}\right\rangle ^{2}$.
+	Montrer que $ \left( e_{1},...,e_{n}\right) $  est une base  de $E$. Notant $A=\left(\ps{e_i}{e_j}\right)_{1\leqslant i,j \leqslant n}$, montrer que $A$ est inversible égale à son carré, en déduire que $ \left( e_{1},...,e_{n}\right) $  est une base orthonormale  de $E$. 
+\end{Exo}
+\end{document}
